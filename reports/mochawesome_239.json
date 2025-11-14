@@ -1,0 +1,148 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-09T22:08:17.992Z",
+    "end": "2025-11-09T22:08:40.390Z",
+    "duration": 22398,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "df93c981-4509-49a8-97cb-cc57c345d96b",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "file": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48015080-5892-4077-9b38-8af12b1ffce5",
+          "title": "Admin Login - Input validations",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Admin log in - Invalid credentials (No @)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Invalid credentials (No @)",
+              "timedOut": null,
+              "duration": 2171,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-red text-[14px]']\").should('be.visible').and('contain', 'Invalid');",
+              "err": {},
+              "uuid": "651864a1-e2ca-48a8-9a5c-eeb8a67bf929",
+              "parentUUID": "48015080-5892-4077-9b38-8af12b1ffce5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "651864a1-e2ca-48a8-9a5c-eeb8a67bf929"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2171,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "87917e15-aa94-4b94-b6ce-7608539d5b0f",
+          "title": "Resend OTP flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Resend OTP",
+              "fullTitle": "Resend OTP flow Resend OTP",
+              "timedOut": null,
+              "duration": 19294,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.window().then(win => {\n  win.sessionStorage.clear();\n});\ncy.get(\"[type$='text']\").type(\"qa@userank.com\");\ncy.get(\"[type$='password']\").type(\"Password@Rank1234\");\ncy.get(\"[type$='submit']\").click();\n/*cy.get(\"[class$='flex flex-col gap-y-4 items-center px-8 py-6']\")\ncy.contains('Continue').click()*/\ncy.wait(3000);\ncy.get(\"[class$='self-center space-y-2']\").should('exist').within(() => {\n  cy.get(\"[class$='font-semibold']\").should('be.visible');\n});\ncy.wait(300000);\ncy.contains('Resend OTP').click();\ncy.contains('Resending');\ncy.wait(2000);\ncy.get(\"[class$='self-center space-y-2']\").should('exist').within(() => {\n  cy.get(\"[class$='font-semibold']\").should('be.visible');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/rank-admin.-authentication.cy.js:308:47)",
+                "diff": null
+              },
+              "uuid": "9b5228d6-e651-4c1d-8301-43643132e892",
+              "parentUUID": "87917e15-aa94-4b94-b6ce-7608539d5b0f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "9b5228d6-e651-4c1d-8301-43643132e892"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 19294,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "stats": {
+    "suites": 0,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-06T11:50:47.993Z",
+    "end": "2025-11-06T11:50:48.147Z",
+    "duration": 154,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8c521294-ef51-43ee-a07e-ae559390dc24",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [
+        {
+          "title": "An uncaught error was detected outside of a test",
+          "fullTitle": "An uncaught error was detected outside of a test",
+          "timedOut": null,
+          "duration": 133,
+          "state": "failed",
+          "speed": null,
+          "pass": false,
+          "fail": true,
+          "pending": false,
+          "context": null,
+          "code": "throw err;",
+          "err": {
+            "message": "TypeError: The following error originated from your test code, not from Cypress.\n\n  > it.olnly is not a function\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.",
+            "estack": "TypeError: The following error originated from your test code, not from Cypress.\n\n  > it.olnly is not a function\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.\n    at Suite.eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:28:5)\n    at Object.create (http://localhost:60130/__cypress/runner/cypress_runner.js:169009:19)\n    at context.describe.context.context (http://localhost:60130/__cypress/runner/cypress_runner.js:168696:27)\n    at createRunnable (http://localhost:60130/__cypress/runner/cypress_runner.js:152693:31)\n    at <unknown> (http://localhost:60130/__cypress/runner/cypress_runner.js:152754:14)\n    at eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:1:0)\n    at eval (http://localhost:60130/__cypress/tests?p=cypress/e2e/rank-admin-customer%20management.cy.js:1118:12)\n    at eval (<anonymous>)\n    at <unknown> (http://localhost:60130/__cypress/runner/cypress_runner.js:113506:23)\n    at tryCatcher (http://localhost:60130/__cypress/runner/cypress_runner.js:1777:23)",
+            "diff": null
+          },
+          "uuid": "9197c398-0d3f-49f9-90ba-46848c9f2b5e",
+          "parentUUID": "8c521294-ef51-43ee-a07e-ae559390dc24",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [],
+      "passes": [],
+      "failures": [
+        "9197c398-0d3f-49f9-90ba-46848c9f2b5e"
+      ],
+      "pending": [],
+      "skipped": [],
+      "duration": 133,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
