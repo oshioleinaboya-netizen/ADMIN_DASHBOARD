@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "cypress": "^15.5.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "mocha-junit-reporter": "^2.2.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.13.1",
+    "cypress-telegram-reporter": "^0.1.1",
+    "dotenv": "^17.2.3",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.10",
+    "read-excel-file": "^6.0.1",
+    "typescript": "^5.9.3"
+  }
+}

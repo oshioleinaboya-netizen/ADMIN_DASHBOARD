@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-05T11:19:27.771Z",
+    "end": "2025-11-05T11:20:25.573Z",
+    "duration": 57802,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8d363ed7-43d3-4df7-90ec-4a3396da3141",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7e392d3b-7df9-466e-9406-04d2b0863e56",
+          "title": "Customer Management - UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Customer UI - Pagination",
+              "fullTitle": "Customer Management - UI Customer UI - Pagination",
+              "timedOut": null,
+              "duration": 54983,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='flex items-center justify-between w-full']\").within(() => {\n  cy.get(\"[class$='flex items-center gap-4']\").within(() => {\n    cy.get(\"[class$='text-sm text-gray-600']\");\n    cy.contains('Show').should('not.be.disabled');\n  });\n  cy.get(\"[aria-label$='Pagination']\").within(() => {\n    cy.get(\"[aria-label$='Previous page']\");\n    cy.get(\"[aria-label$='Next page']\").should('not.be.disabled');\n    cy.get(\"[aria-current$='page']\").should('not.be.disabled');\n  });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management - UI`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management - UI`\n    at Context.eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:12:7)",
+                "diff": null
+              },
+              "uuid": "c997635f-6f59-4cd2-9870-d2c41ed89d91",
+              "parentUUID": "7e392d3b-7df9-466e-9406-04d2b0863e56",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "c997635f-6f59-4cd2-9870-d2c41ed89d91"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 54983,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

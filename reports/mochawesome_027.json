@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-05T10:59:17.727Z",
+    "end": "2025-11-05T10:59:31.967Z",
+    "duration": 14240,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1c016833-0b07-4f60-aebc-cd461d9c271b",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "65cf9c21-30ce-4731-b9da-ca80f7a68206",
+          "title": "Customer Management - UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Customer UI - Pagination",
+              "fullTitle": "Customer Management - UI Customer UI - Pagination",
+              "timedOut": null,
+              "duration": 10660,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='flex items-center justify-between w-full']\").within(() => {\n  cy.get(\"[class$='flex items-center gap-4']\").within(() => {\n    cy.get(\"[class$='text-sm text-gray-600']\");\n    cy.contains('Show').should('not.be.disabled');\n  });\n  cy.get(\"[aria-label$='Pagination']\").within(() => {\n    cy.get(\"[aria-label$='Previous page']\");\n    cy.get(\"[aria-label$='Next page']\").should('not.be.disabled');\n    cy.get(\"[aria-current$='page']\").should('not.be.disabled');\n  });\n});",
+              "err": {},
+              "uuid": "02169a96-4055-4ab9-b19e-26a86fc551cc",
+              "parentUUID": "65cf9c21-30ce-4731-b9da-ca80f7a68206",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "02169a96-4055-4ab9-b19e-26a86fc551cc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10660,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

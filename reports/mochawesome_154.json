@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-06T16:42:18.270Z",
+    "end": "2025-11-06T16:42:23.369Z",
+    "duration": 5099,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cb5b086c-05ec-46df-80dc-e8470b284170",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cd538266-c492-4324-b369-f85066e8083c",
+          "title": "QA Check",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "QA check",
+              "fullTitle": "QA Check QA check",
+              "timedOut": null,
+              "duration": 3075,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.window().then(win => {\n  win.sessionStorage.clear();\n});\ncy.get(\"[type$='text']\").type(\"qa@userank.com\");\ncy.get(\"[type$='password']\").type(\"Password@Rank1234\");\n/*cy.get(\"[type$='submit']\").click()\n/*cy.get(\"[class$='flex flex-col gap-y-4 items-center px-8 py-6']\")\ncy.contains('Continue').click()*/\n/*cy.wait(2000);\ncy.get(\"[class$='self-center space-y-2']\").should('exist').within(()=>{\n  cy.get(\"[class$='font-semibold']\").should('be.visible')\n})\n  cy.get('body').then(($body) => {\n  if ($body.find(\"[class*='cursor-text']\").length) {\n    cy.get(\"[class*='cursor-text']\").type('000000');\n  } else {\n    cy.log('No OTP field found, skipping OTP input.');\n  }\n  cy.get(\"[class*='animate-spin']\").should('be.visible')\n});\ncy.wait(3000)\ncy.url().should('include', '/customers')*/",
+              "err": {},
+              "uuid": "9a75006c-eb4f-4b66-a351-93ee946169c0",
+              "parentUUID": "cd538266-c492-4324-b369-f85066e8083c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9a75006c-eb4f-4b66-a351-93ee946169c0"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3075,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

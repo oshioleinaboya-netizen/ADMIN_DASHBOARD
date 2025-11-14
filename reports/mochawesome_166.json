@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-07T14:38:14.004Z",
+    "end": "2025-11-07T14:38:26.318Z",
+    "duration": 12314,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "55c801c9-3d85-4f2d-9749-3b55d2cf56e6",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0129b84d-327a-481c-8e33-958da310f1d2",
+          "title": "List of Users",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Total users",
+              "fullTitle": "List of Users Total users",
+              "timedOut": null,
+              "duration": 10061,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('p.font-bold.text-2xl') // adjust selector if needed\n.first() // gets the first match if there are multiple\n.invoke('text').then(totalText => {\n  const totalCustomers = Number(totalText.replace(/,/g, '').trim()); // convert \"1,419\" → 1419\n  // Now get the text showing total entries at the bottom\n  cy.contains('Showing').invoke('text').then(entriesText => {\n    // Extract the number after \"of\"\n    const match = entriesText.match(/of\\s([\\d,]+)/); //Extracts number right after of\n    expect(match, 'should contain \"of ### entries\"').to.not.be.null;\n    const totalEntries = Number(match[1].replace(/,/g, ''));\n    // Compare both\n    expect(totalEntries).to.eq(totalCustomers);\n  });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `List of Users`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `List of Users`\n    at Context.eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:677:47)",
+                "diff": null
+              },
+              "uuid": "261244a2-1040-4110-8ef4-8b3f92f4663e",
+              "parentUUID": "0129b84d-327a-481c-8e33-958da310f1d2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "261244a2-1040-4110-8ef4-8b3f92f4663e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 10061,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
