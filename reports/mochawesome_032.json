@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-05T11:00:15.387Z",
+    "end": "2025-11-05T11:00:26.853Z",
+    "duration": 11466,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "73205a8b-94f1-416d-882f-886cb211c647",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "file": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+          "title": "Admin Login - Input validations",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Admin log in - Invalid credentials (No @)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Invalid credentials (No @)",
+              "timedOut": null,
+              "duration": 2861,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-red text-[14px]']\").should('be.visible').and('contain', 'Invalid');",
+              "err": {},
+              "uuid": "22bbb4e2-a3d7-4aab-b0a0-3b9c2cd2e7e3",
+              "parentUUID": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Admin log in - Invalid credentials (No .com)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Invalid credentials (No .com)",
+              "timedOut": null,
+              "duration": 1811,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"heymo@nicom\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-nowrap text-[13px] font-regular']\").should('be.visible').and('contain', 'email must be an email');",
+              "err": {},
+              "uuid": "4c5e4b5e-d2e6-4f9d-b662-86ec7ead414c",
+              "parentUUID": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Admin log in - Invalid credentials (@.com)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Invalid credentials (@.com)",
+              "timedOut": null,
+              "duration": 1233,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"heymoni@.com\"); //\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-red text-[14px]']\").should('be.visible').and('contain', 'Invalid');",
+              "err": {},
+              "uuid": "f9f38ea0-36a5-4253-b3fd-0f37aa550cf3",
+              "parentUUID": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Admin log in - Incorrect credentials (Email)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Incorrect credentials (Email)",
+              "timedOut": null,
+              "duration": 2289,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"engineering90@heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\"); //For sign in, why does it show \"Password must be 8 characters\"?\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-nowrap text-[13px] font-regular']\").should('be.visible').and('contain', 'Your credentials are incorrect');",
+              "err": {},
+              "uuid": "5412d568-12db-4b7e-871b-663d2803fdbe",
+              "parentUUID": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Admin log in - Incorrect credentials (Password)",
+              "fullTitle": "Admin Login - Input validations Admin log in - Incorrect credentials (Password)",
+              "timedOut": null,
+              "duration": 2094,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://moni-admin-fe.staging.rank.africa/');\ncy.get(\"[type$='text']\").type(\"engineering2@heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0r\"); //For sign in, why does it show \"Password must be 8 characters\"?\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='text-nowrap text-[13px] font-regular']\").should('be.visible').and('contain', 'Invalid email or password');",
+              "err": {},
+              "uuid": "d214efa3-5442-4d7e-9847-e82f7b139ccf",
+              "parentUUID": "5f6ee173-2e44-46c9-a930-ffb86835d3c8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "22bbb4e2-a3d7-4aab-b0a0-3b9c2cd2e7e3",
+            "4c5e4b5e-d2e6-4f9d-b662-86ec7ead414c",
+            "f9f38ea0-36a5-4253-b3fd-0f37aa550cf3",
+            "5412d568-12db-4b7e-871b-663d2803fdbe",
+            "d214efa3-5442-4d7e-9847-e82f7b139ccf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10288,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

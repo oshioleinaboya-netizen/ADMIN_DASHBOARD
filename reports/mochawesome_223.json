@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-07T16:04:57.598Z",
+    "end": "2025-11-07T16:05:41.514Z",
+    "duration": 43916,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b0c6e908-da63-47db-afa5-af956f15bb0d",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b86a7e32-3c94-4fbf-8bc0-273e5b7d0cb8",
+          "title": "Customer Management - UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should have all expected clickable components visible",
+              "fullTitle": "Customer Management - UI Should have all expected clickable components visible",
+              "timedOut": null,
+              "duration": 40842,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('body').within(() => {\n  cy.get(\"[class$='mb-24']\").should('exist');\n  cy.get(\"[class$='flex h-[48px] grow items-start justify-start gap-2 rounded-md p-3 text-sm font-medium hover:text-orange hover:font-bold md:flex-none md:p-2 md:px-3 text-orange']\").should('be.visible').and('contain', 'Customers');\n  cy.get(\"[data-testid$='nav-link-customers']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-staff-management']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-fraud-management']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-loan']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[class$='flex h-[48px] w-max items-center justify-between gap-2 border border-[#470C00] bg-[#470C00] rounded-full p-3 text-sm font-medium hover:bg-[#452a25] mb-1']\").should('be.visible').and('not.be.disabled');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[class$='mb-24']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[class$='mb-24']`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:43:33)\n    at withinFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135235:8)\n    at <unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135316:16)\n    at __WEBPACK_DEFAULT_EXPORT__ (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:133169:10)\n    at Context.within (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135302:67)\n    at wrapped (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:145577:19)",
+                "diff": null
+              },
+              "uuid": "2e29bfa3-b45e-4042-a1cd-eb3f4bafb53d",
+              "parentUUID": "b86a7e32-3c94-4fbf-8bc0-273e5b7d0cb8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "2e29bfa3-b45e-4042-a1cd-eb3f4bafb53d"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 40842,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

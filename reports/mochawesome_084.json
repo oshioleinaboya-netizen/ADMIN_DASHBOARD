@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-05T14:06:52.003Z",
+    "end": "2025-11-05T14:06:59.471Z",
+    "duration": 7468,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ad54bc08-b5b9-4377-a988-c892cbf4ff81",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "file": "cypress/e2e/rank-admin.-authentication.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ecef141b-1156-4291-8fce-5b27f2b7ba6f",
+          "title": "Log out flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Admin logout/Re-login flow",
+              "fullTitle": "Log out flow Admin logout/Re-login flow",
+              "timedOut": null,
+              "duration": 6557,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[type$='text']\").type(\"engineering2@heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\n/*cy.get(\"[class$='flex flex-col gap-y-4 items-center px-8 py-6']\")\ncy.contains('Continue').click()*/\ncy.get(\"[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']\").type(\"000000\");\ncy.url().should('include', '/customers');\ncy.get(\"[class$='flex h-[48px] w-max items-center justify-between gap-2 border border-[#470C00] bg-[#470C00] rounded-full p-3 text-sm font-medium hover:bg-[#452a25] mb-1']\").click();\ncy.get(\"[class$='p-3 w-full bg-white rounded-md hover:cursor-pointer hover:bg-[#452a25] hover:text-white']\").within(() => {\n  cy.contains('Logout').click();\n});\n// Re-Login User ---------------------------\ncy.get(\"[class$='flex flex-col gap-y-4 items-start justify-start p-4']\");\ncy.get(\"[type$='text']\").type(\"engineering2@heymoni.com\");\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']\").type(\"000000\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='relative z-[1] flex justify-between gap-4 mb-6 outline-none cursor-text']`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/rank-admin.-authentication.cy.js:146:7)",
+                "diff": null
+              },
+              "uuid": "ceb0865d-e4e7-4c4e-b1b8-da67901458a9",
+              "parentUUID": "ecef141b-1156-4291-8fce-5b27f2b7ba6f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "ceb0865d-e4e7-4c4e-b1b8-da67901458a9"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 6557,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

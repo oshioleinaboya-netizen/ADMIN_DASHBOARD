@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-05T14:30:47.151Z",
+    "end": "2025-11-05T14:30:58.985Z",
+    "duration": 11834,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "83e2a02c-7474-4aeb-bc63-b50f529a39c2",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-customer management.cy.js",
+      "file": "cypress/e2e/rank-admin-customer management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4f0982db-c201-44ef-829d-772b350b9d7a",
+          "title": "Customer Management - UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should have all expected clickable components visible",
+              "fullTitle": "Customer Management - UI Should have all expected clickable components visible",
+              "timedOut": null,
+              "duration": 9851,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='hidden md:block']\").within(() => {\n  cy.get(\"[class$='mb-24']\").should('be.visible');\n  cy.get(\"[class$='flex h-[48px] grow items-start justify-start gap-2 rounded-md p-3 text-sm font-medium hover:text-orange hover:font-bold md:flex-none md:p-2 md:px-3 text-orange']\").should('be.visible').and('contain', 'Customers');\n  cy.get(\"[data-testid$='nav-link-customers']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-staff-management']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-fraud-management']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[data-testid$='nav-link-text-loan']\").should('be.visible').and('not.be.disabled');\n  cy.get(\"[class$='flex h-[48px] w-max items-center justify-between gap-2 border border-[#470C00] bg-[#470C00] rounded-full p-3 text-sm font-medium hover:bg-[#452a25] mb-1']\").should('be.visible').and('not.be.disabled');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class*='animate-spin']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management - UI`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class*='animate-spin']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management - UI`\n    at Context.eval (webpack:///./cypress/e2e/rank-admin-customer management.cy.js:20:40)\n    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)\n    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)\n    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)\n    at wrapped (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:145577:19)",
+                "diff": null
+              },
+              "uuid": "f0dfa9d2-7ca0-4c35-9665-bef2d623beec",
+              "parentUUID": "4f0982db-c201-44ef-829d-772b350b9d7a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f0dfa9d2-7ca0-4c35-9665-bef2d623beec"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 9851,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
