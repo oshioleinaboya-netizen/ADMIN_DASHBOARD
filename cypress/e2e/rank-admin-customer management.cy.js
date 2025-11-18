@@ -94,7 +94,7 @@ describe('Customer Management - UI', () => {
       .should('contain', 'Create a client')
       .and('contain', 'Drafts')
       .and('not.be.disabled');
-  });
+  }); //
 
   // CUSTOMERS UI 2 ===
   it('Customer management UI - 2', () => {
