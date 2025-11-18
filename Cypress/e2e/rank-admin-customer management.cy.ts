@@ -1580,8 +1580,8 @@ describe('Customer Management', ()=> {
       cy.contains('Customers')
       cy.get
       cy.wait(8000)
-      customerName = cy.get("[class$='text-[#1E4D37]']").eq(2).invoke('text').then((customerName) => {
-        const trimmedId = customerName.trim()
+      customerId = cy.get("[class$='text-[#1E4D37]']").eq(2).invoke('text').then((customerId) => {
+        const trimmedId = customerId.trim()
         cy.url().should('include', `/${trimmedId}/`)
       })
     })
