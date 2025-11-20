@@ -9,10 +9,10 @@ describe('Sorting & Filtering - Functionality check', () => {
     'Place of Birth',
     'Monitag'
   ];
-  let beforeSort;
+  /*let beforeSort;
   let filtersPrimary;
   let secondaryFilters;
-  let beforeFilt;
+  let beforeFilt;*/
   beforeEach(() => {
     //Authentication check - Login
     cy.visit('https://moni-admin-fe.staging.rank.africa/')
@@ -113,27 +113,7 @@ describe('Sorting & Filtering - Functionality check', () => {
 
   //Filtering -------------------------------------------------------------------
   it('Filtering Check', () => {
-    filtersPrimary = {
-      'Phone Verification': ['Verified', 'Not Verified'],
-      'Email Verification': ['Verified', 'Not Verified'],
-      'Date created': ['Last 7 days', 'Last 30 days', 'Last 6 months', 'Last year'],
-      'Marital status': ['Single', 'Married', 'Divorced', 'Widowed'],
-      'Employment status': ['Employed', 'Unemployed', 'Self Employed', 'Student'],
-      'Status': ['Active', 'Inactive'],
-      'Migration status': ['Migrated', 'Not Migrated'],
-      'Manual verification': ['Verified', 'Not Verified'],
-      'Business Domain': ['CBA', 'App', 'Admin', 'Ajomoney'],
-      'Educational level': ['High School', 'Bachelor', 'Masters', 'Ph.D'],
-      'Tier Level': ['Tier 1', 'Tier 2', 'Tier 3']
-    };
-    secondaryFilters = {
-      'Date created': ['Start date', 'End date',],
-      'Nationality': ['Select up to 5 countries'],
-      'Birth state': ['Select state'],
-      'Country of registration': ['Select country']
-    }
-    let countries;
-    countries = ['Angola', 'Brazil', 'Canada', 'Dominica', 'Egypt', 'France', 'Gambia', 'Hong Kong', 'India', 'Japan', 'Kenya', 'Liberia', 'Mali', 'Nepal', 'Oman', 'Pakistan', 'Qatar', 'Romania', 'Samoa', 'Tunisia', 'Uganda', 'Viet Nam', 'Western Sahara', 'Yemen', 'Zambia'];
+    const countries: string[] = ['Angola', 'Brazil', 'Canada', 'Dominica', 'Egypt', 'France', 'Gambia', 'Hong Kong', 'India', 'Japan', 'Kenya', 'Liberia', 'Mali', 'Nepal', 'Oman', 'Pakistan', 'Qatar', 'Romania', 'Samoa', 'Tunisia', 'Uganda', 'Viet Nam', 'Western Sahara', 'Yemen', 'Zambia'];
     // Open filter
     cy.get("[class*='w-full flex justify-between mb-[24px]']").contains('Filter').should('be.visible').click();
     cy.get("[class*='p-4 h-[685px] overflow-auto']").should('exist').within(() => {
