@@ -153,7 +153,7 @@ describe('Invite staff', () => {
     cy.contains('Select the permissions that the user should have access to')
     cy.get("[type*='button']").should('exist')
   })
-  it.only('Functionality check', ()=> {
+  it('Functionality check', ()=> {
     cy.contains('Invite a staff').click()
     cy.contains("First name").parent().within(()=> {
       cy.get("[class*='relative']").should('exist').type('Automation Test')
