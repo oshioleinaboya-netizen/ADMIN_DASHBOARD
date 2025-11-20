@@ -1,4 +1,4 @@
-describe('Customer Management - UI', () => {
+describe('Customers page - UI', () => {
   beforeEach(() => {
     //Authentication check - Login
     cy.visit('https://moni-admin-fe.staging.rank.africa/')
@@ -68,7 +68,7 @@ describe('Customer Management - UI', () => {
         .and('not.be.disabled');
     });
   });
-  it('Customer management UI - 1', () => {
+  it('Customers UI - 1', () => {
     cy.document().its('readyState').should('eq', 'complete');
     cy.get('body', { timeout: 15000 }).should('be.visible');
 
@@ -97,7 +97,7 @@ describe('Customer Management - UI', () => {
   }); //
 
   // CUSTOMERS UI 2 ===
-  it('Customer management UI - 2', () => {
+  it('Customers UI - 2', () => {
     cy.document().its('readyState').should('eq', 'complete');
     cy.get('body', { timeout: 15000 }).should('be.visible');
 
@@ -119,7 +119,7 @@ describe('Customer Management - UI', () => {
     cy.get("#search-bar-button").should('be.visible').and('not.be.disabled');
   });
 
-  // CUSTOMERS MANAGEMENT UI TABLE ===
+  // CUSTOMERS UI TABLE ===
   it('Customer management UI - Table', () => {
     cy.document().its('readyState').should('eq', 'complete');
     cy.get('body', { timeout: 15000 }).should('be.visible');
