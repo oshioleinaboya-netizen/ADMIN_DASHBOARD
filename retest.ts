@@ -7,8 +7,8 @@ import axios from "axios";
 dotenv.config();
 
 // ====== CONFIGURATION ======
-const TELEGRAM_BOT_TOKEN: string = "8522079936:AAEeCXewKY-NCfGrLryGxnUXg0wbb5eUDF4";
-const TELEGRAM_CHAT_ID: number = 6556602658;
+const TELEGRAM_BOT_TOKEN: string = process.env.TELEGRAM_BOT_TOKEN ?? "";
+const TELEGRAM_CHAT_ID: number = Number(process.env.TELEGRAM_CHAT_ID);
 
 // ====== SEND TELEGRAM MESSAGE ======
 async function sendTelegramMessage(message: string): Promise<void> {

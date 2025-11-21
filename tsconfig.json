@@ -8,6 +8,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strict": false,
+    "baseUrl": ".",
+    "paths": {
+      "@support/*": ["cypress/support/*"]
+    },
     "types": ["cypress", "node"]
   },
   "include": ["**/*.ts"]

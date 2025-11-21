@@ -1,3 +1,5 @@
+import { adminEmail, adminPassword, rankLink } from "@support/env";
+
 describe('List of Users', ()=> {
   let b: string = 'Boy'
   /* BDD - "Given - being in the Customers area, 
@@ -8,12 +10,12 @@ Note - the total number of customers shown by the pagination indication below th
 Then - I should be able to slide through the whole list (That is, each individual customer list page contains 10 customers. You have to go to page 2,3,4,... and so on. In order to see the rest part of the customer list, by using the navigations provided - both by tapping th numbers and the directional buttons [<], [>]).
 */
   beforeEach(() => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
+    cy.visit(rankLink)
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });
-    cy.get("[type$='text']").type("qa@userank.com")
-    cy.get("[type$='password']").type("Password@Rank1234")
+    cy.get("[type$='text']").type(adminEmail)
+    cy.get("[type$='password']").type(adminPassword)
     cy.get("[type$='submit']").click()
     /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()*/

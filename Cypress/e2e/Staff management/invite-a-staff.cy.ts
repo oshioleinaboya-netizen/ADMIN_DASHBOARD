@@ -1,12 +1,14 @@
+import { adminEmail, adminPassword, rankLink } from "@support/env";
+
 describe('Invite staff', () => {
   beforeEach(() => {
     //Authentication check - Login
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
+    cy.visit(rankLink)
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });
-    cy.get("[type$='text']").type("qa@userank.com")
-    cy.get("[type$='password']").type("Password@Rank1234")
+    cy.get("[type$='text']").type(adminEmail)
+    cy.get("[type$='password']").type(adminPassword)
     cy.get("[type$='submit']").click()
     /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()*/
@@ -117,19 +119,30 @@ describe('Invite staff', () => {
     })
     cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').within(()=> {
       cy.get("[data-testid*='dropdown-option-2']").should('contain', 'COMPLIANCE').click()
-    })
+    }) //Compliance input
+    cy.contains("Department").parent().within(()=> {
+      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').and('contain', 'COMPLIANCE')
+    }) //Placeholder check
     cy.get("[class*='border-[#D4D4D8] border px-3 p-1 text-black text-[14px] rounded-lg hover:cursor-pointer']").should('exist').and('contain', 'Select all').and('not.contain', 'Deselect all')
-    cy.get("[class*='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4']").should('have.length.at.least', 1)
-    cy.get("#adper_f0a459e9d6f24880a").should('be.visible')
+    cy.get("[id*='permissions-scroll-container']").eq(0).within(()=> {
+      cy.get("[class*='flex items-center gap-x-2']").should('have.length.at.least', 2).should('be.visible')
+      cy.get("[class*='peer h-4 w-4 cursor-pointer appearance-none rounded border border-[#D4D4D8] checked:border-black checked:bg-black']").should('have.length.at.least', 2).should('be.visible')
+    })
     cy.get("[type*='button']").should('exist').and('be.disabled')
+    //
     cy.contains("Level").parent().within(()=> {
       cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').click()
     })
     cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').within(()=> {
-      cy.get("[data-testid*='dropdown-option-2']").should('contain', 'LEAD').click()
+      cy.get("[data-testid*='dropdown-option-1']").should('contain', 'LEAD').click()
+    }) //Option click
+    cy.contains("Level").parent().within(()=> {
+      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').and('contain', 'LEAD')
+    }) //Placeholder check
+    cy.get("[id*='permissions-scroll-container']").eq(0).within(()=> {
+      cy.get("[class*='flex items-center gap-x-2']").should('have.length.at.least', 2).should('be.visible')
+      cy.get("[class*='absolute left-0 top-0 h-4 w-4 pointer-events-none']").should('have.length.at.least', 2).should('be.visible')
     })
-    cy.get("[class*='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4']").should('have.length.at.least', 1)
-    cy.get("#adper_6d5c2e8f66fb4117b").should('be.visible').should('have.length.at.least', 1)
 
     //uncheck checkboxes
     cy.get("[class*='flex items-center gap-x-2']").eq(0).click()

@@ -1,11 +1,13 @@
+import { adminEmail, adminPassword, rankLink } from "@support/env";
+
 describe('template spec', () => {
   beforeEach(() => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
+    cy.visit(rankLink)
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });
-    cy.get("[type$='text']").type("qa@userank.com")
-    cy.get("[type$='password']").type("Password@Rank1234")
+    cy.get("[type$='text']").type(adminEmail)
+    cy.get("[type$='password']").type(adminPassword)
     cy.get("[type$='submit']").click()
     /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()*/
