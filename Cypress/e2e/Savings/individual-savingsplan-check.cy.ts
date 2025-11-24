@@ -1,6 +1,6 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
 
-describe('Customer Management functionality check', ()=> {
+describe('Customer savings plan management', ()=> {
   beforeEach(() => {
     cy.visit(rankLink)
     cy.window().then((win) => {

@@ -70,4 +70,20 @@ describe('Staffs UI check', () => {
       });
     });
   })
+  it('Staff UI - Table headers', () => {
+    const expectedHeaders = ['Staff name', 'Level', 'Email address', 'Staff business team', 'Location', 'Status', 'Actions'];
+    
+    cy.get(`[data-slot*='table-container']`).within(() => {
+      cy.get('th').each((header, index) => {
+        cy.wrap(header).should('have.text', expectedHeaders[index]);
+      });
+    });
+  })
+  it.only('Table rows - At most 20 rows displayed per page', () => {
+    cy.get(`[data-slot*='table-container']`).within(() => {
+      cy.get('tbody').find('tr').then((rows) => {
+        expect(rows.length).to.be.at.most(20);
+      });
+    });
+  })
 })

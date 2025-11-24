@@ -16,7 +16,4 @@ export default defineConfig({
     }
   }
 });
-console.log("ENV FILE LOADED?");
-console.log("EMAIL:", process.env.ADMIN_EMAIL);
-console.log("LINK:", process.env.RANK_LINK);
 

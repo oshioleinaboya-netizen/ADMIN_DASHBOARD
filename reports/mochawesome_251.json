@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:20:13.361Z",
+    "end": "2025-11-21T06:20:22.758Z",
+    "duration": 9397,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7e1dc340-6c62-454c-9e30-e9cf34429986",
+      "title": "",
+      "fullFile": "cypress/e2e/Customers/list-of-users.cy.ts",
+      "file": "cypress/e2e/Customers/list-of-users.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "461c64c8-8c80-410a-8b05-2ae691c360ab",
+          "title": "List of Users",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Previous page disabled - First page | next page disabled - Last page",
+              "fullTitle": "List of Users Previous page disabled - First page | next page disabled - Last page",
+              "timedOut": null,
+              "duration": 8372,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[aria-current$='page']\").should('contain', 1);\ncy.get(\"[aria-label$='Previous page']\").should('be.disabled');\ncy.get(\"[data-testid$='pagination-button-72']\").click();\ncy.get(\"[aria-current$='page']\").should('contain', 71);\ncy.get(\"[aria-label$='Next page']\").should('be.disabled');\ncy.get(\"[aria-label$='Previous page']\").should('not.be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `List of Users`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `List of Users`\n    at Context.eval (webpack:///./cypress/e2e/Customers/list-of-users.cy.ts:23:47)",
+                "diff": null
+              },
+              "uuid": "4b878e2a-f190-4e38-9021-9af8c17d1f05",
+              "parentUUID": "461c64c8-8c80-410a-8b05-2ae691c360ab",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "4b878e2a-f190-4e38-9021-9af8c17d1f05"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8372,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

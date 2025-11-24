@@ -1,0 +1,186 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:20:02.743Z",
+    "end": "2025-11-21T06:20:12.542Z",
+    "duration": 9799,
+    "testsRegistered": 5,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 4,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "51610719-e93e-46b8-b6d5-67c17fcaf972",
+      "title": "",
+      "fullFile": "cypress/e2e/Customers/get-a-user.cy.ts",
+      "file": "cypress/e2e/Customers/get-a-user.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+          "title": "Get a user",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Filter by search - Phone number",
+              "fullTitle": "Get a user Filter by search - Phone number",
+              "timedOut": null,
+              "duration": 8719,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by customer's name, monitag or phone number\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('+2348123444444');\ncy.wait(3000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).first().within(() => {\n    cy.get('td').eq(0).should('contain', '+2348123444444');\n});\ncy.get(\"[type$='button']\").should('contain', 'Search').click();\ncy.get(\"[data-slot$='table-container'] tbody tr\").first().within(() => {\n    cy.get('td').eq(0).should('contain', '+2348123444444');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").clear();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.most', 20);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Get a user`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Get a user`\n    at Context.eval (webpack:///./cypress/e2e/Customers/get-a-user.cy.ts:25:47)",
+                "diff": null
+              },
+              "uuid": "78a23ae5-cee2-4f59-9911-3af49b98addf",
+              "parentUUID": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Filter by search - Monitag",
+              "fullTitle": "Get a user Filter by search - Monitag",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by customer's name, monitag or phone number\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('new_hahaII');\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).first().within(() => {\n    cy.get('td').eq(7).should('contain', 'new_hahaII');\n});\ncy.get(\"[type$='button']\").should('contain', 'Search').click();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).first().within(() => {\n    cy.get('td').eq(7).should('contain', 'new_hahaII');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").clear();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.most', 20);",
+              "err": {},
+              "uuid": "7d1676d5-7918-4613-96f5-ae49a4a0d668",
+              "parentUUID": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Filter by search - Name",
+              "fullTitle": "Get a user Filter by search - Name",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by customer's name, monitag or phone number\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('bills billers');\ncy.wait(5000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).last().within(() => {\n    cy.get('td').eq(1).should('contain', 'bills payments billers');\n});\ncy.get(\"[type$='button']\").should('contain', 'Search').click();\ncy.wait(5000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).last().within(() => {\n    cy.get('td').eq(1).should('contain', 'bills payments billers');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").clear();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.most', 20);",
+              "err": {},
+              "uuid": "43fc3298-4271-4273-a504-32c15df02983",
+              "parentUUID": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Filter by search - Empty table body",
+              "fullTitle": "Get a user Filter by search - Empty table body",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by customer's name, monitag or phone number\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('iiiiiiiiiiiiii');\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 0);\ncy.get(\"[alt$='empty box']\").should('be.visible');\ncy.get(\"[class$='font-semibold text-[2rem] text-center']\").should('contain', 'No result found!');\ncy.get(\"[class$='text-gray-600 text-center']\").should('contain', \"We couldn't find any result for this query. Try adjusting the search again\");\ncy.get(\"[class$='text-gray-600 text-center']\").should('contain', \"Try adjusting the search again\");",
+              "err": {},
+              "uuid": "f4c4fa29-b84f-42d1-b903-1815a13395d1",
+              "parentUUID": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Filter by search - letter population",
+              "fullTitle": "Get a user Filter by search - letter population",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by customer's name, monitag or phone number\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('j');\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.least', 1);",
+              "err": {},
+              "uuid": "f363733f-b4af-4368-a67f-cf43a6872f61",
+              "parentUUID": "641cd5b3-fa3e-4bea-9464-c4c9a39ee0ab",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "78a23ae5-cee2-4f59-9911-3af49b98addf"
+          ],
+          "pending": [],
+          "skipped": [
+            "7d1676d5-7918-4613-96f5-ae49a4a0d668",
+            "43fc3298-4271-4273-a504-32c15df02983",
+            "f4c4fa29-b84f-42d1-b903-1815a13395d1",
+            "f363733f-b4af-4368-a67f-cf43a6872f61"
+          ],
+          "duration": 8719,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

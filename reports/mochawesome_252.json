@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:20:23.553Z",
+    "end": "2025-11-21T06:21:04.347Z",
+    "duration": 40794,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "37b8652c-c2c9-40c5-8d0f-fbd4818c2e03",
+      "title": "",
+      "fullFile": "cypress/e2e/Staff management/invite-a-staff.cy.ts",
+      "file": "cypress/e2e/Staff management/invite-a-staff.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e8927145-371e-44e5-a262-c85340e9b166",
+          "title": "Invite staff",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Functionality check",
+              "fullTitle": "Invite staff Functionality check",
+              "timedOut": null,
+              "duration": 39863,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.contains('Invite a staff').click();\ncy.contains(\"First name\").parent().within(() => {\n    cy.get(\"[class*='relative']\").should('exist').type('Automation Test');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").eq(1).should('exist').and('contain', 'No permissions available for selected team');\ncy.contains(\"Surname\").parent().within(() => {\n    cy.get(\"[class*='relative']\").should('exist').type('1');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").eq(1).should('exist').and('contain', 'No permissions available for selected team');\n//\ncy.contains(\"Email address\").parent().within(() => {\n    cy.get(\"[class*='relative']\").should('exist').type('automationtest@gmail.com');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").eq(1).should('exist').and('contain', 'No permissions available for selected team');\n//\ncy.contains(\"Phone Number\").parent().within(() => {\n    cy.get(\"[class*='relative']\").should('exist').type('07087654678');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").eq(1).should('exist').and('contain', 'No permissions available for selected team');\n//\ncy.contains(\"Job title\").parent().within(() => {\n    cy.get(\"[class*='relative']\").should('exist').type('Automation Personnel');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").eq(1).should('exist').and('contain', 'No permissions available for selected team');\n//\ncy.contains(\"Department\").parent().within(() => {\n    cy.get(\"[class*='flex flex-wrap gap-2 flex-1']\").should('exist').click();\n});\ncy.get(\"[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").should('not.be.empty').within(() => {\n    cy.get(\"[data-testid*='dropdown-option-2']\").should('contain', 'COMPLIANCE').click();\n}); //Compliance input\ncy.contains(\"Department\").parent().within(() => {\n    cy.get(\"[class*='flex flex-wrap gap-2 flex-1']\").should('exist').and('contain', 'COMPLIANCE');\n}); //Placeholder check\ncy.get(\"[class*='border-[#D4D4D8] border px-3 p-1 text-black text-[14px] rounded-lg hover:cursor-pointer']\").should('exist').and('contain', 'Select all').and('not.contain', 'Deselect all');\ncy.get(\"[id*='permissions-scroll-container']\").eq(0).within(() => {\n    cy.get(\"[class*='flex items-center gap-x-2']\").should('have.length.at.least', 2).should('be.visible');\n    cy.get(\"[class*='peer h-4 w-4 cursor-pointer appearance-none rounded border border-[#D4D4D8] checked:border-black checked:bg-black']\").should('have.length.at.least', 2).should('be.visible');\n});\ncy.get(\"[type*='button']\").should('exist').and('be.disabled');\n//\ncy.contains(\"Level\").parent().within(() => {\n    cy.get(\"[class*='flex flex-wrap gap-2 flex-1']\").should('exist').click();\n});\ncy.get(\"[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").should('not.be.empty').within(() => {\n    cy.get(\"[data-testid*='dropdown-option-1']\").should('contain', 'LEAD').click();\n}); //Option click\ncy.contains(\"Level\").parent().within(() => {\n    cy.get(\"[class*='flex flex-wrap gap-2 flex-1']\").should('exist').and('contain', 'LEAD');\n}); //Placeholder check\ncy.get(\"[id*='permissions-scroll-container']\").eq(0).within(() => {\n    cy.get(\"[class*='flex items-center gap-x-2']\").should('have.length.at.least', 2).should('be.visible');\n    cy.get(\"[class*='absolute left-0 top-0 h-4 w-4 pointer-events-none']\").should('have.length.at.least', 2).should('be.visible');\n});\n//uncheck checkboxes\ncy.get(\"[class*='flex items-center gap-x-2']\").eq(0).click();\ncy.get(\"[class*='text-[12px] text-[#71717A]']\").should('have.length.at.most', 1);\ncy.get(\"[class*='border-[#D4D4D8] border px-3 p-1 text-black text-[14px] rounded-lg hover:cursor-pointer']\").should('exist').and('contain', 'Deselect all').and('not.contain', 'Select all');\ncy.get(\"[class*='flex items-center gap-x-2']\").eq(0).click();\ncy.get(\"[class*='border-[#D4D4D8] border px-3 p-1 text-black text-[14px] rounded-lg hover:cursor-pointer']\").should('exist').and('contain', 'Select all').and('not.contain', 'Deselect all');\n//Role name\ncy.get(\"[class*='w-full mb-4']\").should('exist').within(() => {\n    cy.get(\"[class*='relative']\").should('exist');\n    cy.contains('Role name');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Invite staff`",
+                "estack": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Invite staff`\n    at Context.eval (webpack:///./cypress/e2e/Staff management/invite-a-staff.cy.ts:40:31)",
+                "diff": null
+              },
+              "uuid": "246cdb14-0778-43f6-b4a6-11c1cde3dbee",
+              "parentUUID": "e8927145-371e-44e5-a262-c85340e9b166",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "246cdb14-0778-43f6-b4a6-11c1cde3dbee"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 39863,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
