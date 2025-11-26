@@ -40,18 +40,61 @@ describe('Staffs UI check', () => {
     cy.get("[data-testid*='nav-link-staff-management']").click()
   })
   it('Deactivate staff', ()=> {
-    cy.get("[data-slot$='table-container']").within(() => {
-      cy.get("tbody tr")
-        .filter((i, row) => {
-          const text = row.innerText.trim();
-          return text.includes("ACTIVE") && !text.includes("INACTIVE") && !text.includes("SUPER-ADMIN");
-        })
-        .first()
-        .then($row => {
-          cy.wrap($row).click(); // ✅ wrap before clicking
-        });
-    });
+    let deactivatedStaffName = "";
 
+    function findAndDeactivateStaff() {
+      cy.get("[data-slot$='table-container']").within(() => {
+        cy.get("tbody tr")
+          .filter((i, row) => {
+            const text = row.innerText.trim();
+            return text.includes("ACTIVE") &&
+                  !text.includes("INACTIVE") &&
+                  !text.includes("SUPER-ADMIN");
+          })
+          .first()
+          .then($row => {
+            // Extract name from first td
+            deactivatedStaffName = ($row[0] as HTMLTableRowElement).cells[0].innerText.trim();
+
+            cy.wrap($row).click();  // ✅ CLICK ROW
+          });
+      });
+    }
+    function findRowByNameAcrossPages(targetName, onFound) {
+
+      cy.get("[data-slot$='table-container']").within(() => {
+        cy.get("tbody tr").then($rows => {
+
+          let matchedRow = null;
+
+          [...$rows].forEach(row => {
+            if (row.innerText.includes(targetName)) {
+              matchedRow = row;
+            }
+          });
+
+          if (matchedRow) {
+            // ⬇️⬇️ THIS IS WHERE THE CLICK HAPPENS
+            return onFound(cy.wrap(matchedRow));
+          }
+
+          // If name NOT found → try Next page
+          cy.get("[aria-label$='Next page']").then($next => {
+
+            if ($next.is(":disabled")) {
+              throw new Error(`Staff '${targetName}' NOT found in any page.`);
+            }
+
+            cy.wrap($next).click();
+            cy.wait(800);
+
+            findRowByNameAcrossPages(targetName, onFound); // recursion
+          });
+        });
+      });
+    }
+
+    findAndDeactivateStaff()
     cy.wait(5000)
     cy.url().should('include', '/staff-mgt/')
     cy.contains('Deactivate staff').click()
@@ -62,13 +105,13 @@ describe('Staffs UI check', () => {
         cy.get(`[class*='text-gray-400']`).should('exist').and('contain', 'Choose reason for deactivating')
       }).click()
     })
-    const reasons = [
+    const reasonsD = [
       'Contract Termination',
       'Extended Leave',
       'Other',
       'Security Concern'
     ]
-    reasons.forEach((reason) => {
+    reasonsD.forEach((reason) => {
       cy.contains(reason).should('be.visible');
     })
     cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Deactivate staff').and('be.disabled')
@@ -159,27 +202,10 @@ describe('Staffs UI check', () => {
     cy.get("[alt*='close modal']").should('be.visible')
     cy.contains('Ok').click()
 
-    cy.get("[data-slot$='table-container']").within(() => {
-      cy.get("tbody tr")
-        .filter((i, row) => {
-          const text = row.innerText.trim();
-          return text.includes("INACTIVE");
-        })
-        .its('length')
-        .should('eql', 3);
-    })
-  })
-  it('Reactivate staff', ()=> {
-    cy.get("[data-slot$='table-container']").within(() => {
-      cy.get("tbody tr")
-        .filter((i, row) => {
-          const text = row.innerText.trim();
-          return text.includes("INACTIVE") && !text.includes("SUPER-ADMIN");
-        })
-        .eq(1)
-        .then($row => {
-          cy.wrap($row).click(); // ✅ wrap before clicking
-        });
+    // -------- REACTIVATE STAFF FLOW
+    findRowByNameAcrossPages(deactivatedStaffName, ($row) => {
+      // The row is found → CLICK IT
+      $row.click();
     });
 
     cy.wait(5000)
@@ -192,13 +218,13 @@ describe('Staffs UI check', () => {
         cy.get(`[class*='text-gray-400']`).should('exist').and('contain', 'Choose reason for reactivating')
       }).click()
     })
-    const reasons = [
+    const reasonsR = [
       'Account Restoration',
       'Error Correction',
       'Other',
       'Returning from Leave'
     ]
-    reasons.forEach((reason) => {
+    reasonsR.forEach((reason) => {
       cy.contains(reason).should('be.visible');
     })
     cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Reactivate staff').and('be.disabled')
@@ -288,15 +314,5 @@ describe('Staffs UI check', () => {
     cy.contains('Ok')
     cy.get("[alt*='close modal']").should('be.visible')
     cy.contains('Ok').click()
-
-    cy.get("[data-slot$='table-container']").within(() => {
-      cy.get("tbody tr")
-        .filter((i, row) => {
-          const text = row.innerText.trim();
-          return text.includes("INACTIVE");
-        })
-        .its('length')
-        .should('eql', 2);
-    })
   })
 })

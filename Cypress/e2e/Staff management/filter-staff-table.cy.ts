@@ -314,8 +314,8 @@ describe('template spec', () => {
           .eq(3)
           .invoke("text")
           .then((text) => {
-            const statusText = text.trim().toUpperCase();
-            expect(statusText).to.equal("FINANCE");
+            const teamText = text.trim().toUpperCase();
+            expect(teamText).to.equal("FINANCE");
           });
       });
     }
@@ -672,7 +672,7 @@ describe('template spec', () => {
     cy.get("[class*='relative']")
     .filter(':contains("Filter")').eq(1).click()
   })
-  it('Filter staff table - Multiple filter selection (Same parent)', () => {
+  it('Filter staff table - Multiple filter selection (Same parent - Status)', () => {
     const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
     cy.get("[class*='relative']")
     .filter(':contains("Filter")').eq(1).click()
@@ -739,7 +739,7 @@ describe('template spec', () => {
     })
     checkStatusColumnForActiveOnlyII()
   })
-  it.only('Filter staff table - Multiple filter selection (Same parent)', ()=> {
+  it('Filter staff table - Multiple filter selection (Same parent - Level)', ()=> {
     const levels = ['ASSOCIATE', 'MANAGER', 'LEAD'];
 
     function applyLevelFilter(selectedLevels = levels) {
@@ -793,5 +793,223 @@ describe('template spec', () => {
     applyLevelFilter();
     pickStaffSequentially();
 
+  })
+  it('Filter staff table - Multiple filter selection (Same parent - Team)', () => {
+    const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
+    function checkTeamColumnForMultiple() {
+      cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+        cy.wrap($row)
+          .find("td")
+          .eq(3)
+          .invoke("text")
+          .then((text) => {
+            const statusText = text.trim().toUpperCase();
+            expect(['FINANCE', 'MARKETING']).to.include(statusText);
+          });
+      });
+    }
+    function checkTeamColumnForMultiple2() {
+      cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+        cy.wrap($row)
+          .find("td")
+          .eq(3)
+          .invoke("text")
+          .then((text) => {
+            const statusText = text.trim().toUpperCase();
+            expect(['FINANCE', 'MARKETING', 'ACCOUNT-OFFICER']).to.include(statusText);
+          });
+      });
+    }
+    function checkTeamColumnForMultiple3() {
+      cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+        cy.wrap($row)
+          .find("td")
+          .eq(3)
+          .invoke("text")
+          .then((text) => {
+            const statusText = text.trim().toUpperCase();
+            expect(['FINANCE', 'MARKETING', 'ACCOUNT-OFFICER', 'COMPLIANCE']).to.include(statusText);
+          });
+      });
+    }
+    cy.get("[class*='relative']")
+    .filter(':contains("Filter")').eq(1).click()
+    cy.get("[class*='absolute -left-[50px] py-[10px] mt-2 rounded-2xl font-semibold border bg-white z-50']").within(()=> {
+      cy.contains("Team").parent().within(()=> {
+          teams.forEach((team) => {
+            cy.contains(team).should('be.visible').click()
+          })
+        })
+        cy.contains("Team").parent().within(()=> {
+          cy.contains('INVESTMENT').should('be.visible').click()
+          cy.contains('COMPLIANCE').should('be.visible').click()
+          cy.contains('OPERATIONS').should('be.visible').click()
+          cy.contains('ACCOUNT OFFICER').should('be.visible').click()
+          cy.contains('CX').should('be.visible').click()
+          cy.contains('RISK').should('be.visible').click()
+          cy.contains('BUSINESS DEVELOPMENT OFFICER').should('be.visible').click()
+        })
+      cy.contains('Apply').should('be.visible').click()
+    })
+    checkTeamColumnForMultiple()
+
+    // Three filter options
+    cy.get("[class*='relative']")
+    .filter(':contains("Filter")').eq(1).click()
+    cy.get("[class*='absolute -left-[50px] py-[10px] mt-2 rounded-2xl font-semibold border bg-white z-50']").within(()=> {
+      cy.contains('Clear').click()
+    })
+    cy.wait(3000)
+    cy.get("[class*='relative']")
+    .filter(':contains("Filter")').eq(1).click()
+    cy.contains("Team").parent().within(()=> {
+      teams.forEach((team) => {
+        cy.contains(team).should('be.visible').click()
+      })
+    })
+    cy.contains("Team").parent().within(()=> {
+      cy.contains('INVESTMENT').should('be.visible').click()
+      cy.contains('COMPLIANCE').should('be.visible').click()
+      cy.contains('OPERATIONS').should('be.visible').click()
+      cy.contains('CX').should('be.visible').click()
+      cy.contains('RISK').should('be.visible').click()
+      cy.contains('BUSINESS DEVELOPMENT OFFICER').should('be.visible').click()
+    })
+    cy.contains('Apply').should('be.visible').click()
+    checkTeamColumnForMultiple2()
+
+    // Four filter options
+    cy.get("[class*='relative']")
+    .filter(':contains("Filter")').eq(1).click()
+    cy.get("[class*='absolute -left-[50px] py-[10px] mt-2 rounded-2xl font-semibold border bg-white z-50']").within(()=> {
+      cy.contains('Clear').click()
+    })
+    cy.wait(3000)
+    cy.get("[class*='relative']")
+    .filter(':contains("Filter")').eq(1).click()
+    cy.contains("Team").parent().within(()=> {
+      teams.forEach((team) => {
+        cy.contains(team).should('be.visible').click()
+      })
+    })
+    cy.contains("Team").parent().within(()=> {
+      cy.contains('INVESTMENT').should('be.visible').click()
+      cy.contains('OPERATIONS').should('be.visible').click()
+      cy.contains('CX').should('be.visible').click()
+      cy.contains('RISK').should('be.visible').click()
+      cy.contains('BUSINESS DEVELOPMENT OFFICER').should('be.visible').click()
+    })
+    cy.contains('Apply').should('be.visible').click()
+    checkTeamColumnForMultiple3()
+  })
+  it('Filter staff table - Multiple filter selection (Different parents - Status/Team (SINGLE OPTION EACH))', () => {
+      const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
+      const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
+      function checkTeamStatusColumnForMultiple() {
+        cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+          cy.wrap($row)
+            .find("td")
+            .eq(5)
+            .invoke("text")
+            .then((text) => {
+              const statusText = text.trim().toUpperCase();
+              expect(['ACTIVE']).to.include(statusText);
+            });
+          
+            cy.wrap($row)
+            .find("td")
+            .eq(3)
+            .invoke("text")
+            .then((text) => {
+              const teamText = text.trim().toUpperCase();
+              expect(['FINANCE']).to.include(teamText);
+            });
+        });
+      }
+      cy.get("[class*='relative']")
+        .filter(':contains("Filter")').eq(1).click()
+      cy.get("[class*='absolute -left-[50px] py-[10px] mt-2 rounded-2xl font-semibold border bg-white z-50']").within(()=> {
+      cy.contains("Status").parent().within(()=> {
+          statuses.forEach((status) => {
+            cy.contains(status).should('be.visible').click()
+          })
+        })
+        cy.contains("Status").parent().within(()=> {
+          cy.contains('Inactive').should('be.visible').click()
+          cy.contains('Invited').should('be.visible').click()
+          cy.contains('Invitation Expired').should('be.visible').click()
+        })
+        cy.contains("Team").parent().within(()=> {
+          teams.forEach((team) => {
+            cy.contains(team).should('be.visible').click()
+          })
+        })
+        cy.contains("Team").parent().within(()=> {
+          cy.contains('INVESTMENT').should('be.visible').click()
+          cy.contains('MARKETING').should('be.visible').click()
+          cy.contains('COMPLIANCE').should('be.visible').click()
+          cy.contains('OPERATIONS').should('be.visible').click()
+          cy.contains('ACCOUNT OFFICER').should('be.visible').click()
+          cy.contains('CX').should('be.visible').click()
+          cy.contains('RISK').should('be.visible').click()
+          cy.contains('BUSINESS DEVELOPMENT OFFICER').should('be.visible').click()
+        })
+        cy.contains('Apply').should('be.visible').click()
+      })
+      checkTeamStatusColumnForMultiple()
+  })
+  it.only('Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))', () => {
+      const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
+      const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
+      function checkTeamStatusColumnForMultiple() {
+        cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+          cy.wrap($row)
+            .find("td")
+            .eq(5)
+            .invoke("text")
+            .then((text) => {
+              const statusText = text.trim().toUpperCase();
+              expect(['ACTIVE', 'INVITED']).to.include(statusText);
+            });
+          
+            cy.wrap($row)
+            .find("td")
+            .eq(3)
+            .invoke("text")
+            .then((text) => {
+              const teamText = text.trim().toUpperCase();
+              expect(['FINANCE', 'COMPLIANCE']).to.include(teamText);
+            });
+        });
+      }
+      cy.get("[class*='relative']")
+        .filter(':contains("Filter")').eq(1).click()
+      cy.get("[class*='absolute -left-[50px] py-[10px] mt-2 rounded-2xl font-semibold border bg-white z-50']").within(()=> {
+      cy.contains("Status").parent().within(()=> {
+          statuses.forEach((status) => {
+            cy.contains(status).should('be.visible').click()
+          })
+        })
+        cy.contains("Status").parent().within(()=> {
+          cy.contains('Inactive').should('be.visible').click()
+          cy.contains('Invitation Expired').should('be.visible').click()
+        })
+        cy.contains("Team").parent().within(()=> {
+          teams.forEach((team) => {
+            cy.contains(team).should('be.visible').click()
+          })
+        })
+        cy.contains("Team").parent().within(()=> {
+          cy.contains('INVESTMENT').should('be.visible').click()
+          cy.contains('MARKETING').should('be.visible').click()
+          cy.contains('OPERATIONS').should('be.visible').click()
+          cy.contains('ACCOUNT OFFICER').should('be.visible').click()
+          cy.contains('CX').should('be.visible').click()
+          cy.contains('RISK').should('be.visible').click()
+          cy.contains('BUSINESS DEVELOPMENT OFFICER').should('be.visible').click()
+        })
+        cy.contains('Apply').should('be.visible').click()
+      })
+      checkTeamStatusColumnForMultiple()
   })
 })

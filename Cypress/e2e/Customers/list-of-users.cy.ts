@@ -70,15 +70,34 @@ Then - I should be able to slide through the whole list (That is, each individua
     // Page navigation indication
     cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 1 - 20')
   })
-  it('Mid point between table pages', ()=> {
-    cy.wait(8000)
-    cy.get("[data-slot$='table-container'] tbody tr").should('have.length.at.most', 20).first().within(() => {
-      cy.get('td').eq(1).should('contain', 'Ayodeji Samuel Ogundijo')
-    })
-    cy.get("[aria-hidden$='true']").click()
-    cy.get("[data-slot$='table-container'] tbody tr").should('have.length.at.most', 20).first().within(() => {
-      cy.get('td').eq(1).should('not.contain', 'Ayodeji Samuel Ogundijo')
-    })
+  it.only('Mid point between table pages', ()=> {
+    cy.wait(3000);
+
+    // make sure row exists
+    cy.get("[data-slot$='table-container'] tbody tr")
+      .should("have.length.at.most", 20)
+      .its('length')
+      .should('be.gte', 6); // ensure eq(5) is safe
+
+    // extract text from row 5, cell index 1, then continue outside the row scope
+    cy.get("[data-slot$='table-container'] tbody tr")
+      .eq(5)
+      .find("td")
+      .eq(1)
+      .invoke("text")
+      .then((text) => {
+        const storedValue = text.trim();
+        cy.log("storedValue:", storedValue);
+
+        // Now we're outside the row scope — click the midpoint component
+        cy.get("[aria-hidden$='true']").click();
+        cy.wait(1000);
+
+        // Assert that the storedValue does not appear anywhere in the current table
+        cy.get("[data-slot$='table-container'] tbody tr td")
+          .should("not.contain", storedValue);
+      });
+
     // Midpoint "..." click - Page land check
     cy.get("[data-testid$='pagination-button-1']").click()
     cy.get("[aria-current$='page']").should('contain', 1)
@@ -90,7 +109,7 @@ Then - I should be able to slide through the whole list (That is, each individua
         expect(currentPage).to.be.oneOf([33, 34, 35, 36, 37]); // any valid values
       });
   })
-  it.only('Previous page disabled - First page | next page disabled - Last page', ()=> {
+  it('Previous page disabled - First page | next page disabled - Last page', ()=> {
     cy.get("[aria-current$='page']").should('contain', 1)
     cy.get("[aria-label$='Previous page']").should('be.disabled')
     cy.get("[data-testid$='pagination-button-72']").click()
