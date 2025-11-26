@@ -24,3 +24,43 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 /// <reference types="cypress" />
+
+/// <reference types="cypress" />
+
+//Find across pages
+Cypress.Commands.add(
+  "findRowAcrossPages",
+  (
+    rowText: string,
+    rowSelector: string,
+    nextButtonSelector: string
+  ): Cypress.Chainable<boolean> => {
+    const searchPage = (): Cypress.Chainable<boolean> => {
+      return cy.get(rowSelector).then(($rows) => {
+        const rowsArray = Array.from($rows);
+        const matchingRow = rowsArray.find((row) =>
+          row.innerText.includes(rowText)
+        );
+
+        if (matchingRow) {
+          cy.wrap(matchingRow).click();
+          return cy.wrap(true);
+        }
+
+        return cy.get("body").then(($body) => {
+          const nextBtn = $body.find(nextButtonSelector);
+
+          if (nextBtn.length === 0 || nextBtn.prop("disabled")) {
+            return cy.wrap(false);
+          }
+
+          cy.get(nextButtonSelector).click();
+          cy.wait(700);
+          return searchPage();
+        });
+      });
+    };
+
+    return searchPage();
+  }
+);
