@@ -26,16 +26,17 @@ describe('Savings Interest Summation Validation', () => {
     });
     cy.wait(3000)
     cy.url().should('include', '/customers')
-    cy.wait(8000)
+    cy.wait(3000)
     cy.get("#search-bar-button").within(()=> {
       cy.get(`[placeholder$="Search by customer's name, monitag or phone number"]`).should('exist')
     })
     cy.get("[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']").type('8156768888')
-    cy.wait(8000)
+    cy.wait(3000)
     cy.get("[data-slot$='table-container'] tbody tr").first().click()
     cy.url().should('include', '/customers/')
+    cy.wait(5000)
   })
-  it.only('Total vs summation interest checks', () => {
+  it('Total vs summation interest checks', () => {
     cy.contains('Savings').click()
     let totalInterest = 0;
 
@@ -64,7 +65,6 @@ describe('Savings Interest Summation Validation', () => {
     };
 
     // Start: wait for table to be ready
-    cy.visit('https://moni-admin-fe.staging.rank.africa/customers/usr_86ea5878830a44289/savings');
     cy.get("[data-slot$='table-container'] tbody tr").should('exist');
     cy.wait(2000);
 
@@ -90,4 +90,64 @@ describe('Savings Interest Summation Validation', () => {
         });
     });
   });
+  
+  it.only('Total vs summation interest checks - Individual plans', () => {
+    
+    let totalInterest = 0;
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click() //Savings tab click
+      cy.wait(3000)
+    })
+    cy.get("[data-slot$='table-container'] tbody tr").eq(0).click()  //Click page 20
+    cy.wait(3000)
+
+    // Function: Add up interest from current page
+    const sumInterestOnPage = () => {
+    cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+    const firstCol = $row.find("td").eq(0).text().trim();   // What the amount is for
+    const secondCol = $row.find("td").eq(1).text().trim();  // The amount
+
+    // Only pick amounts where the first column contains 'Interest'
+    if (/interest/i.test(firstCol)) {
+      const numeric = parseFloat(secondCol.replace(/[^0-9.]/g, ""));
+      totalInterest += numeric || 0;
+    }
+  });
+};
+
+    // Function: Handle pagination recursively
+    const goToNextPage = () => {
+      cy.get("[aria-label$='Next page']").then(($btn) => {
+        if (!$btn.is(':disabled')) {
+          cy.wrap($btn).click();
+          cy.wait(2000);
+          sumInterestOnPage();
+          goToNextPage(); // continue
+        } else {
+          cy.log('✅ All pages scanned.');
+        }
+      });
+    };
+    // Sum from the first page
+    sumInterestOnPage();
+
+    // Go through other pages if available
+    goToNextPage();
+
+    // Compare with analytics summary
+    cy.then(() => {
+      cy.get('div')
+        .contains('Total interest earned')
+        .next() // or adjust to direct element
+        .invoke('text')
+        .then((summaryText) => {
+          const analyticsInterest = parseFloat(summaryText.replace(/[^0-9.]/g, ''));
+
+          cy.log(`Total Interest (summed): ${totalInterest}`);
+          cy.log(`Analytics Interest: ${analyticsInterest}`);
+
+          expect(totalInterest).to.eql(analyticsInterest);
+        });
+    });
+  })
 });

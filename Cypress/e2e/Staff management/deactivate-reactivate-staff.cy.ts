@@ -1,5 +1,5 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
-describe('Staffs UI check', () => {
+describe('Deactivate staff | Reactivate staff', () => {
   beforeEach(() => {
     //Authentication check - Login
     cy.visit(rankLink)
@@ -39,7 +39,7 @@ describe('Staffs UI check', () => {
     cy.url({ timeout: 30000 }).should('include', '/customers')
     cy.get("[data-testid*='nav-link-staff-management']").click()
   })
-  it('Deactivate staff', ()=> {
+  it.only('Deactivate staff | Reactivate Staff', ()=> {
     let deactivatedStaffName = "";
 
     function findAndDeactivateStaff() {

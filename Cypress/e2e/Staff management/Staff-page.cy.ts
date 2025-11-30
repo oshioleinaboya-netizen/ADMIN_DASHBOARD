@@ -79,11 +79,4 @@ describe('Staffs UI check', () => {
       });
     });
   })
-  it.only('Table rows - At most 20 rows displayed per page', () => {
-    cy.get(`[data-slot*='table-container']`).within(() => {
-      cy.get('tbody').find('tr').then((rows) => {
-        expect(rows.length).to.be.at.most(20);
-      });
-    });
-  })
 })

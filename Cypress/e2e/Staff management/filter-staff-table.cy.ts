@@ -41,7 +41,7 @@ describe('template spec', () => {
           cy.get("[data-testid*='nav-link-staff-management']").click()
           cy.wait(4000)
       })
-  it('Filter staff table', () => {
+  it.only('Filter staff table', () => {
     const levels = ['ASSOCIATE', 'MANAGER', 'LEAD']
     cy.get("[class*='relative']")
     .filter(':contains("Filter")').eq(1).click()

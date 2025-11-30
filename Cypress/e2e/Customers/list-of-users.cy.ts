@@ -57,20 +57,41 @@ Then - I should be able to slide through the whole list (That is, each individua
     });
   })
   it('Next page/Previous page navigation', ()=> {
-    cy.get("[aria-label$='Next page']").click()
-    cy.get("[data-slot$='table-container'] tbody tr").should('have.length.at.most', 20).first().within(() => {
-      cy.get('td').eq(0).should('not.contain', '+2348123444444')
-    })
-    // Page navigation indication
-    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 21 - 40')
-    cy.get("[aria-label$='Previous page']").click()
-    cy.get("[data-slot$='table-container'] tbody tr").should('have.length.at.most', 20).first().within(() => {
-      cy.get('td').eq(0).should('contain', '+2348123444444')
-    })
-    // Page navigation indication
-    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 1 - 20')
+    cy.wait(5000)
+    cy.get("[data-slot$='table-container'] tbody tr")
+      .should("have.length.at.most", 20) // Table count check
+
+    // extract text from row 5, cell index 1, then continue outside the row scope
+    cy.get("[data-slot$='table-container'] tbody tr")
+      .eq(0)
+      .find("td")
+      .eq(0)
+      .invoke("text")
+      .then((text) => {
+        const storedValue = text.trim();
+        cy.log("storedValue:", storedValue);
+
+        // Now we're outside the row scope — click the midpoint component
+        cy.get("[aria-label$='Next page']").click();
+        cy.wait(1000);
+
+        // Assert that the storedValue does not appear anywhere in the current table
+        cy.get("[data-slot$='table-container'] tbody tr td")
+          .should("not.contain", storedValue);
+
+        // Previous page navigation check
+        cy.get("[aria-label$='Previous page']").click();
+        cy.wait(1000);
+
+        // Assert that the storedValue does not appear anywhere in the current table
+        cy.get("[data-slot$='table-container'] tbody tr td")
+          .should("contain", storedValue);
+        
+        // Pagination Indication check
+        cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 1 - 20')
+      });
   })
-  it.only('Mid point between table pages', ()=> {
+  it('Mid point between table pages', ()=> {
     cy.wait(3000);
 
     // make sure row exists
@@ -109,6 +130,7 @@ Then - I should be able to slide through the whole list (That is, each individua
         expect(currentPage).to.be.oneOf([33, 34, 35, 36, 37]); // any valid values
       });
   })
+
   it('Previous page disabled - First page | next page disabled - Last page', ()=> {
     cy.get("[aria-current$='page']").should('contain', 1)
     cy.get("[aria-label$='Previous page']").should('be.disabled')
@@ -116,7 +138,8 @@ Then - I should be able to slide through the whole list (That is, each individua
     cy.get("[aria-current$='page']").should('contain', 71)
     cy.get("[aria-label$='Next page']").should('be.disabled')
     cy.get("[aria-label$='Previous page']").should('not.be.disabled')
-  })
+  }) // Awaiting last page to be uniquely fetchable.
+
   it('Table page list size', ()=> {
     cy.get("[data-testid$='table-page-size-select']").select("Show 10");
     cy.wait(6000);

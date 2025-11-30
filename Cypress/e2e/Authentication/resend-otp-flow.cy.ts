@@ -13,7 +13,7 @@ describe('Resend OTP flow', ()=> {
     cy.get("[class$='self-center space-y-2']").should('exist').within(()=>{
       cy.get("[class$='font-semibold']").should('be.visible')
     })
-    cy.wait(300000)
+    cy.wait(60000)
     cy.contains('Resend OTP').click()
     cy.contains('Resending')
     cy.wait(2000)

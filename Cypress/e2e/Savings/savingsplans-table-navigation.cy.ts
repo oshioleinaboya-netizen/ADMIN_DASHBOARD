@@ -26,12 +26,12 @@ describe('Savings plans table navigation', () => {
     });
     cy.wait(3000)
     cy.url().should('include', '/customers')
-    cy.wait(8000)
+    cy.wait(5000)
     cy.get("#search-bar-button").within(()=> {
       cy.get(`[placeholder$="Search by customer's name, monitag or phone number"]`).should('exist')
     })
     cy.get("[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']").type('bills billers')
-    cy.wait(8000)
+    cy.wait(5000)
     cy.get("[data-slot$='table-container'] tbody tr").first().click()
     cy.url().should('include', '/customers/')
   })
@@ -84,6 +84,8 @@ describe('Savings plans table navigation', () => {
       cy.get("[data-slot$='table-container'] tbody tr td:nth-child(1)").should('not.be.empty')
       cy.get("[data-slot$='table-container'] tbody tr td:nth-child(4)").should('contain', '₦')
       cy.get("[data-slot$='table-container'] tbody tr td:nth-child(5)").should('contain', '₦')
+      
+      //Status check
       cy.get("[data-slot$='table-container'] tbody tr").each(($row, index) => {
         cy.wrap($row).within(() => {
           cy.get(`[class$='flex w-fit items-center bg rounded-full px-2.5 py-1 text-xs font-medium bg-green-100 text-green-800']`).invoke('text').then((text) => {
@@ -251,5 +253,206 @@ describe('Savings plans table navigation', () => {
       }
     });
   })
-})
+  })
+  it('Previous page disabled - First page | next page disabled - Last page', ()=> {
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(5000)
+    })
+    cy.url().should('include', '/savings')
+    cy.get("[aria-current$='page']").should('contain', 1)
+    cy.get("[aria-label$='Previous page']").should('be.disabled')
+    cy.get("[data-testid$='pagination-button-72']").click()
+    cy.get("[aria-current$='page']").should('contain', 71)
+    cy.get("[aria-label$='Next page']").should('be.disabled')
+    cy.get("[aria-label$='Previous page']").should('not.be.disabled')
+  }) // Awaiting last page to be uniquely fetchable.
+  it('Pagination indication functionality', ()=> {
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(5000)
+    })
+    cy.url().should('include', '/savings')
+    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 1 - 20')
+    cy.get("[data-testid$='pagination-button-2']").click()
+    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 21 - 40')
+    cy.get("[data-testid$='pagination-button-3']").click()
+    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 41 - 60')
+    cy.get("[data-testid$='pagination-button-4']").click()
+    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 61 - 80')
+    cy.get("[data-testid$='pagination-button-5']").click()
+    cy.get("[class$='text-sm text-gray-600']").should('contain', 'Showing 81 - 100')
+  })
+  it('Total closed savings', ()=> {
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(3000)
+    })
+    cy.url().should('include', '/savings')
+    cy.contains('Closed savings plans').click()
+    cy.wait(3000)
+    cy.get("[class*='font-medium lg:text-base text-sm']")
+    .eq(3) // gets the first match if there are multiple
+    .invoke('text')
+    .then((totalText) => {
+      const totalCustomers = Number(totalText.replace(/,/g, '').trim()); // convert "22" → 22
+
+      // Now get the text showing total entries at the bottom
+      cy.contains('Showing')
+        .invoke('text')
+        .then((entriesText) => {
+          // Extract the number after "of"
+          const match = entriesText.match(/of\s([\d,]+)/); //Extracts number right after of
+          expect(match, 'should contain "of ### entries"').to.not.be.null;
+          const totalEntries = Number(match[1].replace(/,/g, ''));
+
+          // Compare both
+          expect(totalEntries).to.eq(totalCustomers);
+        });
+    });
+  })
+  it('Individual plan check - Reserve', ()=> {
+    function countReserveAcrossPages() {
+      let totalCount = 0;
+
+      function scanPage(): Cypress.Chainable<number> {
+        return cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+          const label = $row.find("td").eq(0).text().trim().toLowerCase();
+
+          if (label.includes("reserve")) {
+            totalCount++;
+          }
+        }).then(() => {
+          return cy.get("[aria-label$='Next page']").then($next => {
+            if ($next.is(":disabled")) {
+              return cy.wrap(totalCount); // ✅ return final count
+            } else {
+              cy.wrap($next).click();
+              cy.wait(500);
+              return scanPage(); // 🔁 Recurse into next page
+            }
+          });
+        });
+      }
+      return scanPage();
+    }
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(5000)
+    })
+    cy.url().should('include', '/savings')
+
+     // 1️⃣ Get dashboard expected total
+    cy.contains("Total reserve plan")
+      .next()                // The number under the label
+      .invoke("text")
+      .then((text) => {
+        const expectedTotal = parseInt(text.trim(), 10);
+
+        // 2️⃣ Count all 'Reserve' rows across paginated table
+        countReserveAcrossPages()
+        .then((actualCount) => {
+          cy.log(`Expected: ${expectedTotal}, Actual: ${actualCount}`);
+          expect(actualCount).to.equal(expectedTotal);
+        });
+      });
+  })
+  it.only('Individual plan check - Goals', ()=> {
+    function countReserveAcrossPages() {
+      let totalCount = 0;
+
+      function scanPage(): Cypress.Chainable<number> {
+        return cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+          const label = $row.find("td").eq(0).text().trim().toLowerCase();
+
+          if (label.includes("goals")) {
+            totalCount++;
+          }
+        }).then(() => {
+          return cy.get("[aria-label$='Next page']").then($next => {
+            if ($next.is(":disabled")) {
+              return cy.wrap(totalCount); // ✅ return final count
+            } else {
+              cy.wrap($next).click();
+              cy.wait(500);
+              return scanPage(); // 🔁 Recurse into next page
+            }
+          });
+        });
+      }
+      return scanPage();
+    }
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(5000)
+    })
+    cy.url().should('include', '/savings')
+
+     // 1️⃣ Get dashboard expected total
+    cy.contains("Total goals plan")
+      .next()                // The number under the label
+      .invoke("text")
+      .then((text) => {
+        const expectedTotal = parseInt(text.trim(), 10);
+
+        // 2️⃣ Count all 'Reserve' rows across paginated table
+        countReserveAcrossPages()
+        .then((actualCount) => {
+          cy.log(`Expected: ${expectedTotal}, Actual: ${actualCount}`);
+          expect(actualCount).to.equal(expectedTotal);
+        });
+      });
+  })
+  it('Individual plan check - Periodic', ()=> {
+    function countReserveAcrossPages() {
+      let totalCount = 0;
+
+      function scanPage(): Cypress.Chainable<number> {
+        return cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+          const label = $row.find("td").eq(0).text().trim().toLowerCase();
+
+          if (label.includes("periodic")) {
+            totalCount++;
+          }
+        }).then(() => {
+          return cy.get("[aria-label$='Next page']").then($next => {
+            if ($next.is(":disabled")) {
+              return cy.wrap(totalCount); // ✅ return final count
+            } else {
+              cy.wrap($next).click();
+              cy.wait(500);
+              return scanPage(); // 🔁 Recurse into next page
+            }
+          });
+        });
+      }
+      return scanPage();
+    }
+    cy.wait(5000)
+    cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(()=> {
+      cy.contains('Savings').click()
+      cy.wait(5000)
+    })
+    cy.url().should('include', '/savings')
+
+     // 1️⃣ Get dashboard expected total
+    cy.contains("Total periodic plan")
+      .next()                // The number under the label
+      .invoke("text")
+      .then((text) => {
+        const expectedTotal = parseInt(text.trim(), 10);
+
+        // 2️⃣ Count all 'Reserve' rows across paginated table
+        countReserveAcrossPages()
+        .then((actualCount) => {
+          cy.log(`Expected: ${expectedTotal}, Actual: ${actualCount}`);
+          expect(actualCount).to.equal(expectedTotal);
+        });
+      });
+  })
 })
