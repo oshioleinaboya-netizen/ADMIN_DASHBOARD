@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764691131473' stop='1764691198453'>
+    <name>Customer Search Flow</name>
+    <title>Customer Search Flow</title>
+    <test-cases>
+        <test-case start='1764691131473' status='passed' stop='1764691155603'>
+            <name>Filter by Phone number</name>
+            <title>Filter by Phone number</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764691155618' status='passed' stop='1764691163349'>
+            <name>Filter by Monitag</name>
+            <title>Filter by Monitag</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764691163360' status='failed' stop='1764691174785'>
+            <name>Filter by Name</name>
+            <title>Filter by Name</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: expected '&lt;td.p-4.align-middle.whitespace-nowrap.[&amp;:has([role=checkbox])]:pr-0.[&amp;>[role=checkbox]]:translate-y-[2px].cursor-pointer>' to contain 'bills billers'</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: expected '&lt;td.p-4.align-middle.whitespace-nowrap.[&amp;:has([role=checkbox])]:pr-0.[&amp;>[role=checkbox]]:translate-y-[2px].cursor-pointer>' to contain 'bills billers'
+                    at Context.eval (webpack:///./cypress/e2e/Customers/get-a-user.cy.ts:51:37)
+                    at withinFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135235:8)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135316:16)
+                    at __WEBPACK_DEFAULT_EXPORT__ (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:133169:10)
+                    at Context.within (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:135302:67)
+                    at wrapped (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:145577:19)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764691174807' status='passed' stop='1764691182196'>
+            <name>Empty table shows no results</name>
+            <title>Empty table shows no results</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764691182204' status='failed' stop='1764691198450'>
+            <name>Search by letter returns multiple results</name>
+            <title>Search by letter returns multiple results</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 10000ms: Too many elements found. Found '20', expected '1'.</message>
+                <stack-trace>AssertionError: Timed out retrying after 10000ms: Too many elements found. Found '20', expected '1'.
+                    at doSearchAndCheck (webpack:///./cypress/e2e/Customers/get-a-user.cy.ts:47:42)
+                    at Context.eval (webpack:///./cypress/e2e/Customers/get-a-user.cy.ts:65:56)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

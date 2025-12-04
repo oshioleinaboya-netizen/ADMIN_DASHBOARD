@@ -2,6 +2,15 @@ import { adminEmail, adminPassword, rankLink } from "@support/env";
 
 describe('template spec', () => {
   beforeEach(() => {
+          // Clear index DB
+          cy.window().then((win) => {
+            return win.indexedDB.databases().then((dbs) => {
+              dbs.forEach((db) => {
+                win.indexedDB.deleteDatabase(db.name);
+              });
+            });
+          });
+
           //Authentication check - Login
           cy.visit(rankLink)
           cy.window().then((win) => {
@@ -10,8 +19,12 @@ describe('template spec', () => {
           cy.get("[type$='text']").type(adminEmail)
           cy.get("[type$='password']").type(adminPassword)
           cy.get("[type$='submit']").click()
-          /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
-          cy.contains('Continue').click()*/
+          cy.wait(3000)
+
+          // New Device Login
+          cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
+          cy.contains('Continue').click()
+
           cy.wait(2000);
           cy.get('body').then(($body) => {
             const timerExists = $body.find("[class$='self-center space-y-2']").length > 0;
@@ -41,7 +54,7 @@ describe('template spec', () => {
           cy.get("[data-testid*='nav-link-staff-management']").click()
           cy.wait(4000)
       })
-  it.only('Filter staff table', () => {
+  it('Filter staff table', () => {
     const levels = ['ASSOCIATE', 'MANAGER', 'LEAD']
     cy.get("[class*='relative']")
     .filter(':contains("Filter")').eq(1).click()
@@ -958,7 +971,7 @@ describe('template spec', () => {
       })
       checkTeamStatusColumnForMultiple()
   })
-  it.only('Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))', () => {
+  it('Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))', () => {
       const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
       const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
       function checkTeamStatusColumnForMultiple() {

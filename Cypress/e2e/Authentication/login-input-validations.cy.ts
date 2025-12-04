@@ -1,104 +1,85 @@
+import { adminEmail, adminPassword, rankLink } from "@support/env"
+
 describe('Admin Login - Input validations', () => {
-  // Input Validations-------------------------------------------------------
-  it.only('Admin log in - Invalid credentials (No @)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("heymoni.com")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'Invalid')
+
+  beforeEach(() => {
+    cy.visit(rankLink)
   })
+
+  // Helper to type credentials and submit
+  const submitLogin = (email: string, password: string) => {
+    if (email) cy.get("[type$='text']").clear().type(email)
+    if (password) cy.get("[type$='password']").clear().type(password)
+    cy.get("[type$='submit']").click()
+  }
+
+  const assertErrorContains = (selector: string, text: string) => {
+    cy.get(selector, { timeout: 10000 }) // wait up to 10s
+      .should('be.visible')
+      .and('contain', text)
+  }
+
+  it('Admin log in - Invalid credentials (No @)', () => {
+    submitLogin("heymoni.com", adminPassword)
+    assertErrorContains("[class$='text-red text-[14px]']", 'Invalid')
+  })
+
   it('Admin log in - Invalid credentials (No .com)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("heymo@nicom")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd") 
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-nowrap text-[13px] font-regular']").should('be.visible').and('contain', 'email must be an email')
+    submitLogin("heymo@nicom", adminPassword)
+    assertErrorContains("[class$='text-nowrap text-[13px] font-regular']", 'email must be an email')
   })
+
   it('Admin log in - Invalid credentials (@.com)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("heymoni@.com") //
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd") 
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'Invalid')
+    submitLogin("heymoni@.com", adminPassword)
+    assertErrorContains("[class$='text-red text-[14px]']", 'Invalid')
   })
-  //------------------------------------------------------
+
   it('Admin log in - Incorrect credentials (Email)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering90@heymoni.com")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd") //For sign in, why does it show "Password must be 8 characters"?
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-nowrap text-[13px] font-regular']").should('be.visible').and('contain', 'Your credentials are incorrect')
+    submitLogin("gsghshhsnn90@heyoni.com", adminPassword)
+    assertErrorContains("[class$='text-nowrap text-[13px] font-regular']", 'Your credentials are incorrect')
   })
+
   it('Admin log in - Incorrect credentials (Password)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0r") //For sign in, why does it show "Password must be 8 characters"?
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-nowrap text-[13px] font-regular']").should('be.visible').and('contain', 'Invalid email or password')
+    submitLogin(adminEmail, "hdhdjdjdjjdj")
+    assertErrorContains("[class$='text-nowrap text-[13px] font-regular']", 'Invalid email or password')
   })
-  //-----------------------------------------------------
-  it('Admin log in - Missing credentials (2)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
+
+  it('Admin log in - Missing credentials', () => {
+    submitLogin("", "")
+    assertErrorContains("[class$='text-red text-[14px]']", 'is required')
   })
-  it('Admin log in - Missing credential (Password)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
+
+  it('Admin log in - Missing password', () => {
+    submitLogin(adminEmail, "")
+    assertErrorContains("[class$='text-red text-[14px]']", 'is required')
   })
-  it('Admin log in - Missing credential (Email)', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='submit']").click()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
+
+  it('Admin log in - Missing email', () => {
+    submitLogin("", adminPassword)
+    assertErrorContains("[class$='text-red text-[14px]']", 'is required')
   })
-  //Password/email clear out state------------------------------------------------------
-  it('Admin log in - Clear out state 1', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering90@heymoni.com")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='submit']").click()
-    cy.get("[type$='text']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-  })
-  it('Admin log in - Clear out state 2', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='password']").type("myAwesomeP@ssw0r")
-    cy.get("[type$='submit']").click()
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-  })
-  it('Admin log in - Clear out state 3', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='submit']").click()
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-  })
-  it('Admin log in - Clear out state 4', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='submit']").click()
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-  })
-  it('Admin log in - Clear out state 5', () => {
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
-    cy.get("[type$='password']").type("myAwesomeP@ssw0rd")
-    cy.get("[type$='submit']").click()
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
-    cy.get("[type$='text']").type("engineering2@heymoni.com")
-    cy.get("[type$='password']").clear()
-    cy.get("[class$='text-red text-[14px]']").should('be.visible').and('contain', 'is required')
+
+  // Clear out state tests
+  it('Admin log in - Clear out state tests', () => {
+    const cases = [
+      { email: "hshshhshs90@heyoni.com", password: adminPassword, clear: 'text', expectedError: 'is required' },
+      { email: adminEmail, password: "hdhjsnjjnhhdn", clear: 'password', expectedError: 'is required' },
+      { email: "", password: "", clear: 'both', expectedError: 'is required' },
+      { email: adminEmail, password: "", clear: 'password', expectedError: 'is required' },
+      { email: "", password: adminPassword, clear: 'both', expectedError: 'is required' },
+    ]
+
+    cases.forEach((c) => {
+      submitLogin(c.email, c.password)
+
+      if (c.clear === 'text' || c.clear === 'both') {
+        cy.get("[type$='text']").clear()
+      }
+      if (c.clear === 'password' || c.clear === 'both') {
+        cy.get("[type$='password']").clear()
+      }
+
+      assertErrorContains("[class$='text-red text-[14px]']", c.expectedError)
+    })
   })
 })

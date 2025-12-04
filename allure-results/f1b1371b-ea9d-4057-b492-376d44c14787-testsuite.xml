@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764667695101' stop='1764667700983'>
+    <name>Customers page - UI</name>
+    <title>Customers page - UI</title>
+    <test-cases>
+        <test-case start='1764667695101' status='broken' stop='1764667700962'>
+            <name>Should have all expected clickable components visible</name>
+            <title>Should have all expected clickable components visible</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>`cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.
+                
+                https://on.cypress.io/click
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customers page - UI`</message>
+                <stack-trace>CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.
+                
+                https://on.cypress.io/click
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customers page - UI`
+                    at mouseAction (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:114214:68)
+                    at Context.click (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:114381:14)
+                    at wrapped (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:145577:19)
+                From Your Spec Code:
+                    at Object.proxyGetter [as get] (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:80711:22)
+                    at exists (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:150440:26)
+                    at elExists (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:150455:10)
+                    at ensureExistence (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:150636:22)
+                    at onFailFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:150665:53)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

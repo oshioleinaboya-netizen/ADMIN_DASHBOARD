@@ -1,6 +1,7 @@
+import { adminEmail, rankLink } from "@support/env";
 describe('Forget password flow', ()=> {
   beforeEach (()=>{
-    cy.visit('https://moni-admin-fe.staging.rank.africa/')
+    cy.visit(rankLink)
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });
@@ -11,7 +12,7 @@ describe('Forget password flow', ()=> {
       cy.get("[data-nimg$='1']").should('be.visible')
       cy.get("[class$='font-semibold text-[1.75rem] md:text-[2rem]']").should('be.visible').and('contain', 'Reset your password')
       cy.get("[class$='text-gray-600 text-sm md:text-base mt-2']").should('be.visible').and('contain', "Enter your registered email address and we'll send you a link to reset your password")
-      cy.get("[name$='email']").type('engineering2gmail.com')
+      cy.get("[name$='email']").type('hhdhdhdhdhhgmail.com')
       cy.get("[type$='submit']").click()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Invalid email address')
     })
@@ -24,20 +25,20 @@ describe('Forget password flow', ()=> {
       cy.get("[class$='text-gray-600 text-sm md:text-base mt-2']").should('be.visible').and('contain', "Enter your registered email address and we'll send you a link to reset your password")
       cy.get("[type$='submit']").click()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Email is required')
-      cy.get("[name$='email']").type('engineering2gmail.com')
+      cy.get("[name$='email']").type('dhdhdhdhdhgmail.com')
       cy.get("[type$='submit']").click()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Invalid email address')
       cy.get("[name$='email']").clear()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Email is required')
-      cy.get("[name$='email']").type('engineering@.com')
+      cy.get("[name$='email']").type('dhdhdhdg@.com')
       cy.get("[type$='submit']").click()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Invalid email address')
       cy.get("[name$='email']").clear()
-      cy.get("[name$='email']").type('engineering2gmail.com')
+      cy.get("[name$='email']").type('hdhdhdhgmail.com')
       cy.get("[type$='submit']").click()
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Invalid email address')
       cy.get("[name$='email']").clear()
-      cy.get("[name$='email']").type('engineering@gmailcom')
+      cy.get("[name$='email']").type('shshhsing@gmailcom')
       cy.get("[type$='submit']").click()
       cy.get("[class$='w-full text-red-500 text-sm text-center']").should('contain', 'email must be an email')
     })
@@ -59,7 +60,7 @@ describe('Forget password flow', ()=> {
       cy.get("[data-nimg$='1']").should('be.visible')
       cy.get("[class$='font-semibold text-[1.75rem] md:text-[2rem]']").should('be.visible').and('contain', 'Reset your password')
       cy.get("[class$='text-gray-600 text-sm md:text-base mt-2']").should('be.visible').and('contain', "Enter your registered email address and we'll send you a link to reset your password")
-      cy.get("[name$='email']").type('engineering2@heymoni.com')
+      cy.get("[name$='email']").type(adminEmail)
       cy.get("[type$='submit']").click()
     })
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").within(()=> {

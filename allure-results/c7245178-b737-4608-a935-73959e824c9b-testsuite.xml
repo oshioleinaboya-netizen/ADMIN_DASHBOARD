@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764666102237' stop='1764666117622'>
+    <name>Staffs UI check</name>
+    <title>Staffs UI check</title>
+    <test-cases>
+        <test-case start='1764666102237' status='passed' stop='1764666112435'>
+            <name>Staffs page - UI check</name>
+            <title>Staffs page - UI check</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764666112456' status='failed' stop='1764666117601'>
+            <name>Staff UI - Pagination</name>
+            <title>Staff UI - Pagination</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staffs UI check`</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staffs UI check`
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/Staff-page.cy.ts:13:7)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

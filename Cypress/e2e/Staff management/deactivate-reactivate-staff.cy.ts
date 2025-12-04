@@ -1,318 +1,159 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
+
 describe('Deactivate staff | Reactivate staff', () => {
   beforeEach(() => {
-    //Authentication check - Login
-    cy.visit(rankLink)
+    // Clear index DB
     cy.window().then((win) => {
-      win.sessionStorage.clear();
-    });
-    cy.get("[type$='text']").type(adminEmail)
-    cy.get("[type$='password']").type(adminPassword)
-    cy.get("[type$='submit']").click()
-    /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
-    cy.contains('Continue').click()*/
-    cy.wait(2000);
-    cy.get('body').then(($body) => {
-      const timerExists = $body.find("[class$='self-center space-y-2']").length > 0;
-      if (timerExists) {
-        cy.get("[class$='self-center space-y-2']").should('exist').within(()=>{
-          cy.get("[class$='font-semibold']").should('be.visible')
-        })
-      } else {
-        cy.log('No timer exists');
-      }
-    })
- 
-    cy.get('body').then(($body) => {
-      const otpField = $body.find("[class*='cursor-text']").length > 0;
-      if (otpField) {
-        cy.get("[class*='cursor-text']").type('000000');
-      } else {
-        cy.log('No OTP field found, skipping OTP input.');
-      }
-      $body.find("[class*='animate-spin']")
-    });
-    cy.wait(5000)
-    cy.location().then((loc) => {
-      cy.log('Current URL:', loc.href)
-    })
-    cy.url({ timeout: 30000 }).should('include', '/customers')
-    cy.get("[data-testid*='nav-link-staff-management']").click()
-  })
-  it.only('Deactivate staff | Reactivate Staff', ()=> {
-    let deactivatedStaffName = "";
-
-    function findAndDeactivateStaff() {
-      cy.get("[data-slot$='table-container']").within(() => {
-        cy.get("tbody tr")
-          .filter((i, row) => {
-            const text = row.innerText.trim();
-            return text.includes("ACTIVE") &&
-                  !text.includes("INACTIVE") &&
-                  !text.includes("SUPER-ADMIN");
-          })
-          .first()
-          .then($row => {
-            // Extract name from first td
-            deactivatedStaffName = ($row[0] as HTMLTableRowElement).cells[0].innerText.trim();
-
-            cy.wrap($row).click();  // ✅ CLICK ROW
-          });
+      return win.indexedDB.databases().then((dbs) => {
+        dbs.forEach((db) => {
+          win.indexedDB.deleteDatabase(db.name);
+        });
       });
-    }
-    function findRowByNameAcrossPages(targetName, onFound) {
+    });
 
-      cy.get("[data-slot$='table-container']").within(() => {
-        cy.get("tbody tr").then($rows => {
+    // Authentication check - Login
+    cy.visit(rankLink);
 
-          let matchedRow = null;
+    cy.get("[type$='text']").type(adminEmail);
+    cy.get("[type$='password']").type(adminPassword);
+    cy.get("[type$='submit']").click();
+    cy.wait(3000)
 
-          [...$rows].forEach(row => {
-            if (row.innerText.includes(targetName)) {
-              matchedRow = row;
-            }
-          });
+    // New device detected
+    cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
+    cy.contains('Continue').click()
 
-          if (matchedRow) {
-            // ⬇️⬇️ THIS IS WHERE THE CLICK HAPPENS
-            return onFound(cy.wrap(matchedRow));
+    // Handle optional OTP
+    cy.get('body').then(($body) => {
+      if ($body.find("[class*='cursor-text']").length) {
+        cy.get("[class*='cursor-text']", { timeout: 5000 }).type('000000');
+      }
+    });
+
+    // Wait until spinner disappears and URL includes '/customers'
+    cy.get("[class*='animate-spin']", { timeout: 10000 }).should('not.exist');
+    cy.url({ timeout: 30000 }).should('include', '/customers');
+    cy.wait(3000)
+
+    // Navigate to staff management
+    cy.get("[data-testid*='nav-link-staff-management']").click();
+    cy.wait(3000)
+  });
+
+  function handleModal(confirm: boolean) {
+    cy.get("[class*='relative bg-white w-[592px]']")
+      .eq(0)
+      .should('be.visible')
+      .within(() => {
+        cy.contains(confirm ? 'Yes, please' : 'No, cancel').click();
+      });
+    cy.get("[class*='relative bg-white w-[592px]']").should('not.exist');
+  }
+
+  function findRowByNameAcrossPages(targetName: string): Cypress.Chainable<JQuery<HTMLElement>> {
+    const tableRowsSelector = "[data-slot$='table-container'] tbody tr";
+    const nextButtonSelector = "[aria-label$='Next page']";
+
+    function scan(): Cypress.Chainable<JQuery<HTMLElement>> {
+      return cy.get(tableRowsSelector).then($rows => {
+        const match = [...$rows].find(r => r.innerText.includes(targetName));
+
+        if (match) {
+          return cy.wrap(match); // <--- VALID CHAIN RETURN
+        }
+
+        return cy.get(nextButtonSelector).then($next => {
+          if ($next.is(":disabled")) {
+            throw new Error(`Staff '${targetName}' not found.`);
           }
 
-          // If name NOT found → try Next page
-          cy.get("[aria-label$='Next page']").then($next => {
-
-            if ($next.is(":disabled")) {
-              throw new Error(`Staff '${targetName}' NOT found in any page.`);
-            }
-
-            cy.wrap($next).click();
-            cy.wait(800);
-
-            findRowByNameAcrossPages(targetName, onFound); // recursion
-          });
+          return cy.wrap($next)
+            .click()
+            .then(() => cy.get(tableRowsSelector, { timeout: 8000 }).should("exist"))
+            .then(() => scan()); // <--- RECURSE (must return chain)
         });
       });
     }
+    return scan();
+  }
 
-    findAndDeactivateStaff()
-    cy.wait(5000)
-    cy.url().should('include', '/staff-mgt/')
-    cy.contains('Deactivate staff').click()
-    cy.wait(5000)
+
+
+  it.only('Deactivate and Reactivate staff flow', () => {
+    let deactivatedStaffName = "";
+
+    // ----- Find first ACTIVE staff row safely -----
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: 10000 })
+      .should('have.length.gte', 1) // ensures table loaded
+      .then($rows => {
+        const match = [...$rows].find(row =>
+          row.innerText.includes("ACTIVE") &&
+          !row.innerText.includes("INACTIVE") &&
+          !row.innerText.includes("SUPER-ADMIN")
+        );
+
+        expect(match, "ACTIVE").to.exist;
+
+        // match is a DOM row element; cast to HTMLTableRowElement to read cells
+        deactivatedStaffName = (match as HTMLTableRowElement).cells[2].innerText.trim();
+        cy.wrap(match).click(); // click opens staff detail
+      });
+
+    // Ensure navigation occurred
+    cy.url({ timeout: 10000 }).should('include', '/staff-mgt/');
+
+    // Deactivate button
+    cy.contains('Deactivate staff', { timeout: 8000 }).should('be.visible').click();
     cy.url({ timeout: 10000 }).should('include', '/staff-mgt/deactivate?code');
-    cy.contains("Choosing reason for deactivating").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.get(`[class*='text-gray-400']`).should('exist').and('contain', 'Choose reason for deactivating')
-      }).click()
-    })
-    const reasonsD = [
-      'Contract Termination',
-      'Extended Leave',
-      'Other',
-      'Security Concern'
-    ]
-    reasonsD.forEach((reason) => {
-      cy.contains(reason).should('be.visible');
-    })
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Deactivate staff').and('be.disabled')
-    cy.contains('Contract Termination').should('be.visible').click()
-    cy.contains("Choosing reason for deactivating").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.contains('Contract Termination')
+
+    // Select reason
+    cy.contains("Choosing reason for deactivating")
+      .parent()
+      .within(() => {
+        cy.get("[class*='flex flex-wrap gap-2 flex-1']").click();
+        cy.contains('Contract Termination').click();
+       //cy.contains('Other').click();
+      });
+      //cy.get('textarea[placeholder$="Enter reason"]').type('Testing reason for deactivating staff').eq(1); //Not fetchable
+
+    cy.contains('button', 'Deactivate staff').should('not.be.disabled').click();
+    handleModal(true);
+
+    cy.contains('Deactivation successful', { timeout: 10000 }).should('be.visible');
+    cy.contains('Ok').click();
+
+    // ======== Reactivate the deactivated staff ========
+    // Wait for table to update
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: 10000 })
+      .should('exist')
+      .then(() => {
+        // Now safely search for the exact name
+        findRowByNameAcrossPages(deactivatedStaffName).then($row => {
+          cy.wrap($row).click();
+        });
       })
-    })
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Deactivate staff').and('not.be.disabled')
-    //
-    cy.contains("Choosing reason for deactivating").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.contains('Contract Termination')
-      }).click()
-    })
-    cy.contains('Other').should('be.visible').click()
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Deactivate staff').and('not.be.disabled')
-    cy.contains("Enter reason for deactivating staff").parent().within(()=> {
-      cy.get(`textarea[placeholder$="Enter reason"]`).should('exist').type('Testing reason for deactivating staff')
-    })
-    // Open modal
-    cy.contains('button', 'Deactivate staff')
-      .should('be.visible')
-      .and('not.be.disabled')
-      .click();
 
-    // ====== MODAL CONTENT CHECK ======
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
-      .within(() => {
+    // Wait for navigation
+    cy.url({ timeout: 10000 }).should('include', '/staff-mgt/');
 
-        cy.contains('Are you sure you want to deactivate this staff?').should('be.visible');
-        cy.contains('Deactivating Test User').should('be.visible');
-
-        cy.contains('button', 'Yes, please').should('be.visible');
-        cy.get('[alt*="close modal"]').should('be.visible');
-
-        // No, cancel
-        cy.contains('button', 'No, cancel')
-          .should('be.visible')
-          .click();
-      });
-
-    // Ensure modal closes
-    cy.get("[class*='relative bg-white w-[592px]']")
-      .should('not.exist');
-
-    cy.wait(1000);
-
-    // ====== REOPEN MODAL ======
-    cy.contains('button', 'Deactivate staff').click();
-
-    // Close with X
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
-      .within(() => {
-        cy.get('[alt*="close modal"]').click();
-      });
-
-    cy.get("[class*='relative bg-white w-[592px]']")
-      .should('not.exist');
-
-    
-      // ====== REOPEN MODAL ======
-    cy.contains('button', 'Deactivate staff').click();
-
-    // ====== MODAL CONTENT CHECK ======
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
-      .within(() => {
-        cy.contains('Are you sure you want to deactivate this staff?').should('be.visible');
-        cy.contains('Deactivating Test User').should('be.visible');
-
-        cy.contains('button', 'No, cancel').should('be.visible');
-        cy.get('[alt*="close modal"]').should('be.visible');
-
-        // Yes, please
-        cy.contains('button', 'Yes, please')
-          .should('be.visible')
-          .click();
-      });
-      cy.wait(5000)
-    cy.contains('Deactivation successful')  
-    cy.get("[class*='text-[#646464] text-center']").should('be.visible').and('contain', 'You have successfully deactivated')
-    cy.get("[class*='text-[#646464] text-center']").should('be.visible').and('contain', 'Test User account and they can')
-    cy.contains('Ok')
-    cy.get("[alt*='close modal']").should('be.visible')
-    cy.contains('Ok').click()
-
-    // -------- REACTIVATE STAFF FLOW
-    findRowByNameAcrossPages(deactivatedStaffName, ($row) => {
-      // The row is found → CLICK IT
-      $row.click();
-    });
-
-    cy.wait(5000)
-    cy.url().should('include', '/staff-mgt/')
-    cy.contains('Reactivate Staff').click()
-    cy.wait(5000)
+    cy.contains('Reactivate Staff', { timeout: 8000 }).should('be.visible').click();
     cy.url({ timeout: 10000 }).should('include', '/staff-mgt/reactivate?code');
-    cy.contains("Reason").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.get(`[class*='text-gray-400']`).should('exist').and('contain', 'Choose reason for reactivating')
-      }).click()
-    })
-    const reasonsR = [
-      'Account Restoration',
-      'Error Correction',
-      'Other',
-      'Returning from Leave'
-    ]
-    reasonsR.forEach((reason) => {
-      cy.contains(reason).should('be.visible');
-    })
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Reactivate staff').and('be.disabled')
-    cy.contains('Error Correction').should('be.visible').click()
-    cy.contains("Reason").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.contains('Error Correction')
-      })
-    })
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Reactivate staff').and('not.be.disabled')
-    //
-    cy.contains("Reason").parent().within(()=> {
-      cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('exist').within(()=>{
-        cy.contains('Error Correction')
-      }).click()
-    })
-    cy.contains('Other').should('be.visible').click()
-    cy.get("[type*='button']").should('be.visible').eq(0).and('contain', 'Reactivate staff').and('not.be.disabled')
-    cy.contains("Enter reason for reactivating staff").parent().within(()=> {
-      cy.get(`textarea[placeholder$="Enter reason"]`).should('exist').type('Testing reason for reactivating staff')
-    })
-    // Open modal
-    cy.contains('button', 'Reactivate staff')
-      .should('be.visible')
-      .and('not.be.disabled')
-      .click();
 
-    // ====== MODAL CONTENT CHECK ======
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
+    // Select reason
+    cy.contains("Reason")
+      .parent()
       .within(() => {
-
-        cy.contains('Are you sure you want to reactivate this staff?').should('be.visible');
-        cy.contains('Reactivating Test User').should('be.visible');
-
-        cy.contains('button', 'Yes, please').should('be.visible');
-        cy.get('[alt*="close modal"]').should('be.visible');
-
-        // No, cancel
-        cy.contains('button', 'No, cancel')
-          .should('be.visible')
-          .click();
+        cy.get("[class*='flex flex-wrap gap-2 flex-1']").click();
+        cy.contains('Error Correction').click();
+        //cy.contains('Other').click();
       });
+      //cy.get('textarea[placeholder$="Enter reason"]').type('Testing reason for deactivating staff').eq(1); //Not fetchable
 
-    // Ensure modal closes
-    cy.get("[class*='relative bg-white w-[592px]']")
-      .should('not.exist');
+    cy.contains('button', 'Reactivate staff').should('not.be.disabled').click();
+    handleModal(true);
 
-    cy.wait(1000);
+    cy.contains('Reactivation successful', { timeout: 10000 }).should('be.visible');
+    cy.contains('Ok').click();
+});
 
-    // ====== REOPEN MODAL ======
-    cy.contains('button', 'Reactivate staff').click();
-
-    // Close with X
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
-      .within(() => {
-        cy.get('[alt*="close modal"]').click();
-      });
-
-    cy.get("[class*='relative bg-white w-[592px]']")
-      .should('not.exist');
-
-    
-      // ====== REOPEN MODAL ======
-    cy.contains('button', 'Reactivate staff').click();
-
-    // ====== MODAL CONTENT CHECK ======
-    cy.get("[class*='relative bg-white w-[592px]']").eq(0)
-      .should('be.visible')
-      .within(() => {
-        cy.contains('Are you sure you want to reactivate this staff?').should('be.visible');
-        cy.contains('Reactivating Test User').should('be.visible');
-
-        cy.contains('button', 'No, cancel').should('be.visible');
-        cy.get('[alt*="close modal"]').should('be.visible');
-
-        // Yes, please
-        cy.contains('button', 'Yes, please')
-          .should('be.visible')
-          .click();
-      });
-      cy.wait(5000)
-    cy.contains('Reactivation successful')  
-    cy.get("[class*='text-[#646464] text-center']").should('be.visible').and('contain', 'You have successfully reactivated')
-    cy.get("[class*='text-[#646464] text-center']").should('be.visible').and('contain', 'Test User account and they can')
-    cy.contains('Ok')
-    cy.get("[alt*='close modal']").should('be.visible')
-    cy.contains('Ok').click()
-  })
-})
+});

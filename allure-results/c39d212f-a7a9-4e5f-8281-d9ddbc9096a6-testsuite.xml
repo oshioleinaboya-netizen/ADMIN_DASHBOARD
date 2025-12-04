@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764671270186' stop='1764671305906'>
+    <name>Customer Account Information</name>
+    <title>Customer Account Information</title>
+    <test-cases>
+        <test-case start='1764671270186' status='failed' stop='1764671305900'>
+            <name>Account Information UI check</name>
+            <title>Account Information UI check</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/customers' to include '/customers/'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Account Information`</message>
+                <stack-trace>AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/customers' to include '/customers/'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Account Information`
+                    at Context.eval (webpack:///./cypress/e2e/Customers/Customer management/account-information.cy.ts:42:35)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

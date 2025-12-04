@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764592744401' stop='1764592758107'>
+    <name>Admin Login - Input validations</name>
+    <title>Admin Login - Input validations</title>
+    <test-cases>
+        <test-case start='1764592744401' status='failed' stop='1764592758103'>
+            <name>Admin log in - Clear out state tests</name>
+            <title>Admin log in - Clear out state tests</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 10000ms: expected '&lt;p.text-red.text-[14px]>' to contain 'Your credentials are incorrect'</message>
+                <stack-trace>AssertionError: Timed out retrying after 10000ms: expected '&lt;p.text-red.text-[14px]>' to contain 'Your credentials are incorrect'
+                    at assertErrorContains (webpack:///./cypress/e2e/Authentication/login-input-validations.cy.ts:19:7)
+                    at eval (webpack:///./cypress/e2e/Authentication/login-input-validations.cy.ts:82:6)
+                at Array.forEach (&lt;anonymous>)
+                    at Context.eval (webpack:///./cypress/e2e/Authentication/login-input-validations.cy.ts:72:10)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

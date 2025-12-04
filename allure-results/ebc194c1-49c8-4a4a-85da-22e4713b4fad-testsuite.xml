@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764694927707' stop='1764694965035'>
+    <name>Savings Interest Summation Validation</name>
+    <title>Savings Interest Summation Validation</title>
+    <test-cases>
+        <test-case start='1764694927707' status='failed' stop='1764694965031'>
+            <name>Total vs summation interest checks - Individual plans</name>
+            <title>Total vs summation interest checks - Individual plans</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected 248.91999999999976 to deeply equal 248.92</message>
+                <stack-trace>AssertionError: expected 248.91999999999976 to deeply equal 248.92
+                    at Context.eval (webpack:///./cypress/e2e/Customers/Savings/savings-interest-summation-check.cy.ts:141:32)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764858153396' stop='1764858191131'>
+    <name>Staffs UI check</name>
+    <title>Staffs UI check</title>
+    <test-cases>
+        <test-case start='1764858153396' status='passed' stop='1764858168121'>
+            <name>Staffs page - UI check</name>
+            <title>Staffs page - UI check</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764858168132' status='passed' stop='1764858179625'>
+            <name>Staff UI - Pagination</name>
+            <title>Staff UI - Pagination</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764858179636' status='passed' stop='1764858191131'>
+            <name>Staff UI - Table headers</name>
+            <title>Staff UI - Table headers</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

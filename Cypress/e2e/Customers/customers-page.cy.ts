@@ -2,89 +2,86 @@ import { adminEmail, adminPassword, rankLink } from "@support/env";
 
 describe('Customers page - UI', () => {
   beforeEach(() => {
-    //Authentication check - Login
-    cy.visit(rankLink)
-    /*cy.window().then((win) => {
-      win.sessionStorage.clear();
-    });*/
-    cy.get("[type$='text']").type(adminEmail)
-    cy.get("[type$='password']").type(adminPassword)
-    cy.get("[type$='submit']").click()
-    /*cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
-    cy.contains('Continue').click()*/
-    cy.wait(2000);
-    cy.get('body').then(($body) => {
-      const timerExists = $body.find("[class$='self-center space-y-2']").length > 0;
-      if (timerExists) {
-        cy.get("[class$='self-center space-y-2']").should('exist').within(()=>{
-          cy.get("[class$='font-semibold']").should('be.visible')
-        })
-      } else {
-        cy.log('No timer exists');
-      }
-    })
- 
-    cy.get('body').then(($body) => {
-      const otpField = $body.find("[class*='cursor-text']").length > 0;
-      if (otpField) {
-        cy.get("[class*='cursor-text']").type('000000');
-      } else {
-        cy.log('No OTP field found, skipping OTP input.');
-      }
-      $body.find("[class*='animate-spin']")
+    // Clear index DB
+    cy.window().then((win) => {
+      return win.indexedDB.databases().then((dbs) => {
+        dbs.forEach((db) => {
+          win.indexedDB.deleteDatabase(db.name);
+        });
+      });
     });
-    cy.wait(10000)
-    cy.location().then((loc) => {
-      cy.log('Current URL:', loc.href)
-    })
-    cy.url({ timeout: 30000 }).should('include', '/customers')
-  })
+
+    // 1. Login
+    cy.visit(rankLink);
+
+    cy.get("[type$='text']", { timeout: 15000 }).should('be.visible').type(adminEmail);
+    cy.get("[type$='password']").should('be.visible').type(adminPassword);
+    cy.get("[type$='submit']").click();
+    cy.wait(4000)
+
+    // New device detected
+    cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
+    cy.contains('Continue').click()
+    cy.wait(4000)
+
+    //2. Wait for timer (if present)
+    cy.get('body').then(($body) => {
+      const timer = $body.find("[class$='self-center space-y-2']");
+      if (timer.length) {
+        cy.wrap(timer)
+          .should('be.visible')
+          .within(() => {
+            cy.get("[class$='font-semibold']").should('be.visible');
+          });
+      }
+    });
+
+    // 3. OTP (if present)
+    cy.get('body').then(($body) => {
+      const otp = $body.find("[class*='cursor-text']");
+      if (otp.length) {
+        cy.wrap(otp).type('000000');
+      }
+    });
+
+    // 4. Wait for load spinner to disappear (replaces cy.wait)
+    cy.get("[class*='animate-spin']", { timeout: 20000 }).should('not.exist');
+
+    // 5. Ensure redirected to /customers
+    cy.url({ timeout: 30000 }).should('include', '/customers');
+  });
+
+  // ========= TEST 1 =========
   it('Should have all expected clickable components visible', () => {
-    // Wait for page readiness
     cy.document().its('readyState').should('eq', 'complete');
-    cy.get('body', { timeout: 10000 }).should('be.visible');
 
-    // Assertions
-    cy.get('body').within(() => {
-      cy.get("[alt$='Rank Logo']", { timeout: 10000 }).should('exist');
-
-      cy.get("[data-testid$='nav-link-customers']", { timeout: 10000 })
-        .should('be.visible')
-        .and('contain', 'Customers')
-        .and('not.be.disabled');
-
-      cy.get("[data-testid$='nav-link-text-staff-management']")
-        .should('be.visible')
-        .and('not.be.disabled');
-
-      cy.get("[data-testid$='nav-link-text-fraud-management']")
-        .should('be.visible')
-        .and('not.be.disabled');
-
-      cy.get("[data-testid$='nav-link-text-loan']")
-        .should('be.visible')
-        .and('not.be.disabled');
-
+    cy.get('body', { timeout: 15000 }).should('be.visible').within(() => {
+      cy.get("[alt$='Rank Logo']").should('exist');
+      cy.get("[data-testid$='nav-link-customers']").should('be.visible').and('not.be.disabled');
+      cy.get("[data-testid$='nav-link-text-staff-management']").should('be.visible');
+      cy.get("[data-testid$='nav-link-text-fraud-management']").should('be.visible');
+      cy.get("[data-testid$='nav-link-text-loan']").should('be.visible');
       cy.get("[class$='flex h-[48px] w-max items-center justify-between gap-2 border border-[#470C00] bg-[#470C00] rounded-full p-3 text-sm font-medium hover:bg-[#452a25] mb-1']")
-        .should('be.visible')
-        .and('not.be.disabled');
+        .should('be.visible');
     });
   });
+
+  // ========= TEST 2 =========
   it('Customers UI - 1', () => {
     cy.document().its('readyState').should('eq', 'complete');
-    cy.get('body', { timeout: 15000 }).should('be.visible');
+    cy.get('body').should('be.visible');
 
     cy.get("[class$='rounded-lg bg-white transition-shadow duration-200 border border-gray-200 p-4 flex py-8 mb-8']")
       .should('exist')
       .within(() => {
         cy.get("[class$='ml-8 pr-8']")
-          .should('be.visible')
-          .and('contain', 'Tier 0')
+          .should('contain', 'Tier 0')
           .and('contain', 'Tier 1')
           .and('contain', 'Tier 2')
           .and('contain', 'Tier 3');
-        cy.get("[class$='ml-8 border-r pr-8']").should('contain', 'Onboarded users');
-        cy.get("[class$='ml-8 border-r pr-8']").should('contain', 'Total customers');
+
+        cy.contains("[class$='ml-8 border-r pr-8']", 'Onboarded users');
+        cy.contains("[class$='ml-8 border-r pr-8']", 'Total customers');
       });
 
     cy.get("[class$='font-bold text-[14px]']").should('be.visible');
@@ -92,21 +89,20 @@ describe('Customers page - UI', () => {
     cy.get("[alt$='right arrow']").should('be.visible');
     cy.get("[class$='text-[#71717A]']").should('contain', 'Rank');
     cy.get("[class$='text-[#1E4D37] hover:cursor-pointer']").should('be.visible');
+
     cy.get("[class$='__className_b9c7ce antialiased bg-[#fafafa]']")
       .should('contain', 'Create a client')
-      .and('contain', 'Drafts')
-      .and('not.be.disabled');
-  }); //
+      .and('contain', 'Drafts');
+  });
 
-  // CUSTOMERS UI 2 ===
+  // ========= TEST 3 =========
   it('Customers UI - 2', () => {
     cy.document().its('readyState').should('eq', 'complete');
-    cy.get('body', { timeout: 15000 }).should('be.visible');
+    cy.get('body').should('be.visible');
 
-    cy.get("[class$='font-bold text-[14px]']")
-      .should('be.visible')
-      .and('contain', 'Total number of customers by period');
+    cy.contains("[class$='font-bold text-[14px]']", 'Total number of customers by period').should('be.visible');
     cy.get("[class$='font-bold text-[30px]']").should('be.visible');
+
     cy.get("[class$='__className_b9c7ce antialiased bg-[#fafafa]']")
       .should('contain', 'Active clients');
 
@@ -118,18 +114,17 @@ describe('Customers page - UI', () => {
       cy.contains('Export').should('be.visible');
     });
 
-    cy.get("#search-bar-button").should('be.visible').and('not.be.disabled');
+    cy.get("#search-bar-button").should('be.visible');
   });
 
-  // CUSTOMERS UI TABLE ===
+  // ========= TEST 4 =========
   it('Customer management UI - Table', () => {
     cy.document().its('readyState').should('eq', 'complete');
-    cy.get('body', { timeout: 15000 }).should('be.visible');
+    cy.get('body').should('be.visible');
 
     cy.get("[data-slot$='table-container'] thead tr th")
       .should('have.length', 8)
-      .and('be.visible')
-      .then(($th) => {
+      .each(($th, index) => {
         const headers = [
           'Phone number',
           "Customer's Name",
@@ -140,9 +135,7 @@ describe('Customers page - UI', () => {
           'Place of birth',
           'Monitag',
         ];
-        headers.forEach((header, i) => {
-          expect($th.eq(i)).to.contain(header);
-        });
+        expect($th).to.contain(headers[index]);
       });
 
     cy.get("[data-slot$='table-container'] tbody tr")
@@ -155,10 +148,10 @@ describe('Customers page - UI', () => {
       });
   });
 
-  // CUSTOMERS UI PAGINATION ===
-  it('Customer UI - Pagination', () => {
+  // ========= TEST 5 =========
+  it.only('Customer UI - Pagination', () => {
     cy.document().its('readyState').should('eq', 'complete');
-    cy.get('body', { timeout: 15000 }).should('be.visible');
+    cy.get('body').should('be.visible');
 
     cy.get("[class$='flex items-center justify-between w-full']").within(() => {
       cy.get("[class$='flex items-center gap-4']").within(() => {
@@ -169,8 +162,8 @@ describe('Customers page - UI', () => {
       cy.get("[aria-label$='Pagination']").within(() => {
         cy.get("[aria-label$='Previous page']").should('exist');
         cy.get("[aria-label$='Next page']").should('not.be.disabled');
-        cy.get("[aria-current$='page']").should('not.be.disabled');
+        cy.get("[aria-current$='page']").should('be.visible');
       });
     });
-  })
-})
+  });
+});

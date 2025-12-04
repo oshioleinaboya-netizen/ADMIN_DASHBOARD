@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764671003504' stop='1764671071968'>
+    <name>Resend OTP flow</name>
+    <title>Resend OTP flow</title>
+    <test-cases>
+        <test-case start='1764671003504' status='passed' stop='1764671071968'>
+            <name>Resend OTP</name>
+            <title>Resend OTP</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

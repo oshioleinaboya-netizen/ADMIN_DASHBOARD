@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764587988196' stop='1764588027782'>
+    <name>template spec</name>
+    <title>template spec</title>
+    <test-cases>
+        <test-case start='1764587988196' status='failed' stop='1764588027758'>
+            <name>Filter staff table</name>
+            <title>Filter staff table</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `template spec`</message>
+                <stack-trace>AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `template spec`
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:40:37)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764671225048' stop='1764671248227'>
+    <name>Invite staff</name>
+    <title>Invite staff</title>
+    <test-cases>
+        <test-case start='1764671225048' status='passed' stop='1764671239948'>
+            <name>Invite staff - full flow</name>
+            <title>Invite staff - full flow</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764671239974' status='failed' stop='1764671248201'>
+            <name>Existing email</name>
+            <title>Existing email</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Invite staff`</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Invite staff`
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/invite-a-staff.cy.ts:46:7)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

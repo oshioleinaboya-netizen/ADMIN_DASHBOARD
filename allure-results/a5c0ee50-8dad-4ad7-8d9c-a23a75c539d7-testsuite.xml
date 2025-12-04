@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764693990389' stop='1764694013008'>
+    <name>Customer savings plan management</name>
+    <title>Customer savings plan management</title>
+    <test-cases>
+        <test-case start='1764693990389' status='failed' stop='1764694013004'>
+            <name>Individual savings plan management check</name>
+            <title>Individual savings plan management check</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: Expected to find content: 'Plan Type' but never did.</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Plan Type' but never did.
+                    at eval (webpack:///./cypress/e2e/Customers/Savings/individual-savingsplan-check.cy.ts:77:11)
+                at Array.forEach (&lt;anonymous>)
+                    at findStatus (webpack:///./cypress/e2e/Customers/Savings/individual-savingsplan-check.cy.ts:76:22)
+                    at Context.eval (webpack:///./cypress/e2e/Customers/Savings/individual-savingsplan-check.cy.ts:96:4)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

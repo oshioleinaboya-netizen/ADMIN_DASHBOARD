@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764689923043' stop='1764689940517'>
+    <name>Customer List &amp; Pagination Flow</name>
+    <title>Customer List &amp; Pagination Flow</title>
+    <test-cases>
+        <test-case start='1764689923043' status='passed' stop='1764689940517'>
+            <name>First and Last page disables correct navigation buttons</name>
+            <title>First and Last page disables correct navigation buttons</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

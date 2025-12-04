@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764688312401' stop='1764688375262'>
+    <name>Customers page - UI</name>
+    <title>Customers page - UI</title>
+    <test-cases>
+        <test-case start='1764688312401' status='passed' stop='1764688326350'>
+            <name>Should have all expected clickable components visible</name>
+            <title>Should have all expected clickable components visible</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764688326374' status='failed' stop='1764688341293'>
+            <name>Customers UI - 1</name>
+            <title>Customers UI - 1</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: expected '&lt;body.__className_b9c7ce.antialiased.bg-[#fafafa]>' to contain 'Create a client'</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: expected '&lt;body.__className_b9c7ce.antialiased.bg-[#fafafa]>' to contain 'Create a client'
+                    at Context.eval (webpack:///./cypress/e2e/Customers/customers-page.cy.ts:94:7)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764688341317' status='passed' stop='1764688351980'>
+            <name>Customers UI - 2</name>
+            <title>Customers UI - 2</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764688352003' status='passed' stop='1764688362910'>
+            <name>Customer management UI - Table</name>
+            <title>Customer management UI - Table</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764688362937' status='passed' stop='1764688375262'>
+            <name>Customer UI - Pagination</name>
+            <title>Customer UI - Pagination</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

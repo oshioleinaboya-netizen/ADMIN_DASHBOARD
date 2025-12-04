@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764854975009' stop='1764855008221'>
+    <name>template spec</name>
+    <title>template spec</title>
+    <test-cases>
+        <test-case start='1764854975009' status='passed' stop='1764855008221'>
+            <name>Filter staff table - Single filter selection (Status)</name>
+            <title>Filter staff table - Single filter selection (Status)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
