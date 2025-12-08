@@ -1,4 +1,5 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { findRowAcrossPages } from '@support/helper';
 
 /**
  * Headless-friendly refactor notes (kept out of test logic):
@@ -102,7 +103,7 @@ describe('Savings plans table navigation', () => {
     cy.wait(3000)
   });
 
-  it.only('Savings - Table navigation', () => {
+  it('Savings - Table navigation', () => {
     // Navigate to savings and confirm table layout + content
     ensureSavingsPage();
 
@@ -373,4 +374,13 @@ describe('Savings plans table navigation', () => {
       });
     });
   });
+
+  it.only('Verify that when closed savings plan is selected, the data represnted on the table are only for the closed savings plans', ()=> {
+    ensureSavingsPage()
+    cy.contains('Closed savings plans').click()
+
+    // Closed status
+        findRowAcrossPages(row => /(^|\s)Closed(\s|$)/.test(row.innerText))
+          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
+  })
 });
