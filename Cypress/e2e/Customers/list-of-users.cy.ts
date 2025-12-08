@@ -23,7 +23,7 @@ describe('Customer List & Pagination Flow', () => {
     cy.get("[type$='submit']").click();
     cy.wait(4000)
 
-    // New device detected
+    // New device detected/
     cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()
     cy.wait(4000)

@@ -6,4 +6,4 @@ declare namespace Cypress {
       nextButtonSelector: string
     ): Chainable<boolean>;
   }
-}
+} //

@@ -15,7 +15,7 @@ describe('Staff Management - Pagination & Invitation Status Checks', () => {
       });
     });
 
-    // Authentication check - Login
+    // Authentication check - Login/
     cy.visit(rankLink);
 
     cy.get("[type$='text']").type(adminEmail);

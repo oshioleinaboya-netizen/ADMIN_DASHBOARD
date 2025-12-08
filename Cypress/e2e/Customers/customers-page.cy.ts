@@ -24,7 +24,7 @@ describe('Customers page - UI', () => {
     cy.contains('Continue').click()
     cy.wait(4000)
 
-    //2. Wait for timer (if present)
+    //2. Wait for timer (if present)/
     cy.get('body').then(($body) => {
       const timer = $body.find("[class$='self-center space-y-2']");
       if (timer.length) {

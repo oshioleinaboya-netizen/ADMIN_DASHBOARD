@@ -161,7 +161,7 @@ export function inviteStaff() {
     .should('have.length', 1)
     .then(($matched) => {
       cy.wrap($matched).click();
-    }); //Button enabled check and click
+    }); //Button enabled check and click/
     cy.wait(3000)
 }
 

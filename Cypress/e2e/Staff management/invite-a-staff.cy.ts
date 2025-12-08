@@ -14,7 +14,7 @@ const selectors = {
   inviteButton: '[type*="button"]:contains("Invite Staff")'
 };
 
-// Helper functions
+// Helper functions/
 const typeInput = (label: string, value: string) => {
   cy.contains(label).parent().find("input, textarea").first().clear().type(value);
 };
@@ -68,7 +68,7 @@ describe('Invite staff', () => {
     cy.url({ timeout: 30000 }).should('include', '/customers');
     cy.wait(3000)
 
-    // Navigate to staff management
+    // Navigate to staff management/
     cy.get("[data-testid*='nav-link-staff-management']").click();
     cy.wait(3000)
   });

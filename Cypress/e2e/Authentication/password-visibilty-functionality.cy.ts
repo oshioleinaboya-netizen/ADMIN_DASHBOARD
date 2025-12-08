@@ -12,4 +12,4 @@ describe('Password visibility toggle', () => {
     cy.get("[alt$='show password icon']").click()
     cy.get("[class$='relative  ']").should('be.visible')
   });
-});
+});//

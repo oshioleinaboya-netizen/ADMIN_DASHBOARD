@@ -27,7 +27,7 @@
 
 /// <reference types="cypress" />
 
-//Find across pages
+//Find across pages/
 Cypress.Commands.add(
   "findRowAcrossPages",
   (

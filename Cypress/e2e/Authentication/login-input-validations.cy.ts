@@ -6,7 +6,7 @@ describe('Admin Login - Input validations', () => {
     cy.visit(rankLink)
   })
 
-  // Helper to type credentials and submit
+  // Helper to type credentials and submit/
   const submitLogin = (email: string, password: string) => {
     if (email) cy.get("[type$='text']").clear().type(email)
     if (password) cy.get("[type$='password']").clear().type(password)

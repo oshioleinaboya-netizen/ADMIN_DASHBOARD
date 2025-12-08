@@ -65,7 +65,7 @@ describe('Get a savings plan', () => {
     cy.get(savingsTabClick).eq(3).click()
     cy.wait(3000)
 
-    // Plan type
+    // Plan type/
     cy.get("#search-bar-button").within(() => {
       cy.get(`[placeholder$="Search by plan type or plan name"]`).should('exist');
     });

@@ -23,7 +23,7 @@ describe('Deactivate staff | Reactivate staff', () => {
     cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()
 
-    // Handle optional OTP
+    // Handle optional OTP/
     cy.get('body').then(($body) => {
       if ($body.find("[class*='cursor-text']").length) {
         cy.get("[class*='cursor-text']", { timeout: 5000 }).type('000000');

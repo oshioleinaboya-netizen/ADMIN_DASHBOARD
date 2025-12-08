@@ -19,7 +19,7 @@ describe('Log out flow', () => {
   }
 
   it('Admin logout/Re-login flow', () => {
-    // Login
+    // Login/
     cy.get("[type$='text']").type(adminEmail)
     cy.get("[type$='password']").type(adminPassword)
     cy.get("[type$='submit']").click()

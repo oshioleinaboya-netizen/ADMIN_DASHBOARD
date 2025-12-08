@@ -5,7 +5,7 @@ describe('Forget password flow', ()=> {
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });
-  })
+  }) //
   it('Forget password flow - Email invalidation', () =>{
     cy.get("[class$='text-sm text-customBlue hover:text-blue-700']").click()
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").should('be.visible').within(()=> {

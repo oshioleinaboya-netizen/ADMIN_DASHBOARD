@@ -23,7 +23,7 @@ describe('Customer Details', () => {
     cy.get("[type$='password']", { timeout: WAIT_LONG }).type(adminPassword);
     cy.get("[type$='submit']", { timeout: WAIT_LONG }).click();
 
-    // New device detected
+    // New device detected/
     cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()
 

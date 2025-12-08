@@ -13,7 +13,7 @@ describe('Login flow', () => {
     cy.get("[type$='password']").type(adminPassword)
     cy.get("[type$='submit']").click()
 
-    // New device detected
+    // New device detected/
     cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()
 

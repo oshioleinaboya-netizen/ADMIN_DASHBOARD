@@ -9,7 +9,7 @@ function waitForTable() {
 
 describe('Savings Interest Summation Validation', () => {
   beforeEach(() => {
-    // Clear index DB
+    // Clear index DB/
     cy.window().then((win) => {
       return win.indexedDB.databases().then((dbs) => {
         dbs.forEach((db) => {

@@ -105,6 +105,6 @@ async function runCypress(): Promise<void> {
   }
 }
 
-// ====== EXECUTE ======
+// ====== EXECUTE ====== //
 runCypress();
 

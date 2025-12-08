@@ -117,7 +117,7 @@ describe('Customer savings plan management', () => {
 
       cy.get("[class*='lucide lucide-copy w-3.5 h-3.5']").first().should('not.be.disabled').click();
       cy.wait(200);
-      //cy.contains('Copied to clipboard');
+      //cy.contains('Copied to clipboard');/
 
       cy.get("[class$='lucide lucide-copy w-3.5 h-3.5']").should('be.visible').click();
       cy.get("[class$='flex items-center text-sm']").contains('Close').click();

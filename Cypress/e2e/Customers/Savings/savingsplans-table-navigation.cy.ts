@@ -379,7 +379,7 @@ describe('Savings plans table navigation', () => {
     ensureSavingsPage()
     cy.contains('Closed savings plans').click()
 
-    // Closed status
+    // Closed status/
         findRowAcrossPages(row => /(^|\s)Closed(\s|$)/.test(row.innerText))
           .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
   })

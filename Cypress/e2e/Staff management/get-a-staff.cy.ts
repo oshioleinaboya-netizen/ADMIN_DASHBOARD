@@ -10,7 +10,7 @@ describe('Get a staff - Filter by search', () => {
           });
         });
 
-        //Authentication check - Login
+        //Authentication check - Login/
         cy.visit(rankLink)
         
         cy.get("[type$='text']").type(adminEmail)

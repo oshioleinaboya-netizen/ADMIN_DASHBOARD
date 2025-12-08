@@ -21,7 +21,7 @@ describe('template spec', () => {
           cy.get("[type$='submit']").click()
           cy.wait(3000)
 
-          // New Device Login
+          // New Device Login/
           cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
           cy.contains('Continue').click()
 
