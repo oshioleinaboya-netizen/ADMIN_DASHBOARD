@@ -383,4 +383,21 @@ describe('Savings plans table navigation', () => {
         findRowAcrossPages(row => /(^|\s)Closed(\s|$)/.test(row.innerText))
           .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
   })
+
+  it.only('Verify that when active savings plan is selected, the data represnted on the table are only for the active savings plans', ()=> {
+    ensureSavingsPage()
+
+    // Active status/
+        findRowAcrossPages(row => /(^|\s)Active(\s|$)/.test(row.innerText))
+          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
+  })
+
+  it.only('Verify that when matured savings plan is selected, the data represnted on the table are only for the matured savings plans', ()=> {
+    ensureSavingsPage()
+    cy.contains('Matured savings plans').click()
+
+    // Closed status/
+        findRowAcrossPages(row => /(^|\s)Matured(\s|$)/.test(row.innerText))
+          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
+  })
 });

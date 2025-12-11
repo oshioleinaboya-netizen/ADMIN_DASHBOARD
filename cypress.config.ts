@@ -18,6 +18,5 @@ export default defineConfig({
     },
     baseUrl: process.env.RANK_LINK,
   },
-  reporter: 'mocha-allure-reporter',
 }); //
 

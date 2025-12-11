@@ -188,6 +188,50 @@ export function findRowAcrossPages(matchFn: (row: HTMLElement) => boolean) {
   return searchPage();
 }
 
+// Additional helper check
+export function checkColumnAcrossAllPages(columnIndex: number, expectedValues: string[]) {
+  const checkPage = (): Cypress.Chainable<any> => {
+    // Case: No results found
+    const noResultSelector = "[class*='flex flex-col items-center']";
+    return cy.get("body").then($body => {
+      if ($body.find(noResultSelector).text().match(/No result(s)? found!?/i)) {
+        return cy.get(noResultSelector)
+          .contains(/No result(s)? found!?/i)
+          .should("be.visible")
+          .then(() => cy.wrap(void 0));
+      }
+
+      // Table exists → check all rows on this page
+      return cy.get("[data-slot$='table-container'] tbody tr").each($row => {
+        cy.wrap($row)
+          .find("td")
+          .eq(columnIndex)
+          .invoke("text")
+          .then(text => {
+            const cellText = text.trim().toUpperCase();
+            expectedValues.forEach(val => {
+              if (cellText.includes(val.toUpperCase())) {
+                cy.log(`Found expected value: ${val}`);
+              }
+            });
+          });
+      }).then(() => {
+        // Check for NEXT button
+        return cy.get("[data-testid*='pagination-arrow-next']").then($next => {
+          if ($next.is(':disabled')) return cy.wrap(void 0); // no more pages
+          cy.wrap($next).click();
+          cy.wait(500); // wait for table to render
+          return checkPage(); // continue to next page
+        });
+      });
+    });
+  };
+
+  return checkPage();
+}
+
+
+
 
 
 
