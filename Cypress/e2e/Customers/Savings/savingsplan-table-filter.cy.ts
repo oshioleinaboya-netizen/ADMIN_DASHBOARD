@@ -4,7 +4,11 @@ const WAIT_LONG = 30000;
 const WAIT_MED = 10000;
 
 function waitForTable() {
-  return cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist');
+  return cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+    }).should('exist');
 }
 
 describe('Filtering savings table', () => {
@@ -108,34 +112,43 @@ describe('Filtering savings table', () => {
       })
       cy.contains('Apply').click();
     });
-    waitForTable();
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist');
     cy.get("[data-slot$='table-container'] tbody tr td:nth-child(1)").should('contain', 'Reserve');
 
     // Apply single Sort filter
     cy.get("[data-testid$='filters-trigger']").click();
     cy.get("[data-testid$='filters-content']").within(() => {
+      cy.contains('Clear all filters').click({ force: true });
+    });
+    cy.get("[data-testid$='filters-content']").within(() => {
       cy.contains('Sort by').parent().within(()=> {
         cy.contains('Start date').click();
       })
-      cy.contains('Apply').click();
+      cy.contains('Apply').click({ force: true });
     });
-    waitForTable();
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist')
     cy.get("[data-slot$='table-container'] tbody tr td:nth-child(7)").eq(1).should('not.contain', 'Oct 28, 2025');
 
     // Apply multiple Tag filters
     cy.get("[data-testid$='filters-trigger']").click();
     cy.get("[data-testid$='filters-content']").within(() => {
+      cy.contains('Clear all filters').click({ force: true });
+    });
+    cy.get("[data-testid$='filters-content']").within(() => {
       cy.contains('Tag').parent().within(()=> {
         cy.contains('Periodic').click();
         cy.contains('Goals').click();
       })
-      cy.contains('Apply').click();
+      cy.contains('Apply').click({ force: true });
     });
-    waitForTable();
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist');
     cy.get("[data-slot$='table-container'] tbody tr td:nth-child(1)").should('not.contain', 'Reserve');
 
     // Apply multiple Tag + Sort filters
     cy.get("[data-testid$='filters-trigger']").click();
+    cy.get("[data-testid$='filters-content']").within(() => {
+      cy.contains('Clear all filters').click({ force: true });
+    });
     cy.get("[data-testid$='filters-content']").within(() => {
       cy.contains('Tag').parent().within(()=> {
         cy.contains('Goals').click();
@@ -143,14 +156,17 @@ describe('Filtering savings table', () => {
       cy.contains('Sort by').parent().within(()=> {
         cy.contains('Start date').click();
       })
-      cy.contains('Apply').click();
+      cy.contains('Apply').click({ force: true });
     });
-    waitForTable();
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist'); // Table wait
     cy.get("[data-slot$='table-container'] tbody tr td:nth-child(1)").should('contain', 'Goals');
     cy.get("[data-slot$='table-container'] tbody tr td:nth-child(7)").eq(0).should('not.contain', 'Dec 02');
 
     // Close filter
     cy.get("[data-testid$='filters-trigger']").click();
+    cy.get("[data-testid$='filters-content']").within(() => {
+      cy.contains('Clear all filters').click({ force: true });
+    });
     cy.get("[data-testid$='filters-content']").within(() => {
       cy.get("[aria-hidden*='true']").click();
     });
@@ -159,7 +175,7 @@ describe('Filtering savings table', () => {
     // Clear all filters
     cy.get("[data-testid$='filters-trigger']").click();
     cy.get("[data-testid$='filters-content']").within(() => {
-      cy.contains('Clear all filters').click();
+      cy.contains('Clear all filters').click({ force: true });
     });
     cy.get("[data-testid$='filters-content']").should('exist');
 
@@ -168,7 +184,7 @@ describe('Filtering savings table', () => {
       cy.get(`[placeholder$="Search by plan type or plan name"]`).should('exist');
     });
     cy.get("#search-bar-button").type('h');
-    waitForTable();
+    cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist') // Table wait
     cy.get("[data-slot$='table-container'] tbody tr").should('have.length.at.least', 1);
   });
 });

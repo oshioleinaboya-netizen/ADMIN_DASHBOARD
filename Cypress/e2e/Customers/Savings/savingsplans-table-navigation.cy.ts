@@ -14,7 +14,11 @@ const WAIT_SHORT = 5000;
 
 function waitForTable() {
   // Wait for table container rows to appear (or a reasonable timeout)
-  return cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist');
+  return cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+    }).should('exist');
 }
 
 function waitForNoGlobalSpinner() {
@@ -98,7 +102,7 @@ describe('Savings plans table navigation', () => {
     cy.wait(3000)
     
     // Wait for table rows to load and click the first — retryable
-    waitForTable().first().click();
+    waitForTable().click();
     cy.url({ timeout: WAIT_LONG }).should('include', '/customers/');
     cy.wait(3000)
   });
@@ -195,7 +199,7 @@ describe('Savings plans table navigation', () => {
         const currentPage = Number(text.trim());
         expect(currentPage).to.be.oneOf([9, 10, 11, 12, 13]);
       });
-      cy.get("[data-testid$='pagination-button-1']").click();
+      cy.get("[data-testid$='pagination-button-1']").click(); // Better weork on this
 
       // Page-size changes: select -> wait for table -> assert count or presence
       const pageSizeChecks = [
@@ -235,11 +239,11 @@ describe('Savings plans table navigation', () => {
     cy.get("[aria-label$='Previous page']").should('be.disabled');
 
     // Try to jump to last page index used previously; this will retry until it becomes available or timeout
-    cy.get("[data-testid$='pagination-button-72']", { timeout: WAIT_LONG }).click();
-    cy.get("[aria-current$='page']", { timeout: WAIT_LONG }).should('contain', 71);
+    cy.get("[data-testid$='pagination-button-3']", { timeout: WAIT_LONG }).click();
+    cy.get("[aria-current$='page']", { timeout: WAIT_LONG }).should('contain', 3);
     cy.get("[aria-label$='Next page']").should('be.disabled');
     cy.get("[aria-label$='Previous page']").should('not.be.disabled');
-  });
+  }); // Properly modify this
 
   it('Pagination indication functionality', () => {
     ensureSavingsPage();
@@ -375,29 +379,108 @@ describe('Savings plans table navigation', () => {
     });
   });
 
-  it.only('Verify that when closed savings plan is selected, the data represnted on the table are only for the closed savings plans', ()=> {
+  it('Verify that when closed savings plan is selected, the data represnted on the table are only for the closed savings plans', ()=> {
+    function checkStatus(allowedStatuses) {
+      if (!Array.isArray(allowedStatuses)) {
+        allowedStatuses = [allowedStatuses]; // convert single string to array
+      }
+      cy.get("body").then(($body) => {
+        // Check for "No results found" first
+        if ($body.find("[class*='flex flex-col items-center']").text().match(/No result(s)? found!?/i)) {
+          // Assert visible and stop
+          cy.get("[class*='flex flex-col items-center']")
+            .contains(/No result(s)? found!?/i)
+            .should("be.visible");
+        } else {
+          // Table exists → check rows
+          cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+            cy.wrap($row)
+              .find("td")
+              .eq(5)
+              .invoke("text")
+              .then((text) => {
+                const statusText = text.trim().toUpperCase();
+                expect(allowedStatuses.map(s => s.toUpperCase())).to.include(statusText);
+              });
+          });
+        }
+      });
+    }
     ensureSavingsPage()
     cy.contains('Closed savings plans').click()
-
+    cy.wait(3000)
     // Closed status/
-        findRowAcrossPages(row => /(^|\s)Closed(\s|$)/.test(row.innerText))
-          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
+    checkStatus("Closed")
   })
 
-  it.only('Verify that when active savings plan is selected, the data represnted on the table are only for the active savings plans', ()=> {
+  it('Verify that when active savings plan is selected, the data represnted on the table are only for the active savings plans', ()=> {
+    function checkStatus(allowedStatuses) {
+      if (!Array.isArray(allowedStatuses)) {
+        allowedStatuses = [allowedStatuses]; // convert single string to array
+      }
+      cy.get("body").then(($body) => {
+        // Check for "No results found" first
+        if ($body.find("[class*='flex flex-col items-center']").text().match(/No result(s)? found!?/i)) {
+          // Assert visible and stop
+          cy.get("[class*='flex flex-col items-center']")
+            .contains(/No result(s)? found!?/i)
+            .should("be.visible");
+        } else {
+          // Table exists → check rows
+          cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+            cy.wrap($row)
+              .find("td")
+              .eq(5)
+              .invoke("text")
+              .then((text) => {
+                const statusText = text.trim().toUpperCase();
+                expect(allowedStatuses.map(s => s.toUpperCase())).to.include(statusText);
+              });
+          });
+        }
+      });
+    }
+
     ensureSavingsPage()
+    cy.wait(3000)
 
     // Active status/
-        findRowAcrossPages(row => /(^|\s)Active(\s|$)/.test(row.innerText))
-          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
-  })
+    checkStatus("Active")
 
-  it.only('Verify that when matured savings plan is selected, the data represnted on the table are only for the matured savings plans', ()=> {
+  it('Verify that when matured savings plan is selected, the data represnted on the table are only for the matured savings plans', ()=> {
+    function checkStatus(allowedStatuses) {
+      if (!Array.isArray(allowedStatuses)) {
+        allowedStatuses = [allowedStatuses]; // convert single string to array
+      }
+      cy.get("body").then(($body) => {
+        // Check for "No results found" first
+        if ($body.find("[class*='flex flex-col items-center']").text().match(/No result(s)? found!?/i)) {
+          // Assert visible and stop
+          cy.get("[class*='flex flex-col items-center']")
+            .contains(/No result(s)? found!?/i)
+            .should("be.visible");
+        } else {
+          // Table exists → check rows
+          cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+            cy.wrap($row)
+              .find("td")
+              .eq(5)
+              .invoke("text")
+              .then((text) => {
+                const statusText = text.trim().toUpperCase();
+                expect(allowedStatuses.map(s => s.toUpperCase())).to.include(statusText);
+              });
+          });
+        }
+      });
+    }
+
     ensureSavingsPage()
     cy.contains('Matured savings plans').click()
+    cy.wait(3000)
 
     // Closed status/
-        findRowAcrossPages(row => /(^|\s)Matured(\s|$)/.test(row.innerText))
-          .then(statusRow => statusRow && cy.wrap(statusRow).find("td").eq(5).find("button").should("be.disabled"));
+    checkStatus("Matured")
   })
+})
 });

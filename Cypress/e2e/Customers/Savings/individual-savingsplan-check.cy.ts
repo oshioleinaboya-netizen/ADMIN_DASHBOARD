@@ -50,7 +50,13 @@ describe('Customer savings plan management', () => {
       .type('billers');
 
     cy.wait(3000)
-    cy.get("[data-slot$='table-container'] tbody tr").first().click();
+    cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+          .click()
+    })
+    
     cy.url({ timeout: WAIT_LONG }).should('include', '/customers/');
     cy.wait(3000)
   });
@@ -70,7 +76,7 @@ describe('Customer savings plan management', () => {
     'Progress'
   ];
 
-  it.only('Individual savings plan management check', () => {
+  it('Individual savings plan management check', () => {
     let status = "";
 
     function findStatus() {
@@ -94,6 +100,9 @@ describe('Customer savings plan management', () => {
     });
     cy.wait(3000)
 
+    cy.get("[data-slot$='table-container'] tbody tr").eq(1).click();
+    cy.get("[class*='lucide lucide-arrow-left w-3.5 h-3.5']").click();
+    cy.wait(2000)
     cy.get("[data-slot$='table-container'] tbody tr").eq(1).click();
     findStatus();
 

@@ -21,12 +21,12 @@ describe('Customer List & Pagination Flow', () => {
     cy.get("[type$='text']", { timeout: 15000 }).should('be.visible').type(adminEmail);
     cy.get("[type$='password']").should('be.visible').type(adminPassword);
     cy.get("[type$='submit']").click();
-    cy.wait(4000)
+    cy.wait(3000)
 
     // New device detected/
     cy.get("[class$='flex flex-col gap-y-4 items-center px-8 py-6']")
     cy.contains('Continue').click()
-    cy.wait(4000)
+    cy.wait(3000)
 
     //2. Wait for timer (if present)
     cy.get('body').then(($body) => {
@@ -110,10 +110,33 @@ describe('Customer List & Pagination Flow', () => {
     [10, 20, 50, 100, 200, 500].forEach(size => validatePageSize(size))
   })
 
-  it.only('Pagination indication by page buttons', () => {
+  it('Pagination indication by page buttons', () => {
     for (let i = 2; i <= 5; i++) {
       cy.get(`[data-testid$='pagination-button-${i}']`).click()
       cy.get(pageInfo).should('contain', `Showing ${((i - 1) * 20 + 1)} - ${i * 20}`)
     }
+  })
+
+  it.only('Verify if I can copy the emails and numbers of customers on the customer table. And the functionality works as expected.', () => {
+    
+    // Phone numbers copy check
+    cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+      cy.wrap($row)
+        .find('td')
+        .eq(0)
+        .find("[class*='lucide lucide-copy size-3.5']")
+        .should('be.visible')
+        .and('not.be.disabled');
+    });
+
+    // Emails copy check
+    cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {
+      cy.wrap($row)
+        .find('td')
+        .eq(2)
+        .find("[class*='lucide lucide-copy size-3.5']")
+        .should('be.visible')
+        .and('not.be.disabled');
+    });
   })
 })

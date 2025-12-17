@@ -51,7 +51,13 @@ describe('Filter savings transactions', () => {
       .type('billers');
 
     cy.wait(3000)
-    cy.get("[data-slot$='table-container'] tbody tr").first().click();
+    cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+          .click()
+    })
+    
     cy.url({ timeout: WAIT_LONG }).should('include', '/customers/');
     cy.wait(3000)
   });

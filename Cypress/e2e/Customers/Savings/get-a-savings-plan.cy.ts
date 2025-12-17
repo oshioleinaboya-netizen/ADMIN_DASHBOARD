@@ -1,4 +1,5 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { findRowAcrossPages } from '@support/helper';
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 8000;
@@ -50,7 +51,12 @@ describe('Get a savings plan', () => {
       .type('bills billers');
 
     cy.wait(3000)
-    cy.get("[data-slot$='table-container'] tbody tr").first().click();
+    cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+          .click()
+    })
     cy.url({ timeout: WAIT_LONG }).should('include', '/customers/');
     cy.wait(3000)
   });
@@ -95,4 +101,42 @@ describe('Get a savings plan', () => {
     cy.get("[class$='text-gray-600 text-center']").should('contain', "Try adjusting the search again");
     cy.get(clearInput).clear();
   });
+
+  it(
+    'Check that if the plan opened is active, mature or closed, it is indicated at the top of the savings details page',
+    () => {
+
+      const savingsTabClick = "[class*='inline-block rounded-t-lg border-b-2 px-2 py-1 text-sm font-medium transition-colors border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-600']"
+      // Savings tab click
+      cy.get(savingsTabClick).eq(3).click()
+      cy.wait(3000)
+
+      findRowAcrossPages(row =>
+        /(^|\s)(ACTIVE|MATURED|CLOSED)(\s|$)/i.test(row.innerText)
+      ).then(($row) => {
+
+        // ✅ Guard clause
+        expect($row, 'Matching plan row').to.exist;
+
+        cy.wrap($row)
+          .find("td")
+          .eq(5)
+          .invoke("text")
+          .then((text) => {
+            const statusFromTable = text.trim().toUpperCase();
+
+            // Click row
+            cy.wrap($row).click();
+            cy.wait(3000);
+
+            // ✅ Verify badge text (not color)
+            cy.get("[class*='rounded-full']").eq(5)
+              .should('be.visible')
+              .invoke('text')
+              .then((badgeText) => {
+                expect(badgeText.trim().toUpperCase()).to.equal(statusFromTable);
+              });
+          });
+      });
+    });
 });

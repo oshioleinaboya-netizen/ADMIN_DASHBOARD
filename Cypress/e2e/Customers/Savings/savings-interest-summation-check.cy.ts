@@ -4,7 +4,11 @@ const WAIT_LONG = 30000;
 const WAIT_MED = 10000;
 
 function waitForTable() {
-  return cy.get("[data-slot$='table-container'] tbody tr", { timeout: WAIT_LONG }).should('exist');
+  return cy.get("[data-slot$='table-container'] tbody tr").then(($row) => {
+      cy.wrap($row)
+          .find("td")
+          .eq(1)
+    }).should('exist');
 }
 
 describe('Savings Interest Summation Validation', () => {
