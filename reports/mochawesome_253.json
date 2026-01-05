@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:21:05.160Z",
+    "end": "2025-11-21T06:21:15.103Z",
+    "duration": 9943,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e61a420c-384d-4538-b480-55aca8c350dd",
+      "title": "",
+      "fullFile": "cypress/e2e/Savings/get-a-savings-plan.cy.ts",
+      "file": "cypress/e2e/Savings/get-a-savings-plan.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f811eb41-c9d0-4111-9fe2-72351c38f7e7",
+          "title": "Get a savings plan",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Filter by search",
+              "fullTitle": "Get a savings plan Filter by search",
+              "timedOut": null,
+              "duration": 8941,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Plan type\ncy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by plan type or plan name\"]`).should('exist');\n});\ncy.get(\"#search-bar-button\").type('reserve');\ncy.wait(5000);\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(1)\").should('contain', 'Reserve');\ncy.get(\"[class$='focus-visible:outline-none ml-2 w-full']\").clear();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.least', 10);\n// ------------------\n/*cy.get(\"#search-bar-button\").type('goals')\ncy.wait(5000)\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(1)\").should('contain', 'Goals')\ncy.get(\"[class$='focus-visible:outline-none ml-2 w-full']\").clear()\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.least', 10)*/\n// Plan name - Fetch by name\ncy.get(\"#search-bar-button\").type('bzbdb');\ncy.wait(5000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 1).first().within(() => {\n    cy.get('td').eq(2).should('contain', 'bzbdb');\n});\ncy.get(\"[class$='focus-visible:outline-none ml-2 w-full']\").clear();\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length.at.least', 10);\n// Unavailable plan type/name\ncy.get(\"#search-bar-button\").within(() => {\n    cy.get(`[placeholder$=\"Search by plan type or plan name\"]`).should('exist');\n});\ncy.get(\"[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']\").type('iiiiiiiiiiiiii');\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr\").should('have.length', 0);\ncy.get(\"[alt$='empty box']\").should('be.visible');\ncy.get(\"[class$='font-semibold text-[2rem] text-center']\").should('contain', 'No result found!');\ncy.get(\"[class$='text-gray-600 text-center']\").should('contain', \"We couldn't find any result for this query.\");\ncy.get(\"[class$='text-gray-600 text-center']\").should('contain', \"Try adjusting the search again\");\ncy.get(\"[class$='focus-visible:outline-none ml-2 w-full']\").clear();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Get a savings plan`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Get a savings plan`\n    at Context.eval (webpack:///./cypress/e2e/Savings/get-a-savings-plan.cy.ts:15:47)",
+                "diff": null
+              },
+              "uuid": "533672cd-3819-48a7-88ed-7d3173665c52",
+              "parentUUID": "f811eb41-c9d0-4111-9fe2-72351c38f7e7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "533672cd-3819-48a7-88ed-7d3173665c52"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8941,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

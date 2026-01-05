@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764857268502' stop='1764857298050'>
+    <name>Get a staff - Filter by search</name>
+    <title>Get a staff - Filter by search</title>
+    <test-cases>
+        <test-case start='1764857268502' status='broken' stop='1764857298044'>
+            <name>Get a staff</name>
+            <title>Get a staff</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.
+                
+                  > Cannot read properties of undefined (reading 'map')
+                
+                When Cypress detects uncaught errors originating from your application it will automatically fail the current test.
+                
+                This behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.
+                
+                https://on.cypress.io/uncaught-exception-from-application</message>
+                <stack-trace>TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.
+                
+                  > Cannot read properties of undefined (reading 'map')
+                
+                When Cypress detects uncaught errors originating from your application it will automatically fail the current test.
+                
+                This behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.
+                
+                https://on.cypress.io/uncaught-exception-from-application
+                    at providesTags (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/648-6446469d05a7cefe.js:1:7878)
+                    at x (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:13135)
+                    at L (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:13800)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:37088)
+                    at Array.map (&lt;anonymous>)
+                    at _ (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:37074)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:36678)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:50526)
+                    at produce (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:64920)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:50520)
+                    at Array.reduce (&lt;anonymous>)
+                    at o (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:50419)
+                    at w (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:51743)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:71834)
+                    at reducer (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:38221)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:71834)
+                    at Object.m [as dispatch] (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:71005)
+                    at dispatch (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:45490)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:39311)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:43656)
+                    at dispatch (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:72166)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/_next/static/chunks/9073-f2bd0f9b5703265b.js:9:48824)
+                    at async Promise.all (index 1)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

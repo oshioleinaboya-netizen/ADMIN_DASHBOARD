@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764698418879' stop='1764698447349'>
+    <name>Filtering savings table</name>
+    <title>Filtering savings table</title>
+    <test-cases>
+        <test-case start='1764698418879' status='failed' stop='1764698447345'>
+            <name>Filtering</name>
+            <title>Filtering</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: expected '&lt;td.p-4.align-middle.whitespace-nowrap.[&amp;:has([role=checkbox])]:pr-0.[&amp;>[role=checkbox]]:translate-y-[2px].cursor-pointer>' not to contain ''</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: expected '&lt;td.p-4.align-middle.whitespace-nowrap.[&amp;:has([role=checkbox])]:pr-0.[&amp;>[role=checkbox]]:translate-y-[2px].cursor-pointer>' not to contain ''
+                    at Context.eval (webpack:///./cypress/e2e/Customers/Savings/savingsplan-table-filter.cy.ts:150:76)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

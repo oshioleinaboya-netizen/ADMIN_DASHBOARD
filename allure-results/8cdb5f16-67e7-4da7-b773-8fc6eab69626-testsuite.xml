@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764594712948' stop='1764594719138'>
+    <name>Password invalidity attempts</name>
+    <title>Password invalidity attempts</title>
+    <test-cases>
+        <test-case start='1764594712948' status='failed' stop='1764594719132'>
+            <name>Password invalidity attempts</name>
+            <title>Password invalidity attempts</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: expected '&lt;div.w-full.sm:max-w-[460px].mx-auto>' to contain 'Invalid email or password. You have 2 attempt(s) left.'</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: expected '&lt;div.w-full.sm:max-w-[460px].mx-auto>' to contain 'Invalid email or password. You have 2 attempt(s) left.'
+                    at Context.eval (webpack:///./cypress/e2e/Authentication/password-validation-attempts.cy.ts:12:57)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

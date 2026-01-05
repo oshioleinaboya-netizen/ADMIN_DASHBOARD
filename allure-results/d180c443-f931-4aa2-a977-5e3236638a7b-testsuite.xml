@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764590198201' stop='1764590209968'>
+    <name>Forget password flow</name>
+    <title>Forget password flow</title>
+    <test-cases>
+        <test-case start='1764590198201' status='passed' stop='1764590202075'>
+            <name>Forget password flow - Email invalidation</name>
+            <title>Forget password flow - Email invalidation</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764590202092' status='passed' stop='1764590207007'>
+            <name>Forget password flow - Email invalidation</name>
+            <title>Forget password flow - Email invalidation</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764590207023' status='passed' stop='1764590208623'>
+            <name>Forget password flow - Admin user does not exist</name>
+            <title>Forget password flow - Admin user does not exist</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764590208642' status='passed' stop='1764590209968'>
+            <name>Forget password flow</name>
+            <title>Forget password flow</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,312 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764689167752' stop='1764689210449'>
+    <name>Customer Search Flow</name>
+    <title>Customer Search Flow</title>
+    <test-cases>
+        <test-case start='1764689167752' status='broken' stop='1764689181544'>
+            <name>Filter by Phone number</name>
+            <title>Filter by Phone number</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear</message>
+                <stack-trace>CypressError: Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear
+                    at throwError (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117462:70)
+                    at onReady (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117486:15)
+                    at runAllChecks (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115023:14)
+                    at retryActionability (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115045:16)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at whenStable (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151252:68)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151193:14)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise._settlePromiseFromHandler (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1489:31)
+                    at Promise._settlePromise (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1546:18)
+                    at Promise._settlePromise0 (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1591:10)
+                    at Promise._settlePromises (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1671:18)
+                    at Promise._fulfill (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1615:18)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:5420:46)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764689181556' status='broken' stop='1764689188586'>
+            <name>Filter by Monitag</name>
+            <title>Filter by Monitag</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear</message>
+                <stack-trace>CypressError: Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear
+                    at throwError (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117462:70)
+                    at onReady (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117486:15)
+                    at runAllChecks (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115023:14)
+                    at retryActionability (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115045:16)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at whenStable (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151252:68)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151193:14)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise._settlePromiseFromHandler (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1489:31)
+                    at Promise._settlePromise (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1546:18)
+                    at Promise._settlePromise0 (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1591:10)
+                    at Promise._settlePromises (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1671:18)
+                    at Promise._fulfill (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1615:18)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:5420:46)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764689188600' status='broken' stop='1764689195984'>
+            <name>Filter by Name</name>
+            <title>Filter by Name</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear</message>
+                <stack-trace>CypressError: Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear
+                    at throwError (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117462:70)
+                    at onReady (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117486:15)
+                    at runAllChecks (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115023:14)
+                    at retryActionability (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115045:16)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at whenStable (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151252:68)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151193:14)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise._settlePromiseFromHandler (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1489:31)
+                    at Promise._settlePromise (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1546:18)
+                    at Promise._settlePromise0 (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1591:10)
+                    at Promise._settlePromises (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1671:18)
+                    at Promise._fulfill (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1615:18)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:5420:46)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764689195998' status='broken' stop='1764689203144'>
+            <name>Empty table shows no results</name>
+            <title>Empty table shows no results</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear</message>
+                <stack-trace>CypressError: Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear
+                    at throwError (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117462:70)
+                    at onReady (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117486:15)
+                    at runAllChecks (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115023:14)
+                    at retryActionability (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115045:16)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at whenStable (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151252:68)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151193:14)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise._settlePromiseFromHandler (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1489:31)
+                    at Promise._settlePromise (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1546:18)
+                    at Promise._settlePromise0 (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1591:10)
+                    at Promise._settlePromises (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1671:18)
+                    at Promise._fulfill (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1615:18)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:5420:46)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764689203161' status='broken' stop='1764689210443'>
+            <name>Search by letter returns multiple results</name>
+            <title>Search by letter returns multiple results</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear</message>
+                <stack-trace>CypressError: Timed out retrying after 4000ms: `cy.clear()` failed because it requires a valid clearable element.
+                
+                The element cleared was:
+                
+                  > `&lt;div class="flex border border-grey p-1 rounded-md bg-white w-full h-min ">...&lt;/div>`
+                
+                A clearable element matches one of the following selectors:
+                  'a[href]'
+                  'area[href]'
+                  'input'
+                  'select'
+                  'textarea'
+                  'button'
+                  'iframe'
+                  '[tabindex]'
+                  '[contenteditable]'
+                
+                https://on.cypress.io/clear
+                    at throwError (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117462:70)
+                    at onReady (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:117486:15)
+                    at runAllChecks (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115023:14)
+                    at retryActionability (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:115045:16)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at whenStable (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151252:68)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:151193:14)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise._settlePromiseFromHandler (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1489:31)
+                    at Promise._settlePromise (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1546:18)
+                    at Promise._settlePromise0 (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1591:10)
+                    at Promise._settlePromises (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1671:18)
+                    at Promise._fulfill (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1615:18)
+                    at &lt;unknown> (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:5420:46)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

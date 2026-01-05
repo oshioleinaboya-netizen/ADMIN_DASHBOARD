@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764699311445' stop='1764699348461'>
+    <name>Savings plans table navigation</name>
+    <title>Savings plans table navigation</title>
+    <test-cases>
+        <test-case start='1764699311446' status='failed' stop='1764699348425'>
+            <name>Savings - Table navigation</name>
+            <title>Savings - Table navigation</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Savings plans table navigation`</message>
+                <stack-trace>AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Savings plans table navigation`
+                    at Context.eval (webpack:///./cypress/e2e/Customers/Savings/savingsplans-table-navigation.cy.ts:80:35)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

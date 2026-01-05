@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-21T06:18:01.653Z",
+    "end": "2025-11-21T06:18:11.634Z",
+    "duration": 9981,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "10d74595-6c1e-49f2-9c85-b990098223dd",
+      "title": "",
+      "fullFile": "cypress/e2e/Authentication/forget-password-flow.cy.ts",
+      "file": "cypress/e2e/Authentication/forget-password-flow.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "820c22c0-206e-455e-851f-5b2b5d39c1dd",
+          "title": "Forget password flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Forget password flow - Email invalidation",
+              "fullTitle": "Forget password flow Forget password flow - Email invalidation",
+              "timedOut": null,
+              "duration": 3141,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='text-sm text-customBlue hover:text-blue-700']\").click();\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").should('be.visible').within(() => {\n    cy.get(\"[data-nimg$='1']\").should('be.visible');\n    cy.get(\"[class$='font-semibold text-[1.75rem] md:text-[2rem]']\").should('be.visible').and('contain', 'Reset your password');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('be.visible').and('contain', \"Enter your registered email address and we'll send you a link to reset your password\");\n    cy.get(\"[name$='email']\").type('engineering2gmail.com');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Invalid email address');\n});",
+              "err": {},
+              "uuid": "9c707e73-fd2d-44dc-914e-f0cf3d2f8004",
+              "parentUUID": "820c22c0-206e-455e-851f-5b2b5d39c1dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Forget password flow - Email invalidation",
+              "fullTitle": "Forget password flow Forget password flow - Email invalidation",
+              "timedOut": null,
+              "duration": 3001,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='text-sm text-customBlue hover:text-blue-700']\").click();\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").should('be.visible').within(() => {\n    cy.get(\"[data-nimg$='1']\").should('be.visible');\n    cy.get(\"[class$='font-semibold text-[1.75rem] md:text-[2rem]']\").should('be.visible').and('contain', 'Reset your password');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('be.visible').and('contain', \"Enter your registered email address and we'll send you a link to reset your password\");\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Email is required');\n    cy.get(\"[name$='email']\").type('engineering2gmail.com');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Invalid email address');\n    cy.get(\"[name$='email']\").clear();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Email is required');\n    cy.get(\"[name$='email']\").type('engineering@.com');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Invalid email address');\n    cy.get(\"[name$='email']\").clear();\n    cy.get(\"[name$='email']\").type('engineering2gmail.com');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='text-red text-[14px]']\").should('contain', 'Invalid email address');\n    cy.get(\"[name$='email']\").clear();\n    cy.get(\"[name$='email']\").type('engineering@gmailcom');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='w-full text-red-500 text-sm text-center']\").should('contain', 'email must be an email');\n});",
+              "err": {},
+              "uuid": "86acddcd-2eeb-4303-8352-446ca346ee27",
+              "parentUUID": "820c22c0-206e-455e-851f-5b2b5d39c1dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Forget password flow - Admin user does not exist",
+              "fullTitle": "Forget password flow Forget password flow - Admin user does not exist",
+              "timedOut": null,
+              "duration": 1149,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='text-sm text-customBlue hover:text-blue-700']\").click();\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").should('be.visible').within(() => {\n    cy.get(\"[data-nimg$='1']\").should('be.visible');\n    cy.get(\"[class$='font-semibold text-[1.75rem] md:text-[2rem]']\").should('be.visible').and('contain', 'Reset your password');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('be.visible').and('contain', \"Enter your registered email address and we'll send you a link to reset your password\");\n    cy.get(\"[name$='email']\").type('hdhhdjj@gmail.com');\n    cy.get(\"[type$='submit']\").click();\n    cy.get(\"[class$='w-full text-red-500 text-sm text-center']\").should('contain', 'Admin user not found');\n});",
+              "err": {},
+              "uuid": "0b038c6d-83ec-4ef1-a361-360ed8acc093",
+              "parentUUID": "820c22c0-206e-455e-851f-5b2b5d39c1dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Forget password flow",
+              "fullTitle": "Forget password flow Forget password flow",
+              "timedOut": null,
+              "duration": 1486,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='text-sm text-customBlue hover:text-blue-700']\").click();\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").should('be.visible').within(() => {\n    cy.get(\"[data-nimg$='1']\").should('be.visible');\n    cy.get(\"[class$='font-semibold text-[1.75rem] md:text-[2rem]']\").should('be.visible').and('contain', 'Reset your password');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('be.visible').and('contain', \"Enter your registered email address and we'll send you a link to reset your password\");\n    cy.get(\"[name$='email']\").type('engineering2@heymoni.com');\n    cy.get(\"[type$='submit']\").click();\n});\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").within(() => {\n    cy.get(\"[class$='font-semibold text-[1.75rem] md:text-[2rem]']\").should('contain', 'Reset password');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('contain', 'We have sent a reset password link to').within(() => {\n        cy.get(\"[class$='font-semibold']\").should('be.visible');\n    });\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('contain', '@');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('contain', '.com');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('contain', '@');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base mt-2']\").should('contain', '.com');\n    cy.get(\"[data-nimg$='1']\").should('be.visible');\n    cy.get(\"[class$='text-gray-600 text-sm md:text-base']\").should('contain', 'Follow the instruction in the email to reset your password.');\n    cy.get(\"[type$='submit']\").click();\n});\ncy.get(\"[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']\").should('not.exist');",
+              "err": {},
+              "uuid": "80d4f867-724b-4f61-b7df-73756d7ccfea",
+              "parentUUID": "820c22c0-206e-455e-851f-5b2b5d39c1dd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9c707e73-fd2d-44dc-914e-f0cf3d2f8004",
+            "86acddcd-2eeb-4303-8352-446ca346ee27",
+            "0b038c6d-83ec-4ef1-a361-360ed8acc093",
+            "80d4f867-724b-4f61-b7df-73756d7ccfea"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8777,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:18:39.585Z",
+    "end": "2025-11-21T06:18:48.432Z",
+    "duration": 8847,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e7217645-6b87-4cfc-950b-c45cc7f2febf",
+      "title": "",
+      "fullFile": "cypress/e2e/Authentication/password-invalidity-attempts.cy.ts",
+      "file": "cypress/e2e/Authentication/password-invalidity-attempts.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a7c817e0-19c6-4a2a-b9d0-da279454b51b",
+          "title": "Password invalidity attempts",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Password invalidity attempts",
+              "fullTitle": "Password invalidity attempts Password invalidity attempts",
+              "timedOut": null,
+              "duration": 7895,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[type$='text']\").type(\"qa@userank.com\");\ncy.get(\"[type$='password']\").type(\"Password@Rank1234\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='w-full sm:max-w-[460px] mx-auto']\").should('contain', 'Invalid email or password. You have 2 attempt(s) left.');\ncy.get(\"[class$='w-full sm:max-w-[460px] mx-auto']\").within(() => {\n    cy.get(\"[alt$='caution icon']\").should('be.visible');\n});\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='w-full sm:max-w-[460px] mx-auto']\").should('contain', 'Invalid email or password. You have 1 attempt(s) left.');\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='w-full sm:max-w-[460px] mx-auto']\").should('contain', 'Account is locked due to too many failed login attempts. Please contact admin.');\ncy.get(\"[type$='password']\").clear();\ncy.get(\"[type$='password']\").type(\"myAwesomeP@ssw0rd\");\ncy.get(\"[type$='submit']\").click();\ncy.get(\"[class$='w-full sm:max-w-[460px] mx-auto']\").should('contain', 'Account is locked due to too many failed login attempts. Please contact admin.');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='w-full sm:max-w-[460px] mx-auto']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='w-full sm:max-w-[460px] mx-auto']`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/Authentication/password-invalidity-attempts.cy.ts:12:57)",
+                "diff": null
+              },
+              "uuid": "1f086779-bff0-431e-8a96-30a7b4399bda",
+              "parentUUID": "a7c817e0-19c6-4a2a-b9d0-da279454b51b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "1f086779-bff0-431e-8a96-30a7b4399bda"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 7895,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

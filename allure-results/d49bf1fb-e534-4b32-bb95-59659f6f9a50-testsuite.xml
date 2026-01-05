@@ -1,0 +1,159 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764779759209' stop='1764779891370'>
+    <name>Staff Management Filters</name>
+    <title>Staff Management Filters</title>
+    <test-cases>
+        <test-case start='1764779759209' status='passed' stop='1764779774772'>
+            <name>Filter staff table - Verify all options</name>
+            <title>Filter staff table - Verify all options</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764779774787' status='failed' stop='1764779792635'>
+            <name>Filter staff table - Single Level Filter</name>
+            <title>Filter staff table - Single Level Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'ASSOCIATE' ] to include '---'</message>
+                <stack-trace>AssertionError: expected [ 'ASSOCIATE' ] to include '---'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779792658' status='failed' stop='1764779806365'>
+            <name>Filter staff table - Single Status Filter</name>
+            <title>Filter staff table - Single Status Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'Active' ] to include 'INACTIVE'</message>
+                <stack-trace>AssertionError: expected [ 'Active' ] to include 'INACTIVE'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779806376' status='failed' stop='1764779820561'>
+            <name>Filter staff table - Single Team Filter</name>
+            <title>Filter staff table - Single Team Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'FINANCE' ] to include 'ACCOUNT-OFFICER'</message>
+                <stack-trace>AssertionError: expected [ 'FINANCE' ] to include 'ACCOUNT-OFFICER'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779820574' status='failed' stop='1764779834325'>
+            <name>Filter staff table - Multiple Status Filter</name>
+            <title>Filter staff table - Multiple Status Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'Active', 'Invited' ] to include 'INACTIVE'</message>
+                <stack-trace>AssertionError: expected [ 'Active', 'Invited' ] to include 'INACTIVE'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779834336' status='failed' stop='1764779847976'>
+            <name>Filter staff table - Multiple Level Filter</name>
+            <title>Filter staff table - Multiple Level Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'MANAGER', 'LEAD' ] to include '---'</message>
+                <stack-trace>AssertionError: expected [ 'MANAGER', 'LEAD' ] to include '---'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779847987' status='failed' stop='1764779862132'>
+            <name>Filter staff table - Multiple Team Filter</name>
+            <title>Filter staff table - Multiple Team Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'FINANCE', 'COMPLIANCE' ] to include 'ACCOUNT-OFFICER'</message>
+                <stack-trace>AssertionError: expected [ 'FINANCE', 'COMPLIANCE' ] to include 'ACCOUNT-OFFICER'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779862143' status='failed' stop='1764779876731'>
+            <name>Filter staff table - Mixed Status &amp; Team Filter</name>
+            <title>Filter staff table - Mixed Status &amp; Team Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'Active' ] to include 'INVITED'</message>
+                <stack-trace>AssertionError: expected [ 'Active' ] to include 'INVITED'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764779876742' status='failed' stop='1764779891363'>
+            <name>Filter staff table - Mixed Status &amp; Team Filter (Multiple Options)</name>
+            <title>Filter staff table - Mixed Status &amp; Team Filter (Multiple Options)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>expected [ 'Active', 'Invited' ] to include 'INVITED'</message>
+                <stack-trace>AssertionError: expected [ 'Active', 'Invited' ] to include 'INVITED'
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:73:34)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)
+                    at tryCatcher (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:1777:23)
+                    at Promise.attempt.Promise.try (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:4285:29)
+                    at Context.thenFn (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122254:66)
+                    at Context.then (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122505:21)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

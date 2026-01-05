@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764777898860' stop='1764777915636'>
+    <name>Deactivate staff | Reactivate staff</name>
+    <title>Deactivate staff | Reactivate staff</title>
+    <test-cases>
+        <test-case start='1764777898860' status='passed' stop='1764777915636'>
+            <name>Deactivate and Reactivate staff flow</name>
+            <title>Deactivate and Reactivate staff flow</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

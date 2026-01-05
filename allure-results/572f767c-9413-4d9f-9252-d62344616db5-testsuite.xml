@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764855805907' stop='1764856171345'>
+    <name>template spec</name>
+    <title>template spec</title>
+    <test-cases>
+        <test-case start='1764855805907' status='passed' stop='1764855823915'>
+            <name>Filter staff table</name>
+            <title>Filter staff table</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764855823929' status='passed' stop='1764855861462'>
+            <name>Filter staff table - Single filter selection (Levels)</name>
+            <title>Filter staff table - Single filter selection (Levels)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764855861495' status='passed' stop='1764855892308'>
+            <name>Filter staff table - Single filter selection (Status)</name>
+            <title>Filter staff table - Single filter selection (Status)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764855892328' status='passed' stop='1764855953155'>
+            <name>Filter staff table - Single filter selection (Team)</name>
+            <title>Filter staff table - Single filter selection (Team)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764855953193' status='passed' stop='1764855974556'>
+            <name>Filter staff table - Multiple filter selection (Same parent - Status)</name>
+            <title>Filter staff table - Multiple filter selection (Same parent - Status)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764855974572' status='passed' stop='1764856105908'>
+            <name>Filter staff table - Multiple filter selection (Same parent - Level)</name>
+            <title>Filter staff table - Multiple filter selection (Same parent - Level)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764856105963' status='passed' stop='1764856134536'>
+            <name>Filter staff table - Multiple filter selection (Same parent - Team)</name>
+            <title>Filter staff table - Multiple filter selection (Same parent - Team)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764856134557' status='passed' stop='1764856152983'>
+            <name>Filter staff table - Multiple filter selection (Different parents - Status/Team (SINGLE OPTION EACH))</name>
+            <title>Filter staff table - Multiple filter selection (Different parents - Status/Team (SINGLE OPTION EACH))</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764856153005' status='passed' stop='1764856171345'>
+            <name>Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))</name>
+            <title>Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:21:26.445Z",
+    "end": "2025-11-21T06:21:36.052Z",
+    "duration": 9607,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "768a7144-4239-49a3-b024-fa9a20119fc4",
+      "title": "",
+      "fullFile": "cypress/e2e/Savings/savings-extras.cy.ts",
+      "file": "cypress/e2e/Savings/savings-extras.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b9bfd775-8a03-410c-b15d-7ae283587ae0",
+          "title": "Customer Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Get particular a customer - Savings UI Check",
+              "fullTitle": "Customer Management Get particular a customer - Savings UI Check",
+              "timedOut": null,
+              "duration": 8682,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(5000);\ncy.get(\"[class$='h-full flex flex-col flex-1 overflow-y-auto']\").within(() => {\n    cy.contains('Savings').click();\n    cy.wait(5000);\n});\ncy.url().should('include', '/savings');\ncy.contains('Total Savings Balance');\ncy.contains('Total Interest Earned');\ncy.contains('Active Savings Plans');\ncy.contains('Closed Savings Plans');\ncy.contains('Active savings plans');\ncy.contains('Matured savings plans');\ncy.contains('Closed savings plans');\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Filter').should('be.visible');\n    cy.root().should('not.be.disabled');\n});\ncy.get(\"[alt$='search icon']\").should('exist').and('not.be.disabled');\n/*cy.get(\"[class$='flex items-center justify-between mt-6']\").should('contain', 'Showing')\ncy.get(\"[class$='flex items-center justify-between mt-6']\").should('contain', 'entries')*/\ncy.get(\"[data-testid$='dropdown-button']\").should('contain', 'Customer Actions').and('be.visible');\ncy.get(\"[class$='font-bold text-[20px]']\").should('be.visible');\ncy.get(\"[alt$='profile image']\").should('be.visible');\ncy.contains('Customer Management');\ncy.get(\"[class$='flex justify-between items-center']\").within(() => {\n    cy.contains('Rank');\n    cy.contains('Customers');\n    cy.get;\n    cy.wait(8000);\n    cy.get(\"[class$='text-[#1E4D37]']\").invoke('text').then((customerName) => {\n        const trimmedId = customerName.trim();\n        cy.get(\"[class*='font-bold text-[20px]']\").should('contain', `/${trimmedId}/`);\n    });\n});\n//Matured savings\ncy.contains('Matured savings plans').click();\ncy.get(\"[data-slot$='table-container']\").should('exist');\n//Closed savings\ncy.contains('Closed savings plans').click();\ncy.get(\"[data-slot$='table-container']\").should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer Management`\n    at Context.eval (webpack:///./cypress/e2e/Savings/savings-extras.cy.ts:15:47)",
+                "diff": null
+              },
+              "uuid": "13890fa7-5c06-4062-ad36-5075b6b5496b",
+              "parentUUID": "b9bfd775-8a03-410c-b15d-7ae283587ae0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "13890fa7-5c06-4062-ad36-5075b6b5496b"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8682,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

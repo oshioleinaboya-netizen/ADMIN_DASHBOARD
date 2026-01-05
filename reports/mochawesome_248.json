@@ -1,0 +1,186 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:19:04.848Z",
+    "end": "2025-11-21T06:19:50.710Z",
+    "duration": 45862,
+    "testsRegistered": 5,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 4,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "8ea7895e-15b8-4851-acbe-c41dd978d7ce",
+      "title": "",
+      "fullFile": "cypress/e2e/Customers/customers-page.cy.ts",
+      "file": "cypress/e2e/Customers/customers-page.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+          "title": "Customers page - UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should have all expected clickable components visible",
+              "fullTitle": "Customers page - UI Should have all expected clickable components visible",
+              "timedOut": null,
+              "duration": 44853,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Wait for page readiness\ncy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 10000 }).should('be.visible');\n// Assertions\ncy.get('body').within(() => {\n    cy.get(\"[alt$='Rank Logo']\", { timeout: 10000 }).should('exist');\n    cy.get(\"[data-testid$='nav-link-customers']\", { timeout: 10000 })\n        .should('be.visible')\n        .and('contain', 'Customers')\n        .and('not.be.disabled');\n    cy.get(\"[data-testid$='nav-link-text-staff-management']\")\n        .should('be.visible')\n        .and('not.be.disabled');\n    cy.get(\"[data-testid$='nav-link-text-fraud-management']\")\n        .should('be.visible')\n        .and('not.be.disabled');\n    cy.get(\"[data-testid$='nav-link-text-loan']\")\n        .should('be.visible')\n        .and('not.be.disabled');\n    cy.get(\"[class$='flex h-[48px] w-max items-center justify-between gap-2 border border-[#470C00] bg-[#470C00] rounded-full p-3 text-sm font-medium hover:bg-[#452a25] mb-1']\")\n        .should('be.visible')\n        .and('not.be.disabled');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customers page - UI`",
+                "estack": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customers page - UI`\n    at Context.eval (webpack:///./cypress/e2e/Customers/customers-page.cy.ts:40:31)",
+                "diff": null
+              },
+              "uuid": "a5373ffb-22f2-4b30-bbc4-c79cb8258528",
+              "parentUUID": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Customers UI - 1",
+              "fullTitle": "Customers page - UI Customers UI - 1",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 15000 }).should('be.visible');\ncy.get(\"[class$='rounded-lg bg-white transition-shadow duration-200 border border-gray-200 p-4 flex py-8 mb-8']\")\n    .should('exist')\n    .within(() => {\n    cy.get(\"[class$='ml-8 pr-8']\")\n        .should('be.visible')\n        .and('contain', 'Tier 0')\n        .and('contain', 'Tier 1')\n        .and('contain', 'Tier 2')\n        .and('contain', 'Tier 3');\n    cy.get(\"[class$='ml-8 border-r pr-8']\").should('contain', 'Onboarded users');\n    cy.get(\"[class$='ml-8 border-r pr-8']\").should('contain', 'Total customers');\n});\ncy.get(\"[class$='font-bold text-[14px]']\").should('be.visible');\ncy.get(\"[class*='flex items-center']\").should('be.visible');\ncy.get(\"[alt$='right arrow']\").should('be.visible');\ncy.get(\"[class$='text-[#71717A]']\").should('contain', 'Rank');\ncy.get(\"[class$='text-[#1E4D37] hover:cursor-pointer']\").should('be.visible');\ncy.get(\"[class$='__className_b9c7ce antialiased bg-[#fafafa]']\")\n    .should('contain', 'Create a client')\n    .and('contain', 'Drafts')\n    .and('not.be.disabled');",
+              "err": {},
+              "uuid": "c1c01ace-6607-42e8-8b50-7600dac50561",
+              "parentUUID": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Customers UI - 2",
+              "fullTitle": "Customers page - UI Customers UI - 2",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 15000 }).should('be.visible');\ncy.get(\"[class$='font-bold text-[14px]']\")\n    .should('be.visible')\n    .and('contain', 'Total number of customers by period');\ncy.get(\"[class$='font-bold text-[30px]']\").should('be.visible');\ncy.get(\"[class$='__className_b9c7ce antialiased bg-[#fafafa]']\")\n    .should('contain', 'Active clients');\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible');\n    cy.get(\"[alt$='sort icon']\").should('exist');\n    cy.contains('Filter').should('be.visible');\n    cy.get(\"[alt$='filter icon']\").should('exist');\n    cy.contains('Export').should('be.visible');\n});\ncy.get(\"#search-bar-button\").should('be.visible').and('not.be.disabled');",
+              "err": {},
+              "uuid": "262ab2cb-762c-48bf-b6c1-fc877e7b5894",
+              "parentUUID": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Customer management UI - Table",
+              "fullTitle": "Customers page - UI Customer management UI - Table",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 15000 }).should('be.visible');\ncy.get(\"[data-slot$='table-container'] thead tr th\")\n    .should('have.length', 8)\n    .and('be.visible')\n    .then(($th) => {\n    const headers = [\n        'Phone number',\n        \"Customer's Name\",\n        'Email address',\n        'Created At',\n        'Gender',\n        'Nationality',\n        'Place of birth',\n        'Monitag',\n    ];\n    headers.forEach((header, i) => {\n        expect($th.eq(i)).to.contain(header);\n    });\n});\ncy.get(\"[data-slot$='table-container'] tbody tr\")\n    .should('have.length.at.most', 20)\n    .first()\n    .within(() => {\n    cy.get('td').each(($td) => {\n        cy.wrap($td).should('not.be.empty');\n    });\n});",
+              "err": {},
+              "uuid": "329ca21a-c26a-4451-ab23-cb432a310dbb",
+              "parentUUID": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Customer UI - Pagination",
+              "fullTitle": "Customers page - UI Customer UI - Pagination",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 15000 }).should('be.visible');\ncy.get(\"[class$='flex items-center justify-between w-full']\").within(() => {\n    cy.get(\"[class$='flex items-center gap-4']\").within(() => {\n        cy.contains('Show').should('be.visible');\n        cy.get(\"[class$='text-sm text-gray-600']\").should('exist');\n    });\n    cy.get(\"[aria-label$='Pagination']\").within(() => {\n        cy.get(\"[aria-label$='Previous page']\").should('exist');\n        cy.get(\"[aria-label$='Next page']\").should('not.be.disabled');\n        cy.get(\"[aria-current$='page']\").should('not.be.disabled');\n    });\n});",
+              "err": {},
+              "uuid": "d1a070d8-9080-4171-a394-8b56ac911dc7",
+              "parentUUID": "b40fa8f5-e094-4ab1-867e-0ed3eacbfca5",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "a5373ffb-22f2-4b30-bbc4-c79cb8258528"
+          ],
+          "pending": [],
+          "skipped": [
+            "c1c01ace-6607-42e8-8b50-7600dac50561",
+            "262ab2cb-762c-48bf-b6c1-fc877e7b5894",
+            "329ca21a-c26a-4451-ab23-cb432a310dbb",
+            "d1a070d8-9080-4171-a394-8b56ac911dc7"
+          ],
+          "duration": 44853,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

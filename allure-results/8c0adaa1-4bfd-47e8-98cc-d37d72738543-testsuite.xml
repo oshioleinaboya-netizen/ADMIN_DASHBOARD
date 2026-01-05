@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764671192304' stop='1764671213492'>
+    <name>Staff Management Filters</name>
+    <title>Staff Management Filters</title>
+    <test-cases>
+        <test-case start='1764671192305' status='passed' stop='1764671206269'>
+            <name>Filter staff table - Verify all options</name>
+            <title>Filter staff table - Verify all options</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764671206284' status='failed' stop='1764671213466'>
+            <name>Filter staff table - Single Level Filter</name>
+            <title>Filter staff table - Single Level Filter</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staff Management Filters`</message>
+                <stack-trace>AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='flex flex-col gap-y-4 items-center px-8 py-6']`, but never found it.
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staff Management Filters`
+                    at clearSessionAndLogin (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:18:7)
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/filter-staff-table.cy.ts:79:4)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

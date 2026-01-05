@@ -1,0 +1,186 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:19:51.595Z",
+    "end": "2025-11-21T06:20:01.960Z",
+    "duration": 10365,
+    "testsRegistered": 5,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 4,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "5a8c6c7e-7e96-4233-862f-eb9a72fd86a2",
+      "title": "",
+      "fullFile": "cypress/e2e/Customers/filter-sort-users-table.cy.ts",
+      "file": "cypress/e2e/Customers/filter-sort-users-table.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+          "title": "Sorting & Filtering - Functionality check",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Sorting Functionality",
+              "fullTitle": "Sorting & Filtering - Functionality check Sorting Functionality",
+              "timedOut": null,
+              "duration": 9354,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible').click();\n});\nsections.forEach((section) => {\n    cy.contains(\"[class$='border-b-2 p-2 text-[16px] text-[#3F3F46]']\", section).within(() => {\n        cy.contains(\"Ascending\");\n        cy.contains(\"Descending\"); // Moni tag is not fetchable\n    });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Sorting & Filtering - Funct...`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[class$='self-center space-y-2']`, but never found it.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Sorting & Filtering - Funct...`\n    at Context.eval (webpack:///./cypress/e2e/Customers/filter-sort-users-table.cy.ts:30:47)",
+                "diff": null
+              },
+              "uuid": "cb220199-443b-4c23-8ef3-131e4b9de5e0",
+              "parentUUID": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sort application",
+              "fullTitle": "Sorting & Filtering - Functionality check Sort application",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Single sort application\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(2)\").first().should('contain', 'Ayodeji Samuel Ogundijo');\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible').click();\n});\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\");\ncy.get(\"[class$='text-[14px] pl-4']\").should('contain', 'Sort');\ncy.contains(\"[class$='border-b-2 p-2 text-[16px] text-[#3F3F46]']\", 'Customer Name').within(() => {\n    cy.contains('Ascending').click();\n    cy.contains('Descending').click();\n});\ncy.get(\"[class$='bg-black h-full px-3 py-1 ml-2 text-white rounded-lg flex justify-center items-center hover:cursor-pointer']\").click(); // CLick apply\ncy.wait(8000);\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\").should('not.exist');\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(2)\").first().should('not.contain', 'Ayodeji Samuel Ogundijo');\n// Multiple sort applicartion (2)\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(4)\").first().should('contain', 'Oct 10, 2023');\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(4)\").first().should('contain', 'Ayodeji Samuel Ogundijo');\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible').click();\n});\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\");\ncy.get(\"[class$='text-[14px] pl-4']\").should('contain', 'Sort');\ncy.contains(\"[class$='border-b-2 p-2 text-[16px] text-[#3F3F46]']\", 'Customer Name').within(() => {\n    cy.contains('Ascending').click();\n    cy.contains('Descending').click();\n});\ncy.contains(\"[class$='border-b-2 p-2 text-[16px] text-[#3F3F46]']\", 'Customer Name').within(() => {\n    cy.contains('Ascending').click();\n    cy.contains('Descending').click();\n});\ncy.get(\"[class$='bg-black h-full px-3 py-1 ml-2 text-white rounded-lg flex justify-center items-center hover:cursor-pointer']\").click(); // CLick apply\ncy.wait(8000);\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\").should('not.exist');\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(2)\").first().should('not.contain', 'Ayodeji Samuel Ogundijo');\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(4)\").first().should('contain', 'Oct 10, 2023');\n//Clear sort options --------------------------------------------------\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible').click();\n});\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\");\ncy.get(\"[class$='px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer']\").click();\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\").should('not.exist');\n//Cancel feature (x) --------------------------------------------------------\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Sort').should('be.visible').click();\n});\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\");\ncy.get(\"[data-nimg$='1']\").click();\ncy.get(\"[class$='w-[415px] p-2 flex flex-col justify-between']\").should('not.exist');",
+              "err": {},
+              "uuid": "d8cafb97-c027-48c7-898f-397e03b1d443",
+              "parentUUID": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Filtering Check",
+              "fullTitle": "Sorting & Filtering - Functionality check Filtering Check",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const countries = ['Angola', 'Brazil', 'Canada', 'Dominica', 'Egypt', 'France', 'Gambia', 'Hong Kong', 'India', 'Japan', 'Kenya', 'Liberia', 'Mali', 'Nepal', 'Oman', 'Pakistan', 'Qatar', 'Romania', 'Samoa', 'Tunisia', 'Uganda', 'Viet Nam', 'Western Sahara', 'Yemen', 'Zambia'];\n// Open filter\ncy.get(\"[class*='w-full flex justify-between mb-[24px]']\").contains('Filter').should('be.visible').click();\ncy.get(\"[class*='p-4 h-[685px] overflow-auto']\").should('exist').within(() => {\n    cy.contains('Phone verification').parent().within(() => {\n        cy.contains('Verified').click();\n        cy.contains('Not Verified').click();\n        //----------------------------------\n        cy.contains('Verified').click();\n        cy.contains('Not Verified').click();\n    });\n});\n// Reset filter\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Email verification filter\ncy.contains('Email verification').parent().within(() => {\n    cy.contains('Verified').click();\n    cy.contains('Not Verified').click();\n    //----------------------------------\n    cy.contains('Verified').click();\n    cy.contains('Not Verified').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Date created filter\ncy.contains('Date created').parent().within(() => {\n    cy.contains('Last 7 days').click();\n    cy.contains('Last 30 days').click();\n    cy.contains('Last 6 months').click();\n    cy.contains('Last year').click();\n    //-----------------------------------\n    cy.contains('Last 7 days').click();\n    cy.contains('Last 30 days').click();\n    cy.contains('Last 6 months').click();\n    cy.contains('Last year').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Marital status filter\ncy.contains('Marital status').parent().within(() => {\n    cy.contains('Single').click();\n    cy.contains('Married').click();\n    cy.contains('Divorced').click();\n    cy.contains('Widowed').click();\n    //-----------------------------------\n    cy.contains('Single').click();\n    cy.contains('Married').click();\n    cy.contains('Divorced').click();\n    cy.contains('Widowed').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Emplyoment status filter\ncy.contains('Employment status').parent().within(() => {\n    cy.contains('Employed').click();\n    cy.contains('Unemployed').click();\n    cy.contains('Self Employed').click();\n    cy.contains('Student').click();\n    //-----------------------------------\n    cy.contains('Employed').click();\n    cy.contains('Unemployed').click();\n    cy.contains('Self Employed').click();\n    cy.contains('Student').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Status filter\ncy.contains('Status').parent().within(() => {\n    cy.contains('Active').click();\n    cy.contains('Inactive').click();\n    //----------------------------------\n    cy.contains('Active').click();\n    cy.contains('Inactive').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Migration Status filter\ncy.contains('Migration status').parent().within(() => {\n    cy.contains('Migrated').click();\n    cy.contains('Not Migrated').click();\n    //----------------------------------\n    cy.contains('Migrated').click();\n    cy.contains('Not Migrated').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Manual Verificatoon filter\ncy.contains('Manual Verification').parent().within(() => {\n    cy.contains('Verified').click();\n    cy.contains('Not Verified').click();\n    //----------------------------------\n    cy.contains('Verified').click();\n    cy.contains('Not Verified').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Business Domain filter\ncy.contains('Business Domain').parent().within(() => {\n    cy.contains('CBA').click();\n    cy.contains('App').click();\n    cy.contains('Admin').click();\n    cy.contains('Ajomoney').click();\n    //-----------------------------------\n    cy.contains('CBA').click();\n    cy.contains('App').click();\n    cy.contains('Admin').click();\n    cy.contains('Ajomoney').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Education level filter\ncy.contains('Employment status').parent().within(() => {\n    cy.contains('Employed').click();\n    cy.contains('Unemployed').click();\n    cy.contains('Self Employed').click();\n    cy.contains('Student').click();\n    //-----------------------------------\n    cy.contains('Employed').click();\n    cy.contains('Unemployed').click();\n    cy.contains('Self Employed').click();\n    cy.contains('Student').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n// Tier Level filter\ncy.contains('Tier Level').parent().within(() => {\n    cy.contains('Tier 1').click();\n    cy.contains('Tier 2').click();\n    cy.contains('Tier 3').click();\n    //-----------------------------------\n    cy.contains('Tier 1').click();\n    cy.contains('Tier 2').click();\n    cy.contains('Tier 3').click();\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n//Nationality filter\ncy.contains('Nationality').parent().within(() => {\n    cy.get(\"[class$='w-full bg-white relative undefined']\").click();\n});\ncy.get(\"[class$='p-4 border mt-2 w-full max-h-[400px] rounded-lg shadow-sm bg-white absolute z-10 ']\");\ncy.get(\"[class$='flex border border-grey p-2 rounded-full bg-white w-full ']\").within(() => {\n    cy.get(`[placeholder$=\"search countries\"]`).should('exist');\n});\ncy.get(\"[class$='overflow-y-auto max-h-[235px] px-4']\").within(() => {\n    countries.forEach((country) => {\n        cy.contains(\"[class$='border-b w-full py-3 flex justify-between']\", country).click({ force: true });\n    });\n    //cy.contains(\"[class$='border-b w-full py-3 flex justify-between']\", 'Angola').click({ force: true });\n});\ncy.get(\"[id$='customerCountry-add']\").click();\ncy.contains(\"[class$='py-2 flex flex-wrap']\", 'Angola');\ncy.contains(\"[class$='py-2 flex flex-wrap']\", 'Brazil');\ncy.contains(\"[class$='py-2 flex flex-wrap']\", 'Canada');\ncy.contains(\"[class$='py-2 flex flex-wrap']\", 'Dominica');\ncy.contains(\"[class$='py-2 flex flex-wrap']\", 'Egypt');\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n//Birth state\ncy.contains('Birth state').parent().within(() => {\n    cy.get(`[id$='dropdown']`).should('contain', 'Select state');\n    cy.get(\"[id$='dropdown']\").click();\n});\ncy.get(\"[class$='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").within(() => {\n    cy.get(\"[id$='dropdown-option-0']\").click({ force: true });\n});\ncy.contains('Birth state').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").should('contain', 'ABIA');\n});\n//------------------------------------------------\ncy.contains('Birth state').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").click();\n});\ncy.get(\"[class$='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").within(() => {\n    cy.get(\"[id$='dropdown-option-24']\").click({ force: true });\n});\ncy.contains('Birth state').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").should('contain', 'LAGOS');\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n//Country of registration\ncy.contains('Country of registration').parent().within(() => {\n    cy.get(`[id$='dropdown']`).should('contain', 'Select country');\n    cy.get(\"[id$='dropdown']\").click();\n});\ncy.get(\"[class$='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").within(() => {\n    cy.get(\"[id$='dropdown-option-1']\").click({ force: true });\n});\ncy.contains('Country of registration').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").should('contain', 'Afghanistan');\n});\n//------------------------------------------------\ncy.contains('Country of registration').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").click();\n});\ncy.get(\"[class$='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']\").within(() => {\n    cy.get(\"[id$='dropdown-option-20']\").click({ force: true });\n});\ncy.contains('Country of registration').parent().within(() => {\n    cy.get(\"[id$='dropdown']\").should('contain', 'Belarus');\n});\ncy.get(\"[class*='px-4 py-2 bg-[#E4E4E7] text-black rounded-lg']\").should('be.visible').click();\n//Date created\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-start']`).should('contain', 'Start date').click();\n});\ncy.get(\"[class$='w-full max-w-md bg-white rounded-lg shadow-lg p-4']\").within(() => {\n    cy.contains('SUN');\n    cy.contains('MON');\n    cy.contains('TUE');\n    cy.contains('WED');\n    cy.contains('THU');\n    cy.contains('FRI');\n    cy.contains('SAT');\n    cy.contains(\"October 2025\");\n    cy.contains(\"1\");\n    cy.contains(\"10\");\n    cy.contains(\"18\");\n    cy.contains(\"29\");\n    cy.get(\"[aria-label$='Previous month']\").should('exist');\n    cy.get(\"[aria-label$='Next month']\").should('exist');\n    cy.get(\"[data-testid$='calendar-cancel']\").should('exist');\n    cy.get(\"[data-testid$='calendar-done']\").should('exist').click();\n});\n// --------------------------------------- End date\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-end']`).should('contain', 'End date').click();\n});\ncy.get(\"[class$='w-full max-w-md bg-white rounded-lg shadow-lg p-4']\").within(() => {\n    cy.contains('SUN');\n    cy.contains('MON');\n    cy.contains('TUE');\n    cy.contains('WED');\n    cy.contains('THU');\n    cy.contains('FRI');\n    cy.contains('SAT');\n    cy.contains(\"October 2025\");\n    cy.contains(\"1\");\n    cy.contains(\"10\");\n    cy.contains(\"18\");\n    cy.contains(\"29\");\n    cy.get(\"[aria-label$='Previous month']\").should('exist');\n    cy.get(\"[aria-label$='Next month']\").should('exist');\n    cy.get(\"[data-testid$='calendar-cancel']\").should('exist');\n    cy.get(\"[data-testid$='calendar-done']\").should('exist').click();\n});",
+              "err": {},
+              "uuid": "8f5e96e1-68de-4b43-9287-392918a0049f",
+              "parentUUID": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Filtering Application",
+              "fullTitle": "Sorting & Filtering - Functionality check Filtering Application",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(1)\").eq(1).should('be.visible');\n//Cancel feature (x) --------------------------------------------------------\ncy.get(\"[class$='w-full flex justify-between mb-[24px]']\").within(() => {\n    cy.contains('Filter').should('be.visible').click();\n});\ncy.get(\"[class$='flex flex-col h-[605px]']\").should('exist').within(() => {\n    cy.get(\"[alt$='close']\").click();\n});\ncy.get(\"[class$='flex flex-col h-[605px]']\").should('not.exist');\n// application\ncy.get(\"[class*='w-full flex justify-between mb-[24px]']\").contains('Filter').should('be.visible').click();\ncy.get(\"[class*='p-4 h-[685px] overflow-auto']\").should('exist').within(() => {\n    cy.contains('Phone verification').parent().within(() => {\n        cy.contains('Verified').click();\n    });\n});\ncy.get(\"[class$='px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800']\").click();\ncy.wait(8000);\ncy.get(\"[data-slot$='table-container'] tbody tr td:nth-child(1)\").eq(1).should('not.be.visible');",
+              "err": {},
+              "uuid": "bd318023-2869-4452-a135-bf17df894c6b",
+              "parentUUID": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Secondary filters check - Date created",
+              "fullTitle": "Sorting & Filtering - Functionality check Secondary filters check - Date created",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Start date check\ncy.get(\"[class*='w-full flex justify-between mb-[24px]']\").contains('Filter').should('be.visible').click();\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-start']`).should('contain', 'Start date').click();\n});\ncy.get(\"[class$='w-full max-w-md bg-white rounded-lg shadow-lg p-4']\").within(() => {\n    cy.contains('SUN');\n    cy.contains('MON');\n    cy.contains('TUE');\n    cy.contains('WED');\n    cy.contains('THU');\n    cy.contains('FRI');\n    cy.contains('SAT');\n    cy.contains(\"October 2025\");\n    cy.contains(\"10\").click();\n});\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-start']`).should('contain', 'October 10, 2025');\n});\n// End date check\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-end']`).should('contain', 'End date').click();\n});\ncy.get(\"[class$='w-full max-w-md bg-white rounded-lg shadow-lg p-4']\").within(() => {\n    cy.contains('SUN');\n    cy.contains('MON');\n    cy.contains('TUE');\n    cy.contains('WED');\n    cy.contains('THU');\n    cy.contains('FRI');\n    cy.contains('SAT');\n    cy.contains(\"October 2025\");\n    cy.contains(\"10\").click();\n});\ncy.contains('Date created').parent().within(() => {\n    cy.get(`[data-testid$='filter-customer-date-end']`).should('contain', 'October 10, 2025');\n});\ncy.get(\"[class$='px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800']\").click();\ncy.wait(8000);",
+              "err": {},
+              "uuid": "85a9d07d-b2c6-42f3-979a-d1072b051bc6",
+              "parentUUID": "af4c5a34-ce36-4d3f-89d5-c3d5b2cacbce",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "cb220199-443b-4c23-8ef3-131e4b9de5e0"
+          ],
+          "pending": [],
+          "skipped": [
+            "d8cafb97-c027-48c7-898f-397e03b1d443",
+            "8f5e96e1-68de-4b43-9287-392918a0049f",
+            "bd318023-2869-4452-a135-bf17df894c6b",
+            "85a9d07d-b2c6-42f3-979a-d1072b051bc6"
+          ],
+          "duration": 9354,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

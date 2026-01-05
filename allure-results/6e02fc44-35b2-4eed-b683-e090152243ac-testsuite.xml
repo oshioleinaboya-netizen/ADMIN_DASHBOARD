@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764594678760' stop='1764594704619'>
+    <name>Admin Login - Input validations</name>
+    <title>Admin Login - Input validations</title>
+    <test-cases>
+        <test-case start='1764594678760' status='passed' stop='1764594681174'>
+            <name>Admin log in - Invalid credentials (No @)</name>
+            <title>Admin log in - Invalid credentials (No @)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594681190' status='passed' stop='1764594682876'>
+            <name>Admin log in - Invalid credentials (No .com)</name>
+            <title>Admin log in - Invalid credentials (No .com)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594682893' status='passed' stop='1764594684108'>
+            <name>Admin log in - Invalid credentials (@.com)</name>
+            <title>Admin log in - Invalid credentials (@.com)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594684129' status='passed' stop='1764594685704'>
+            <name>Admin log in - Incorrect credentials (Email)</name>
+            <title>Admin log in - Incorrect credentials (Email)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594685722' status='failed' stop='1764594696950'>
+            <name>Admin log in - Incorrect credentials (Password)</name>
+            <title>Admin log in - Incorrect credentials (Password)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 10000ms: expected '&lt;p.text-nowrap.text-[13px].font-regular>' to contain 'Invalid email or password'</message>
+                <stack-trace>AssertionError: Timed out retrying after 10000ms: expected '&lt;p.text-nowrap.text-[13px].font-regular>' to contain 'Invalid email or password'
+                    at assertErrorContains (webpack:///./cypress/e2e/Authentication/login-input-validations.cy.ts:19:7)
+                    at Context.eval (webpack:///./cypress/e2e/Authentication/login-input-validations.cy.ts:44:4)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1764594696973' status='passed' stop='1764594697356'>
+            <name>Admin log in - Missing credentials</name>
+            <title>Admin log in - Missing credentials</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594697366' status='passed' stop='1764594698558'>
+            <name>Admin log in - Missing password</name>
+            <title>Admin log in - Missing password</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594698578' status='passed' stop='1764594699877'>
+            <name>Admin log in - Missing email</name>
+            <title>Admin log in - Missing email</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764594699895' status='passed' stop='1764594704619'>
+            <name>Admin log in - Clear out state tests</name>
+            <title>Admin log in - Clear out state tests</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

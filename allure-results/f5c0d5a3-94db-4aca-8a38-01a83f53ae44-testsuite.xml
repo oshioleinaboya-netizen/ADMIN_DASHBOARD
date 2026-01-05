@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764693847026' stop='1764693878154'>
+    <name>Get a savings plan</name>
+    <title>Get a savings plan</title>
+    <test-cases>
+        <test-case start='1764693847026' status='passed' stop='1764693878154'>
+            <name>Filter by search</name>
+            <title>Filter by search</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

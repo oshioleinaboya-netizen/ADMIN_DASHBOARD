@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764840579713' stop='1764840595042'>
+    <name>Deactivate staff | Reactivate staff</name>
+    <title>Deactivate staff | Reactivate staff</title>
+    <test-cases>
+        <test-case start='1764840579713' status='failed' stop='1764840595039'>
+            <name>Deactivate and Reactivate staff flow</name>
+            <title>Deactivate and Reactivate staff flow</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>ACTIVE: expected undefined to exist</message>
+                <stack-trace>AssertionError: ACTIVE: expected undefined to exist
+                    at Object.proxyGetter [as get] (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:80711:22)
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/deactivate-reactivate-staff.cy.ts:73:35)
+                    at getRet (https://moni-admin-fe.staging.rank.africa/__cypress/runner/cypress_runner.js:122243:20)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

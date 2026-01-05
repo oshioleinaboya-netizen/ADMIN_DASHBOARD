@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764587947917' stop='1764587987275'>
+    <name>Deactivate staff | Reactivate staff</name>
+    <title>Deactivate staff | Reactivate staff</title>
+    <test-cases>
+        <test-case start='1764587947917' status='failed' stop='1764587987270'>
+            <name>Deactivate staff | Reactivate Staff</name>
+            <title>Deactivate staff | Reactivate Staff</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Deactivate staff | Reactiva...`</message>
+                <stack-trace>AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Deactivate staff | Reactiva...`
+                    at Context.eval (webpack:///./cypress/e2e/Staff management/deactivate-reactivate-staff.cy.ts:39:31)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

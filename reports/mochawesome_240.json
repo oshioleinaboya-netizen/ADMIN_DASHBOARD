@@ -1,0 +1,129 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-21T06:17:16.832Z",
+    "end": "2025-11-21T06:18:00.778Z",
+    "duration": 43946,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "a6cd9e12-5899-4ddc-8c08-2f0590517319",
+      "title": "",
+      "fullFile": "cypress/e2e/rank-admin-staff.cy.ts",
+      "file": "cypress/e2e/rank-admin-staff.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2eb642a0-4ef9-4c57-be80-ef74724bdaec",
+          "title": "Staffs UI check",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Staffs page - UI check",
+              "fullTitle": "Staffs UI check Staffs page - UI check",
+              "timedOut": null,
+              "duration": 40725,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"[class*='font-bold text-[30px]']\").should('be.visible').and('contain', 'Staff Management');\ncy.get(\"[class*='flex justify-between items-center mb-10']\").within(() => {\n    cy.get(\"[class*='text-[#1E4D37]']\").eq(0).should('contain', 'Staff list');\n    cy.get(\"[class*='text-[#71717A] mr-2']\").should('contain', 'Rank');\n});\ncy.contains('Invite a staff');\ncy.get(\"[class*='md:w-1/2 flex']\").should('exist').within(() => {\n    cy.get(\"[class*='flex border border-grey p-1 rounded-md bg-white w-full']\").should('exist');\n    cy.get(`[placeholder$=\"search by staff's name, team and role\"]`).should('exist');\n    cy.get(\"[type*='button']\").should('contain', 'Search');\n});\ncy.get(\"[class*='relative']\").should(\"exist\").and('contain', 'Filter');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staffs UI check`",
+                "estack": "AssertionError: Timed out retrying after 30000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Staffs UI check`\n    at Context.eval (webpack:///./cypress/e2e/rank-admin-staff.cy.ts:40:31)",
+                "diff": null
+              },
+              "uuid": "2f4d2a38-8c3e-4754-8ce2-962a3b876bc1",
+              "parentUUID": "2eb642a0-4ef9-4c57-be80-ef74724bdaec",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Staff UI - Pagination",
+              "fullTitle": "Staffs UI check Staff UI - Pagination",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.document().its('readyState').should('eq', 'complete');\ncy.get('body', { timeout: 15000 }).should('be.visible');\ncy.get(\"[class$='flex items-center justify-between w-full']\").within(() => {\n    cy.get(\"[class$='flex items-center gap-4']\").within(() => {\n        cy.get(\"[class$='text-sm text-gray-600']\").should('exist');\n    });\n    cy.get(\"[aria-label$='Pagination']\").within(() => {\n        cy.get(\"[aria-label$='Previous page']\").should('exist');\n        cy.get(\"[aria-label$='Next page']\").should('not.be.disabled');\n        cy.get(\"[aria-current$='page']\").should('not.be.disabled');\n    });\n});",
+              "err": {},
+              "uuid": "caabed49-3e74-42d6-8423-8365e16fdb2b",
+              "parentUUID": "2eb642a0-4ef9-4c57-be80-ef74724bdaec",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "2f4d2a38-8c3e-4754-8ce2-962a3b876bc1"
+          ],
+          "pending": [],
+          "skipped": [
+            "caabed49-3e74-42d6-8423-8365e16fdb2b"
+          ],
+          "duration": 40725,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

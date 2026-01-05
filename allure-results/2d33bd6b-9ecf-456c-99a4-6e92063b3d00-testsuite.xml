@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764596834723' stop='1764596852858'>
+    <name>Admin Login - Input validations</name>
+    <title>Admin Login - Input validations</title>
+    <test-cases>
+        <test-case start='1764596834723' status='passed' stop='1764596838164'>
+            <name>Admin log in - Invalid credentials (No @)</name>
+            <title>Admin log in - Invalid credentials (No @)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596838181' status='passed' stop='1764596839864'>
+            <name>Admin log in - Invalid credentials (No .com)</name>
+            <title>Admin log in - Invalid credentials (No .com)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596839882' status='passed' stop='1764596841147'>
+            <name>Admin log in - Invalid credentials (@.com)</name>
+            <title>Admin log in - Invalid credentials (@.com)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596841166' status='passed' stop='1764596842836'>
+            <name>Admin log in - Incorrect credentials (Email)</name>
+            <title>Admin log in - Incorrect credentials (Email)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596842854' status='passed' stop='1764596844677'>
+            <name>Admin log in - Incorrect credentials (Password)</name>
+            <title>Admin log in - Incorrect credentials (Password)</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596844694' status='passed' stop='1764596845091'>
+            <name>Admin log in - Missing credentials</name>
+            <title>Admin log in - Missing credentials</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596845103' status='passed' stop='1764596846450'>
+            <name>Admin log in - Missing password</name>
+            <title>Admin log in - Missing password</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596846469' status='passed' stop='1764596847929'>
+            <name>Admin log in - Missing email</name>
+            <title>Admin log in - Missing email</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1764596847947' status='passed' stop='1764596852858'>
+            <name>Admin log in - Clear out state tests</name>
+            <title>Admin log in - Clear out state tests</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

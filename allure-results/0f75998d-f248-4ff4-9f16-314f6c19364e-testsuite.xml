@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1764666080834' stop='1764666101369'>
+    <name>Customer List &amp; Pagination Flow</name>
+    <title>Customer List &amp; Pagination Flow</title>
+    <test-cases>
+        <test-case start='1764666080834' status='failed' stop='1764666101365'>
+            <name>Pagination indication by page buttons</name>
+            <title>Pagination indication by page buttons</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Timed out retrying after 15000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer List &amp; Pagination ...`</message>
+                <stack-trace>AssertionError: Timed out retrying after 15000ms: expected 'https://moni-admin-fe.staging.rank.africa/' to include '/customers'
+                
+                Because this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Customer List &amp; Pagination ...`
+                    at Context.eval (webpack:///./cypress/e2e/Customers/list-of-users.cy.ts:27:31)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
