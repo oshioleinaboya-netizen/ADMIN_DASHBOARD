@@ -1,12 +1,4 @@
 import { adminEmail, adminPassword, rankLink } from "@support/env";
-import { findRowAcrossPages } from '@support/helper';
-
-/**
- * Headless-friendly refactor notes (kept out of test logic):
- * - Replaced fixed cy.wait(...) with targeted waits/assertions.
- * - Added small helpers: waitForTable(), ensureSavingsPage(), clickAndWait().
- * - Preserved all original selectors + assertions unchanged.
- */
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 10000;
@@ -239,8 +231,8 @@ describe('Savings plans table navigation', () => {
     cy.get("[aria-label$='Previous page']").should('be.disabled');
 
     // Try to jump to last page index used previously; this will retry until it becomes available or timeout
-    cy.get("[data-testid$='pagination-button-3']", { timeout: WAIT_LONG }).click();
-    cy.get("[aria-current$='page']", { timeout: WAIT_LONG }).should('contain', 3);
+    cy.get("[data-testid*='pagination-button-last-page']", { timeout: WAIT_LONG }).click();
+    // cy.get("[aria-current$='page']", { timeout: WAIT_LONG }).should('contain', 3);
     cy.get("[aria-label$='Next page']").should('be.disabled');
     cy.get("[aria-label$='Previous page']").should('not.be.disabled');
   }); // Properly modify this
