@@ -162,9 +162,9 @@ describe('xtest', () => {
       cy.wait(5000)
       
       cy.get("[id*='refresh']").click() // Refresh inbox
-      cy.get("[onload*='w.mailload()']").within(()=> {
-        cy.contains('Accept Invite', {timeout: 10000} ).click( {force: true} )
-      })
+      cy.get("[style*='padding: 40px']").within(()=> {
+        cy.get("[href*='https://moni-admin-fe.staging.rank.africa/create-password?reset_token=XpHA37YfRNd6ak9Km&email=frederik.rank@yopmail.com&first_name=frederik']").scrollIntoView().click( {force: true} )
+      });
       cy.wait(3000)
   });
 });
