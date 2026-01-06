@@ -24,6 +24,7 @@
     "read-excel-file": "^6.0.1"
   },
   "scripts": {
+    "start": "node server.js",
     "cy:open": "cypress open"
   }
 }

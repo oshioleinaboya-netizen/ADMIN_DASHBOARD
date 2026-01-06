@@ -25,18 +25,23 @@ jobs:
         run: npm ci
 
       # 4️⃣ Run Cypress tests
-      - name: Run Cypress Tests with Allure
+      - name: Start server
+        run: npm start & # start in background
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000
+      - name: Run Cypress
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          headed: true 
+          headed: true
+
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           RANK_LINK: ${{ secrets.RANK_LINK }}
-          CYPRESS_baseUrl: ${{ secrets.RANK_LINK }}
+          CYPRESS_baseUrl: http://localhost:3000
 
       # 5️⃣ Upload Cypress artifacts
       - name: Upload Cypress Artifacts
