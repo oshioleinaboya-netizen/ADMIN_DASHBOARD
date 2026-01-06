@@ -24,25 +24,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Run Cypress tests with GitHub Action (headless + environment)
+      # 4️⃣ Run Cypress tests
       - name: Run Cypress Tests with Allure
-        uses: cypress-io/github-action@v4
-        with:
-          start: npm start               # start your app if needed
-          wait-on: ${{ secrets.RANK_LINK }} # wait for base URL
-          wait-on-timeout: 60           # 60s timeout
-          browser: chrome               # run in headless Chrome
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           RANK_LINK: ${{ secrets.RANK_LINK }}
-          CYPRESS_baseUrl: ${{ secrets.RANK_LINK }}
-          CYPRESS_defaultCommandTimeout: 10000
-          CYPRESS_pageLoadTimeout: 60000
-          CYPRESS_viewportWidth: 1280
-          CYPRESS_viewportHeight: 720
+        run: |
+          npx cypress run
 
       # 5️⃣ Upload Cypress screenshots/videos if tests fail
       - name: Upload Cypress Artifacts
@@ -90,7 +81,7 @@ jobs:
             -d text="❌ *Cypress Tests Failed!*%0ARepo: $GITHUB_REPOSITORY%0AWorkflow: $GITHUB_WORKFLOW%0ARun: $GITHUB_RUN_NUMBER%0AView Allure Report: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
             -d parse_mode=Markdown
 
-      # 🔟 ✅ Send SUCCESS message
+      # 🔟 ✅ Send SUCCESS message (THIS IS WHAT YOU ASKED FOR)
       - name: Send Telegram Success Notification
         if: success()
         run: |
