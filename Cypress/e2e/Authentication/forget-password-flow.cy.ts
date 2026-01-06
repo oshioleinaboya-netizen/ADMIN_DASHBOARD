@@ -1,7 +1,7 @@
-import { adminEmail, rankLink } from "@support/env";
+import { adminEmail } from "@support/env";
 describe('Forget password flow', ()=> {
   beforeEach (()=>{
-    cy.visit(rankLink)
+    cy.visit("/");
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });

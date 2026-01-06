@@ -1,7 +1,7 @@
-import { rankLink, adminPassword } from "@support/env"
+import { adminPassword } from "@support/env"
 describe('Password visibility toggle', () => {
   beforeEach (()=>{
-    cy.visit(rankLink)
+    cy.visit("/");
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });

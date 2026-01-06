@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 describe('Customer Search Flow', () => {
   const searchInput = "[class$='flex border border-grey p-1 rounded-md bg-white w-full h-min ']"
@@ -15,7 +15,7 @@ describe('Customer Search Flow', () => {
       });
     });
 
-    cy.visit(rankLink)
+    cy.visit("/");
 
     // Login
     cy.get("[type$='text']").type(adminEmail)

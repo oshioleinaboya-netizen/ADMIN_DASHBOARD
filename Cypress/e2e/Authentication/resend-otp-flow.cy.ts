@@ -1,7 +1,7 @@
-import { rankLink, adminEmail, adminPassword } from "@support/env"
+import { adminEmail, adminPassword } from "@support/env"
 describe('Resend OTP flow', ()=> {
   it.only('Resend OTP', ()=> {
-  cy.visit(rankLink)
+  cy.visit("/");
     cy.window().then((win) => {
       win.sessionStorage.clear();
     });

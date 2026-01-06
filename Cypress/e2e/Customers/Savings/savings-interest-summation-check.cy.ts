@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 10000;
@@ -22,7 +22,7 @@ describe('Savings Interest Summation Validation', () => {
       });
     });
 
-    cy.visit(rankLink);
+    cy.visit("/");
     cy.window().then((win) => win.sessionStorage.clear());
 
     cy.get("[type$='text']", { timeout: WAIT_LONG }).type(adminEmail);

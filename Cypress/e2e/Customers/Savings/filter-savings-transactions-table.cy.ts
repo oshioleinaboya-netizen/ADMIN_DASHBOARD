@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 import { checkColumnAcrossAllPages } from '@support/helper';
 
 const WAIT_LONG = 30000;
@@ -15,7 +15,7 @@ describe('Filter savings transactions', () => {
       });
     });
 
-    cy.visit(rankLink); // Site visit
+    cy.visit("/"); // Site visit
 
     // Login
     cy.get("[type$='text']", { timeout: WAIT_LONG }).type(adminEmail);

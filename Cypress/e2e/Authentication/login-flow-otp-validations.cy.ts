@@ -1,8 +1,8 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 describe('Login flow', () => {
   beforeEach(() => {
-    cy.visit(rankLink)
+    cy.visit("/");
     cy.window().then(win => win.sessionStorage.clear())
   })
 

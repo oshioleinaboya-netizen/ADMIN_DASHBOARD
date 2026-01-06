@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 describe('Customer List & Pagination Flow', () => {
   const tableRows = "[data-slot$='table-container'] tbody tr"
@@ -16,7 +16,7 @@ describe('Customer List & Pagination Flow', () => {
     });
 
     // 1. Login
-    cy.visit(rankLink);
+    cy.visit("/");
 
     cy.get("[type$='text']", { timeout: 15000 }).should('be.visible').type(adminEmail);
     cy.get("[type$='password']").should('be.visible').type(adminPassword);

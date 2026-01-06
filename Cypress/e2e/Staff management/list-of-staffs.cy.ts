@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 import { findRowAcrossPages } from '@support/helper';
 
 describe('Staff Management - Pagination & Invitation Status Checks', () => {
@@ -16,7 +16,7 @@ describe('Staff Management - Pagination & Invitation Status Checks', () => {
     });
 
     // Authentication check - Login/
-    cy.visit(rankLink);
+    cy.visit("/");
 
     cy.get("[type$='text']").type(adminEmail);
     cy.get("[type$='password']").type(adminPassword);

@@ -1,4 +1,4 @@
-import { rankLink, adminEmail, adminPassword } from '@support/env';
+import { adminEmail, adminPassword } from '@support/env';
 import { faker } from '@faker-js/faker';
 
 describe('xtest', () => {
@@ -45,10 +45,9 @@ describe('xtest', () => {
         // 3. Login + invite staff INSIDE origin
         // ----------------------------------------------
         //
-        cy.origin('https://moni-admin-fe.staging.rank.africa',
+        cy.origin('/',
           {
             args: {
-              rankLink,
               adminEmail,
               adminPassword,
               staffEmail,
@@ -57,10 +56,10 @@ describe('xtest', () => {
               phone
             }
           },
-          ({ rankLink, adminEmail, adminPassword, staffEmail, staffFirstName, surName, phone }) => {
+          ({ adminEmail, adminPassword, staffEmail, staffFirstName, surName, phone }) => {
 
             // Login
-            cy.visit(rankLink);
+            cy.visit("/");
             cy.wait(5000)
 
             // Clear IndexDB inside the new origin

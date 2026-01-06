@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 describe('Deactivate staff | Reactivate staff', () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('Deactivate staff | Reactivate staff', () => {
     });
 
     // Authentication check - Login
-    cy.visit(rankLink);
+    cy.visit("/");
 
     cy.get("[type$='text']").type(adminEmail);
     cy.get("[type$='password']").type(adminPassword);

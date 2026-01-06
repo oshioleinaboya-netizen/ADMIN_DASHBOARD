@@ -1,4 +1,4 @@
-import { rankLink, adminEmail, adminPassword } from '@support/env';
+import { adminEmail, adminPassword } from '@support/env';
 describe('Get a staff - Filter by search', () => {
   beforeEach(() => {
         // Clear index DB
@@ -11,7 +11,7 @@ describe('Get a staff - Filter by search', () => {
         });
 
         //Authentication check - Login/
-        cy.visit(rankLink)
+        cy.visit("/");
         
         cy.get("[type$='text']").type(adminEmail)
         cy.get("[type$='password']").type(adminPassword)

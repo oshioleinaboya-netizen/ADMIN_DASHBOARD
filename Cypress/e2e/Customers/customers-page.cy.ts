@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 describe('Customers page - UI', () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('Customers page - UI', () => {
     });
 
     // 1. Login
-    cy.visit(rankLink);
+    cy.visit("/");
 
     cy.get("[type$='text']", { timeout: 15000 }).should('be.visible').type(adminEmail);
     cy.get("[type$='password']").should('be.visible').type(adminPassword);

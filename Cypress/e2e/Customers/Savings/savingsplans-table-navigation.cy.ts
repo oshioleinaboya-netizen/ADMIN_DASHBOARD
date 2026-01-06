@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 10000;
@@ -45,7 +45,7 @@ describe('Savings plans table navigation', () => {
       });
     });
 
-    cy.visit(rankLink);
+    cy.visit("/");
 
     // login
     cy.get("[type$='text']", { timeout: WAIT_LONG }).should('be.visible').type(adminEmail);

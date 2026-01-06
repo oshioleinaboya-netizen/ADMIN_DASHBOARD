@@ -1,11 +1,11 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 8000;
 
 describe('Customer Account Information', () => {
   beforeEach(() => {
-    cy.visit(rankLink);
+    cy.visit("/");
     // Clear index DB
     cy.window().then((win) => {
       return win.indexedDB.databases().then((dbs) => {

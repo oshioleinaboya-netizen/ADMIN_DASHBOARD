@@ -1,9 +1,9 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env"
+import { adminEmail, adminPassword } from "@support/env"
 
 describe('Admin Login - Input validations', () => {
 
   beforeEach(() => {
-    cy.visit(rankLink)
+    cy.visit("/");
   })
 
   // Helper to type credentials and submit/

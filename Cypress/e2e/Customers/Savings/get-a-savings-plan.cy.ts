@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword, rankLink } from "@support/env";
+import { adminEmail, adminPassword } from "@support/env";
 import { findRowAcrossPages } from '@support/helper';
 
 const WAIT_LONG = 30000;
@@ -15,7 +15,7 @@ describe('Get a savings plan', () => {
       });
     });
 
-    cy.visit(rankLink);
+    cy.visit("/");
     cy.window().then((win) => win.sessionStorage.clear());
 
     cy.get("[type$='text']", { timeout: WAIT_LONG }).type(adminEmail);

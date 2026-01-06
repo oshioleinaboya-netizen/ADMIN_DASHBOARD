@@ -1,9 +1,9 @@
-import { rankLink, adminEmail, adminPassword } from "@support/env"
+import { adminEmail, adminPassword } from "@support/env"
 describe('Log out flow', () => {
   const otpCode = '000000'
 
   beforeEach(() => {
-    cy.visit(rankLink)
+    cy.visit("/");
     cy.window().then(win => win.sessionStorage.clear())
   })
 
