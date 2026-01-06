@@ -6,6 +6,7 @@ dotenv.config({ path: "retest.env" });
 
 module.exports = defineConfig({
   e2e: {
+    supportFile: false,
     setupNodeEvents(on, config) {
       allureWriter(on, config);
 
