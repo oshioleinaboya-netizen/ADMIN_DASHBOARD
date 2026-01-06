@@ -14,5 +14,5 @@
     },
     "types": ["cypress", "node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "cypress.config.js"]
 }
