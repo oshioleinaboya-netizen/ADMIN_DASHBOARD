@@ -33,6 +33,7 @@ jobs:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           RANK_LINK: ${{ secrets.RANK_LINK }}
         run: |
+          cd CI_INTEGRATION
           npx cypress run
 
       # 5️⃣ Upload Cypress screenshots/videos if tests fail
