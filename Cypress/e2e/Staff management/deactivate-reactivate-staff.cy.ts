@@ -4,11 +4,15 @@ describe('Deactivate staff | Reactivate staff', () => {
   beforeEach(() => {
     // Clear index DB
     cy.window().then((win) => {
-      return win.indexedDB.databases().then((dbs) => {
-        dbs.forEach((db) => {
-          win.indexedDB.deleteDatabase(db.name);
+      if (win.indexedDB?.databases) {
+        win.indexedDB.databases().then((dbs) => {
+          dbs.forEach((db) => {
+            if (db.name) {
+              win.indexedDB.deleteDatabase(db.name);
+            }
+          });
         });
-      });
+      }
     });
 
     // Authentication check - Login

@@ -17,7 +17,17 @@ describe('Customer Details', () => {
 
   beforeEach(() => {
     cy.visit("/");
-    cy.window().then(win => win.sessionStorage.clear());
+    cy.window().then((win) => {
+      if (win.indexedDB?.databases) {
+        win.indexedDB.databases().then((dbs) => {
+          dbs.forEach((db) => {
+            if (db.name) {
+              win.indexedDB.deleteDatabase(db.name);
+            }
+          });
+        });
+      }
+    });
 
     cy.get("[type$='text']", { timeout: WAIT_LONG }).type(adminEmail);
     cy.get("[type$='password']", { timeout: WAIT_LONG }).type(adminPassword);

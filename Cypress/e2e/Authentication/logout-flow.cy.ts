@@ -4,7 +4,17 @@ describe('Log out flow', () => {
 
   beforeEach(() => {
     cy.visit("/");
-    cy.window().then(win => win.sessionStorage.clear())
+    cy.window().then((win) => {
+      if (win.indexedDB?.databases) {
+        win.indexedDB.databases().then((dbs) => {
+          dbs.forEach((db) => {
+            if (db.name) {
+              win.indexedDB.deleteDatabase(db.name);
+            }
+          });
+        });
+      }
+    });
   })
 
   function handleOtp() {
