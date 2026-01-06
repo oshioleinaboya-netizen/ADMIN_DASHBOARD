@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js ≥22
+      # 2️⃣ Setup Node.js ≥22 (required by Cypress v15)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -24,26 +24,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Run Cypress tests
-      - name: Start server
-        run: npm start & # start in background
-      - name: Wait for server
-        run: npx wait-on http://localhost:3000
-      - name: Run Cypress
+      # 4️⃣ Run Cypress tests against DEPLOYED app
+      - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          headed: true
-
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CYPRESS_baseUrl: ${{ secrets.RANK_LINK }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          RANK_LINK: ${{ secrets.RANK_LINK }}
-          CYPRESS_baseUrl: http://localhost:3000
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
-      # 5️⃣ Upload Cypress artifacts
+      # 5️⃣ Upload Cypress artifacts on failure
       - name: Upload Cypress Artifacts
         if: failure()
         uses: actions/upload-artifact@v4
@@ -86,7 +79,7 @@ jobs:
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d text="❌ *Cypress Tests Failed!*%0ARepo: $GITHUB_REPOSITORY%0AWorkflow: $GITHUB_WORKFLOW%0ARun: $GITHUB_RUN_NUMBER%0AView Allure Report: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
+            -d text="❌ *Cypress Tests Failed!*%0ARepo: $GITHUB_REPOSITORY%0ARun: $GITHUB_RUN_NUMBER" \
             -d parse_mode=Markdown
 
       # 🔟 Send SUCCESS notification
@@ -95,5 +88,5 @@ jobs:
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d text="✅ *Cypress Tests Passed!* 🎉%0ARepo: $GITHUB_REPOSITORY%0ARun: $GITHUB_RUN_NUMBER%0AAll tests completed successfully." \
+            -d text="✅ *Cypress Tests Passed!* 🎉%0ARepo: $GITHUB_REPOSITORY%0ARun: $GITHUB_RUN_NUMBER" \
             -d parse_mode=Markdown
