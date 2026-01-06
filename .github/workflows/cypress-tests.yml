@@ -32,7 +32,6 @@ jobs:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           RANK_LINK: ${{ secrets.RANK_LINK }}
-        working-directory: CI_INTEGRATION
         run: |
           npx cypress run
 
