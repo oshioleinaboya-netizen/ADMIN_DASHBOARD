@@ -6,6 +6,7 @@ const WAIT_MED = 8000;
 describe('Customer Account Information', () => {
   beforeEach(() => {
     cy.visit("/");
+    
     // Clear index DB
     cy.window().then((win) => {
       if (win.indexedDB?.databases) {
