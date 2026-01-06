@@ -31,10 +31,8 @@ jobs:
           browser: chrome
         env:
           CYPRESS_baseUrl: ${{ secrets.RANK_LINK }}
-          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CYPRESS_ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          CYPRESS_ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
 
       # 5️⃣ Upload Cypress artifacts on failure
       - name: Upload Cypress Artifacts
