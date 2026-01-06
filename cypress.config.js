@@ -6,8 +6,8 @@ dotenv.config({ path: "retest.env" });
 
 module.exports = defineConfig({
   e2e: {
-    specPattern: 'cypress/e2e/**/*.cy.{ts,js}',
-    supportFile: "cypress/support/e2e.ts",
+    specPattern: 'Cypress/e2e/**/*.cy.{ts,js}',
+    supportFile: "Cypress/support/e2e.ts",
     setupNodeEvents(on, config) {
       allureWriter(on, config);
 
