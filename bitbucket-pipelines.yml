@@ -1,0 +1,49 @@
+image: cypress/browsers:node18.12.0-chrome107
+
+pipelines:
+  default:
+    - step:
+        name: Run Cypress E2E
+        caches:
+          - node
+        script:
+          - npm ci
+
+          # 🔎 Debug baseUrl
+          - echo "Base URL = $CYPRESS_baseUrl"
+          - curl -I "$CYPRESS_baseUrl"
+
+          # 🚀 Run Cypress
+          - npx cypress run --browser chrome || export CYPRESS_FAILED=true
+
+          # 📸 Send screenshots on failure
+          - |
+            if [ "$CYPRESS_FAILED" = "true" ]; then
+              echo "Sending failure screenshots to Telegram..."
+              shopt -s globstar nullglob
+              for file in cypress/screenshots/**/*.png; do
+                curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPhoto" \
+                  -F chat_id="$TELEGRAM_CHAT_ID" \
+                  -F photo=@"$file" \
+                  -F caption="❌ Cypress Test Failed"
+              done
+            fi
+
+          # 📢 Telegram summary
+          - |
+            if [ "$CYPRESS_FAILED" = "true" ]; then
+              curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+                -d chat_id="$TELEGRAM_CHAT_ID" \
+                -d text="❌ *Cypress Tests Failed!*%0ABranch: $BITBUCKET_BRANCH%0ACommit: $BITBUCKET_COMMIT" \
+                -d parse_mode=Markdown
+              exit 1
+            else
+              curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+                -d chat_id="$TELEGRAM_CHAT_ID" \
+                -d text="✅ *Cypress Tests Passed!* 🎉%0ABranch: $BITBUCKET_BRANCH%0ACommit: $BITBUCKET_COMMIT" \
+                -d parse_mode=Markdown
+            fi
+
+        artifacts:
+          - cypress/videos/**
+          - cypress/screenshots/**
