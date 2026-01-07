@@ -2,23 +2,24 @@ name: Run Cypress Tests
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */12 * * *" # every 12 hours
   workflow_dispatch:
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
+    # ✅ ADD THIS (GitHub Actions equivalent of `image:`)
+    container:
+      image: cypress/browsers:node18.12.0-chrome107
+
     steps:
       # 1️⃣ Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js ≥22 (required by Cypress v15)
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+      # ❌ REMOVE setup-node (Node already exists in the container)
+      # Cypress container already has Node + Chrome
 
       # 3️⃣ Install dependencies
       - name: Install dependencies
@@ -28,7 +29,6 @@ jobs:
         run: |
           echo "RANK_LINK is ${{ secrets.RANK_LINK }}"
           curl -I ${{ secrets.RANK_LINK }}
-
 
       # 4️⃣ Run Cypress tests against DEPLOYED app
       - name: Run Cypress Tests
