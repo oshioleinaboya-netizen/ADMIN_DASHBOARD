@@ -3,20 +3,36 @@ image: cypress/browsers:node18.12.0-chrome107
 pipelines:
   default:
     - step:
-        name: Run Cypress E2E
+        name: Run Cypress E2E Tests
         caches:
           - node
         script:
+          # 1️⃣ Install dependencies
           - npm ci
 
-          # 🔎 Debug baseUrl
+          # 2️⃣ Debug deployed URL
           - echo "Base URL = $CYPRESS_baseUrl"
           - curl -I "$CYPRESS_baseUrl"
 
-          # 🚀 Run Cypress
+          # 3️⃣ Run Cypress tests
           - npx cypress run --browser chrome || export CYPRESS_FAILED=true
 
-          # 📸 Send screenshots on failure
+          # 4️⃣ Generate Allure report
+          - npm install -g allure-commandline
+          - allure generate allure-results --clean -o allure-report || true
+
+          # 5️⃣ Upload artifacts
+          - pipe: atlassian/upload-artifact:1.1.0
+            variables:
+              ARTIFACT_PATH: 'cypress/videos/**'
+          - pipe: atlassian/upload-artifact:1.1.0
+            variables:
+              ARTIFACT_PATH: 'cypress/screenshots/**'
+          - pipe: atlassian/upload-artifact:1.1.0
+            variables:
+              ARTIFACT_PATH: 'allure-report/**'
+
+          # 6️⃣ Send failure screenshots to Telegram
           - |
             if [ "$CYPRESS_FAILED" = "true" ]; then
               echo "Sending failure screenshots to Telegram..."
@@ -25,11 +41,11 @@ pipelines:
                 curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPhoto" \
                   -F chat_id="$TELEGRAM_CHAT_ID" \
                   -F photo=@"$file" \
-                  -F caption="❌ Cypress Test Failed"
+                  -F caption="❌ Cypress Test Failed (Screenshot attached)"
               done
             fi
 
-          # 📢 Telegram summary
+          # 7️⃣ Send Telegram summary
           - |
             if [ "$CYPRESS_FAILED" = "true" ]; then
               curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
@@ -47,3 +63,4 @@ pipelines:
         artifacts:
           - cypress/videos/**
           - cypress/screenshots/**
+          - allure-report/**
