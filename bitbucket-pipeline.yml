@@ -22,6 +22,14 @@ pipelines:
           - allure generate allure-results --clean -o allure-report
 
           # 5️⃣ Send Telegram notifications
+
+          # 5️⃣ Upload Cypress artifacts
+          - pipe: atlassian/upload-artifact:1.1.0
+            variables:
+              ARTIFACT_PATH: "cypress/videos/**,cypress/screenshots/**,allure-report/**"
+              ARTIFACT_NAME: "test-artifacts"
+
+          # 6️⃣ Send Telegram notifications
           - |
             if [ "$CYPRESS_FAILED" = "true" ]; then
               echo "❌ Tests failed — sending Telegram notifications..."
@@ -44,8 +52,4 @@ pipelines:
                 -d text="✅ *Cypress Tests Passed!* 🎉%0ABranch: $BITBUCKET_BRANCH%0ACommit: $BITBUCKET_COMMIT" \
                 -d parse_mode=Markdown
             fi
-
-        artifacts:
-          - cypress/videos/**
-          - cypress/screenshots/**
-          - allure-report/**
+            
