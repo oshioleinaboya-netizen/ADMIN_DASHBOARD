@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -10,9 +13,17 @@
     "strict": false,
     "baseUrl": ".",
     "paths": {
-      "@support/*": ["cypress/support/*"]
+      "@support/*": [
+        "gbolu-help/support/*"
+      ]
     },
-    "types": ["cypress", "node"]
+    "types": [
+      "cypress",
+      "node"
+    ]
   },
-  "include": ["**/*.ts", "cypress.config.js"]
+  "include": [
+    "**/*.ts",
+    "cypress.config.js"
+  ]
 }
