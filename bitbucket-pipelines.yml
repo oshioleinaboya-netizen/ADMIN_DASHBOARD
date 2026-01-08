@@ -1,8 +1,9 @@
 image: cypress/browsers:node18.12.0-chrome107
 
 pipelines:
-  default:
-    - step:
+  branches:
+    ci_integration:
+      - step:
         name: Run Cypress E2E
         caches:
           - node
@@ -27,8 +28,8 @@ pipelines:
           # 5️⃣ Upload Cypress artifacts
           - pipe: atlassian/upload-artifact:1.1.0
             variables:
-              ARTIFACT_PATH: "cypress/videos/**,cypress/screenshots/**,allure-report/**"
-              ARTIFACT_NAME: "test-artifacts"
+              ARTIFACT_PATH: 'cypress/videos/**,cypress/screenshots/**,allure-report/**'
+              ARTIFACT_NAME: 'test-artifacts'
 
           # 6️⃣ Send Telegram notifications
           - |
@@ -53,4 +54,3 @@ pipelines:
                 -d text="✅ *Cypress Tests Passed!* 🎉%0ABranch: $BITBUCKET_BRANCH%0ACommit: $BITBUCKET_COMMIT" \
                 -d parse_mode=Markdown
             fi
-            
