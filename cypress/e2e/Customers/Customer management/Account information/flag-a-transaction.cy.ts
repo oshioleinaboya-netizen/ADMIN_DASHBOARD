@@ -236,7 +236,6 @@ describe('Flag a transacton', () => {
       }) // Escalation check
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('not.be.disabled').click() // Flag button should be enabled now
-      // Admin is unable to flag customer transaction at the moment - Bug
       // Where is an admin meant to see flagged transactions?
     })
     cy.contains('Transaction flagged successfully').should('be.visible'); // Success page check
