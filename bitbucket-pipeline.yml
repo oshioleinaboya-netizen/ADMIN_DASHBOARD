@@ -10,12 +10,9 @@ pipelines:
           # 1️⃣ Install dependencies
           - npm ci
 
-          # 2️⃣ Map Bitbucket variable to Cypress
-          - export CYPRESS_baseUrl="$RANK_LINK"
-
-          # 2️⃣ Debug deployed URL
-          - echo "Base URL = $CYPRESS_baseUrl"
-          - curl -I "$CYPRESS_baseUrl"
+          # 2️⃣ Debug deployed URL (uses Bitbucket secret directly)
+          - echo "Base URL = $RANK_LINK"
+          - curl -I "$RANK_LINK"
 
           # 3️⃣ Run Cypress
           - npx cypress run --browser chrome || export CYPRESS_FAILED=true

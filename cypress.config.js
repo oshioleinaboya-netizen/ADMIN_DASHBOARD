@@ -2,7 +2,9 @@ const dotenv = require("dotenv");
 const { defineConfig } = require("cypress");
 const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
-dotenv.config({ path: "retest.env" });
+if (!process.env.CI) {
+  dotenv.config({ path: "retest.env" });
+}
 
 module.exports = defineConfig({
   e2e: {
