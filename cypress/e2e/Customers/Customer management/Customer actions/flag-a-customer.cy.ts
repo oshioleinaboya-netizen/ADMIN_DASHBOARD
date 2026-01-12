@@ -86,6 +86,7 @@ describe('Customer Actions', ()=> {
       cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').should('have.length.at.least', 1).within(() => {
         cy.get("[data-testid*='dropdown-option-0']").click(); // Option selection
       })
+      cy.wait(2000)
 
       cy.contains('Reason (Trigger type)').parent().should('be.visible').within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
@@ -155,6 +156,7 @@ describe('Customer Actions', ()=> {
       cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').should('have.length.at.least', 1).within(() => {
         cy.get("[data-testid*='dropdown-option-0']").click(); // Option selection
       })
+      cy.wait(2000)
 
       cy.contains('Reason (Trigger type)').parent().should('be.visible').within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
