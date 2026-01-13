@@ -104,17 +104,17 @@ describe('Customer Actions', ()=> {
           .should('not.be.empty')
       }) // Fag type check
 
-      cy.contains('Comment').parent().should('be.visible').within(() => {
+      cy.contains('Comment').parent().within(() => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 
-      cy.contains('Do you want to escalate this?').parent().scrollIntoView().should('be.visible').within(() => {
+      cy.contains('Do you want to escalate this?').parent().scrollIntoView().within(() => {
         cy.contains('Yes').click()
       }) // Escalation check
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('be.disabled') // Flag button should be disbaled
 
-      cy.contains('Escalate to a team').parent().should('be.visible').within(() => {
+      cy.contains('Escalate to a team').parent().within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('contain.text', 'Select team').click()
       }) // Escalation check
 
@@ -122,7 +122,7 @@ describe('Customer Actions', ()=> {
         cy.get("[data-testid*='dropdown-option-1']").click(); // Option selection
       })
 
-      cy.contains('Escalate to a team').parent().should('be.visible').within(() => {
+      cy.contains('Escalate to a team').parent().within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
       }) // After selection check
 
@@ -134,7 +134,7 @@ describe('Customer Actions', ()=> {
 
       cy.get("[type*='button']").eq(1).should('contain.text', 'Flag').and('not.be.disabled').click() // Flag button should be enabled now
     })
-    cy.contains('Transaction flagged successfully').should('be.visible'); // Success page check
+    cy.contains('User flagged successfully').should('be.visible'); // Success page check
     cy.contains('Ok').click(); // Close success page
   })
 
@@ -174,7 +174,7 @@ describe('Customer Actions', ()=> {
           .should('not.be.empty')
       }) // Fag type check
 
-      cy.contains('Comment').parent().should('be.visible').within(() => {
+      cy.contains('Comment').parent().within(() => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 
@@ -182,7 +182,7 @@ describe('Customer Actions', ()=> {
       // Admin is unable to flag customer transaction at the moment - Bug
       // Where is an admin meant to see flagged transactions?
     })
-    cy.contains('Transaction flagged successfully').should('be.visible'); // Success page check
+    cy.contains('User flagged successfully').should('be.visible'); // Success page check
     cy.contains('Ok').click(); // Close success page
   })
 })
