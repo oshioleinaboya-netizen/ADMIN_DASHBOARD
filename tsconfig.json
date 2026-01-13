@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "paths": {
       "@support/*": [
-        "xboy/support/*"
+        "cypress/support/*"
       ]
     },
     "types": [
