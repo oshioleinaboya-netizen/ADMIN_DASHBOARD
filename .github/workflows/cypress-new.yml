@@ -1,9 +1,9 @@
 name: Run Cypress Tests
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 */6 * * *" # every 6 hours
-  workflow_dispatch:
 
 jobs:
   cypress-run:
