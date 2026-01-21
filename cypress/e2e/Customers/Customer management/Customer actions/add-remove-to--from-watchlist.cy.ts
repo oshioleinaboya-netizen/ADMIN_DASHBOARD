@@ -114,13 +114,13 @@ describe('Customer Actions', () => {
 
     cy.get("[data-testid$='dropdown-button']").should('contain', 'Customer Actions').and('be.visible').click()
     cy.get("[role$='menu']").within(() => {
-      cy.contains('Add to watchlist').click()
+      cy.contains('Remove from watchlist').click()
     })
 
     cy.get("[data-slot*='drawer-content']").within(() => {
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Add').and('be.disabled') // Flag button should be disbaled
 
-      cy.get("[class*='text-xl font-semibold mb-4']").contains('Add Customer to Watchlist').should('be.visible'); // Header check
+      cy.get("[class*='text-xl font-semibold mb-4']").contains('Remove Customer from Watchlist').should('be.visible'); // Header check
 
       cy.contains('Why do you want to remove customer from watchlist').parent().should('be.visible').within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('contain.text', 'Select reason').click();

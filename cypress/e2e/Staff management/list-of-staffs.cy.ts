@@ -119,7 +119,7 @@ describe('Staff Management - Pagination & Invitation Status Checks', () => {
     });
   })
 
-  it.only('Checks invitation statuses across all pages', () => {
+  it('Checks invitation statuses across all pages', () => {
     // ACTIVE
     findRowAcrossPages(row => /(^|\s)ACTIVE(\s|$)/.test(row.innerText))
       .then(activeRow => activeRow && cy.wrap(activeRow).find("td").eq(6).find("button").should("be.disabled"));

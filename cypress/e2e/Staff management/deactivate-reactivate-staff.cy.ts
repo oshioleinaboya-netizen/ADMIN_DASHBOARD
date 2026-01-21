@@ -83,7 +83,7 @@ describe('Deactivate staff | Reactivate staff', () => {
 
 
 
-  it.only('Deactivate and Reactivate staff flow', () => {
+  it('Deactivate and Reactivate staff flow', () => {
     let deactivatedStaffName = "";
 
     // ----- Find first ACTIVE staff row safely -----

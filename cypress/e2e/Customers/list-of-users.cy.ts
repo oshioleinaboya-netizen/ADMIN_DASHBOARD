@@ -121,7 +121,7 @@ describe('Customer List & Pagination Flow', () => {
     }
   })
 
-  it.only('Verify if I can copy the emails and numbers of customers on the customer table. And the functionality works as expected.', () => {
+  it('Verify if I can copy the emails and numbers of customers on the customer table. And the functionality works as expected.', () => {
 
     // Phone numbers copy check
     cy.get("[data-slot$='table-container'] tbody tr").each(($row) => {

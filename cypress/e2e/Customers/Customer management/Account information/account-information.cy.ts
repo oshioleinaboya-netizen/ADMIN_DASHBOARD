@@ -226,7 +226,7 @@ describe('Customer Account Information', () => {
     checkColumnAcrossAllPages(3, ["SUCCESSFUL", "FAILED", "PENDING", "REVERSED"]);
   })
 
-  it.only('Page size selector functionality check', () => {
+  it('Page size selector functionality check', () => {
     cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(() => {
       cy.contains('Account Information').click();
       cy.wait(5000);

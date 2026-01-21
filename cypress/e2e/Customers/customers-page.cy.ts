@@ -153,7 +153,7 @@ describe('Customers page - UI', () => {
   });
 
   // ========= TEST 5 =========
-  it.only('Customer UI - Pagination', () => {
+  it('Customer UI - Pagination', () => {
     cy.document().its('readyState').should('eq', 'complete');
     cy.get('body').should('be.visible');
 

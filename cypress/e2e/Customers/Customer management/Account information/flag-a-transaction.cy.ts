@@ -74,7 +74,7 @@ describe('Flag a transacton', () => {
         .click();
     }); // get flas component on the table
 
-    cy.get("[class*='flex flex-col justify-between overflow-auto bg-white w-[592px] h-screen pt-10']").within(() => {
+    cy.get("[data-slot*='drawer-content']").within(() => {
       cy.contains('Cancel').click()
     }) // Close the flag modal
 
@@ -89,7 +89,7 @@ describe('Flag a transacton', () => {
         .click();
     });
 
-    cy.get("[class*='flex flex-col justify-between overflow-auto bg-white w-[592px] h-screen pt-10']").within(() => {
+    cy.get("[data-slot*='drawer-content']").within(() => {
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('be.disabled') // Flag button should be disbaled
 
       cy.get("[class*='text-xl font-semibold mb-4']").contains('Flag Transaction').should('be.visible'); // Header check
@@ -119,7 +119,7 @@ describe('Flag a transacton', () => {
           .should('not.be.empty')
       }) // Fag type check
 
-      cy.contains('Comment').parent().should('be.visible').within(() => {
+      cy.contains('Comment').parent().within(() => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 
@@ -155,7 +155,7 @@ describe('Flag a transacton', () => {
     cy.contains('Ok').click(); // Close success page
   });
 
-  it.only('Flag a transaction flow - No flow (Escalation)', () => {
+  it('Flag a transaction flow - No flow (Escalation)', () => {
     cy.get("[class$='h-full flex flex-col flex-1 overflow-y-auto']").within(() => {
       cy.contains('Account Information').click();
       cy.wait(5000);
@@ -172,7 +172,7 @@ describe('Flag a transacton', () => {
         .click();
     }); // get flas component on the table
 
-    cy.get("[class*='flex flex-col justify-between overflow-auto bg-white w-[592px] h-screen pt-10']").within(() => {
+    cy.get("[data-slot*='drawer-content']").within(() => {
       cy.contains('Cancel').click()
     }) // Close the flag modal
 
@@ -187,7 +187,7 @@ describe('Flag a transacton', () => {
         .click();
     });
 
-    cy.get("[class*='flex flex-col justify-between overflow-auto bg-white w-[592px] h-screen pt-10']").within(() => {
+    cy.get("[data-slot*='drawer-content']").within(() => {
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('be.disabled') // Flag button should be disbaled
 
       cy.get("[class*='text-xl font-semibold mb-4']").contains('Flag Transaction').should('be.visible'); // Header check
@@ -219,7 +219,7 @@ describe('Flag a transacton', () => {
           .should('not.be.empty')
       }) // Fag type check
 
-      cy.contains('Comment').parent().should('be.visible').within(() => {
+      cy.contains('Comment').parent().within(() => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 

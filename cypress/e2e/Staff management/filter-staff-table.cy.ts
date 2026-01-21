@@ -58,6 +58,7 @@ describe('template spec', () => {
     cy.get("[data-testid*='nav-link-staff-management']").click()
     cy.wait(4000)
   })
+  
   it('Filter staff table', () => {
     const levels = ['ASSOCIATE', 'MANAGER', 'LEAD']
     cy.get("[class*='relative']")
@@ -88,6 +89,7 @@ describe('template spec', () => {
       })
     })
   })
+  
   it('Filter staff table - Single filter selection (Levels)', () => {
     function pickRandomStaffAfterFilter() {
       cy.get("[data-slot$='table-container'] tbody tr").first().click()
@@ -179,6 +181,7 @@ describe('template spec', () => {
     })
     cy.wait(3000)
   })
+  
   it('Filter staff table - Single filter selection (Status)', () => {
     const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
     cy.get("[class*='relative']")
@@ -320,6 +323,7 @@ describe('template spec', () => {
     })
     checkStatusColumnForActiveOnlyIV()
   })
+  
   it('Filter staff table - Single filter selection (Team)', () => {
     const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
     cy.get("[class*='relative']")
@@ -689,6 +693,7 @@ describe('template spec', () => {
     cy.get("[class*='relative']")
       .filter(':contains("Filter")').eq(1).click()
   })
+  
   it('Filter staff table - Multiple filter selection (Same parent - Status)', () => {
     const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
     cy.get("[class*='relative']")
@@ -756,6 +761,7 @@ describe('template spec', () => {
     })
     checkStatusColumnForActiveOnlyII()
   })
+  
   it('Filter staff table - Multiple filter selection (Same parent - Level)', () => {
     const levels = ['ASSOCIATE', 'MANAGER', 'LEAD'];
 
@@ -811,6 +817,7 @@ describe('template spec', () => {
     pickStaffSequentially();
 
   })
+  
   it('Filter staff table - Multiple filter selection (Same parent - Team)', () => {
     const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
     function checkTeamColumnForMultiple() {
@@ -919,6 +926,7 @@ describe('template spec', () => {
     cy.contains('Apply').should('be.visible').click()
     checkTeamColumnForMultiple3()
   })
+  
   it('Filter staff table - Multiple filter selection (Different parents - Status/Team (SINGLE OPTION EACH))', () => {
     const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
     const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];
@@ -975,6 +983,7 @@ describe('template spec', () => {
     })
     checkTeamStatusColumnForMultiple()
   })
+  
   it('Filter staff table - Multiple filter selection (Different parents - Status/Team (MULTIPLE OPTIONS EACH))', () => {
     const teams = ['FINANCE', 'INVESTMENT', 'MARKETING', 'COMPLIANCE', 'OPERATIONS', 'ACCOUNT OFFICER', 'CX', 'RISK', 'BUSINESS DEVELOPMENT OFFICER'];
     const statuses = ['Active', 'Inactive', 'Invited', 'Invitation Expired'];

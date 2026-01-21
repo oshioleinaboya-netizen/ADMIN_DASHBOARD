@@ -77,7 +77,7 @@ describe('Invite staff', () => {
     cy.wait(3000)
   });
 
-  it.only('Invite staff - full flow', () => {
+  it('Invite staff - full flow', () => {
     cy.contains('Invite a staff').click();
 
     const firstName = faker.person.firstName();

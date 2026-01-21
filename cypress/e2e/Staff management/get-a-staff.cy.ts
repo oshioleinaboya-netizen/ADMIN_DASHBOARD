@@ -56,6 +56,7 @@ describe('Get a staff - Filter by search', () => {
     cy.get("[data-testid*='nav-link-staff-management']").click()
     cy.wait(3000)
   })
+  
   it('Get a staff', () => {
     cy.get("[class*='focus-visible:outline-none ml-2 w-full']").type('Camryn Turner')
     cy.wait(3000)

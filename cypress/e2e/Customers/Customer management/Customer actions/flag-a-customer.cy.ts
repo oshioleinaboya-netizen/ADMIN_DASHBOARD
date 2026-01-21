@@ -58,7 +58,7 @@ describe('Customer Actions', () => {
     cy.url({ timeout: WAIT_LONG }).should('include', '/customers/');
     cy.wait(3000)
   })
-  it.only('Customer Actions - Flag customer', () => {
+  it('Customer Actions - Flag customer', () => {
     cy.get("[data-testid$='dropdown-button']").should('contain', 'Customer Actions').and('be.visible').click()
     cy.get("[role$='menu']").within(() => {
       cy.contains('Flag customer').click()
@@ -138,7 +138,7 @@ describe('Customer Actions', () => {
     cy.contains('Ok').click(); // Close success page
   })
 
-  it.only('Customer Actions - Flag customer (`No` flow)', () => {
+  it('Customer Actions - Flag customer (`No` flow)', () => {
     cy.get("[data-testid$='dropdown-button']").should('contain', 'Customer Actions').and('be.visible').click()
     cy.get("[role$='menu']").within(() => {
       cy.contains('Flag customer').click()

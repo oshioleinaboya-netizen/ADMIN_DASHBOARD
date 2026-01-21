@@ -56,6 +56,7 @@ describe('Upload a business line', () => {
     cy.contains('Loan Management').click()
     cy.wait(3000)
   })
+  
   it('Upload a business line', () => {
     // Click on the loan product
     cy.contains('Civic Loan').click()
