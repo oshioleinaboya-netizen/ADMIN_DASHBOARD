@@ -61,10 +61,10 @@ describe('Upload a business line', () => {
     cy.contains('Civic Loan').click()
     cy.wait(3000)
 
-    cy.contains('Actions').click() // Click the actions drawdown button
-    cy.get("[role*='menu']").eq(0).should('not.be.empty').within(() => {
+    cy.contains('Add New Business Line').click() // Click the add new business line button
+    /*cy.get("[role*='menu']").eq(0).should('not.be.empty').within(() => {
       cy.get("[role*='menuitem']").eq(0).contains('Add New Business Line').click() // Select the drawdown option
-    })
+    })*/
     cy.wait(3000)
 
     // Fill out the business line details
