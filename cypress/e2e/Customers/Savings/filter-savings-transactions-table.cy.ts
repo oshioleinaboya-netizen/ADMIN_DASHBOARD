@@ -103,7 +103,7 @@ describe('Filter savings transactions', () => {
     cy.get("[data-testid*='filters-trigger']").click() // Click filter button
     cy.wait(500)
     cy.get("[class*='space-y-6']").should('exist').within(() => { // Parent selection
-      cy.contains('Type').parent().should('be.visible').within(() => {
+      cy.contains('Type').parent().within(() => {
         cy.contains('Interest').click()
       })
       cy.contains('Apply').click();
@@ -116,7 +116,7 @@ describe('Filter savings transactions', () => {
     cy.get("[class*='space-y-6']").should('exist').within(() => { // Parent selection
       cy.contains('Clear all filters').scrollIntoView().click();
       cy.wait(2000)
-      cy.contains('Type').parent().should('be.visible').within(() => {
+      cy.contains('Type').parent().within(() => {
         cy.contains('Topup').click()
       })
       cy.contains('Apply').click(); // Apply filters

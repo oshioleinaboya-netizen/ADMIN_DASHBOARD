@@ -87,10 +87,10 @@ describe('Get a savings plan', () => {
     cy.get(tableRows).should('have.length.at.least', 10);
 
     // Plan name - fetch by name
-    cy.get(searchInput).type('bzbdb');
+    cy.get(searchInput).type('ReservP');
     cy.wait(3000);
     cy.get(tableRows).should('have.length', 1).first().within(() => {
-      cy.get('td').eq(2).should('contain', 'bzbdb');
+      cy.get('td').eq(2).should('contain', 'ReservP');
     });
     cy.get(clearInput).clear();
     cy.get(tableRows).should('have.length.at.least', 10);

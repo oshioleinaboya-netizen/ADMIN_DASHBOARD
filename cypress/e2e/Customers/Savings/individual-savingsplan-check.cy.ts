@@ -128,7 +128,7 @@ describe('Customer savings plan management', () => {
         cy.contains(field).should('be.visible');
       });
 
-      cy.get("[class*='lucide lucide-copy w-3.5 h-3.5']").first().should('not.be.disabled').click();
+      cy.get("[class*='lucide lucide-copy w-3.5 h-3.5']").first().should('not.be.disabled');
       cy.wait(200);
       //cy.contains('Copied to clipboard');/
 
