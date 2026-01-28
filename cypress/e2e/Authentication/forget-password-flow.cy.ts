@@ -16,6 +16,7 @@ describe('Forget password flow', () => {
       });
     });
   }) //
+  
   it('Forget password flow - Email invalidation', () => {
     cy.get("[class$='text-sm text-customBlue hover:text-blue-700']").click()
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").should('be.visible').within(() => {
@@ -27,6 +28,7 @@ describe('Forget password flow', () => {
       cy.get("[class$='text-red text-[14px]']").should('contain', 'Invalid email address')
     })
   })
+  
   it('Forget password flow - Email invalidation', () => {
     cy.get("[class$='text-sm text-customBlue hover:text-blue-700']").click()
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").should('be.visible').within(() => {
@@ -53,6 +55,7 @@ describe('Forget password flow', () => {
       cy.get("[class$='w-full text-red-500 text-sm text-center']").should('contain', 'email must be an email')
     })
   })
+  
   it('Forget password flow - Admin user does not exist', () => {
     cy.get("[class$='text-sm text-customBlue hover:text-blue-700']").click()
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").should('be.visible').within(() => {
@@ -64,6 +67,7 @@ describe('Forget password flow', () => {
       cy.get("[class$='w-full text-red-500 text-sm text-center']").should('contain', 'Admin user not found')
     })
   })
+  
   it('Forget password flow', () => {
     cy.get("[class$='text-sm text-customBlue hover:text-blue-700']").click()
     cy.get("[class$='relative flex flex-col bg-white w-[592px] rounded-[14px] md:rounded-[18px] h-full']").should('be.visible').within(() => {

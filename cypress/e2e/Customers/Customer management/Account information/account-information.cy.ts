@@ -188,36 +188,46 @@ describe('Customer Account Information', () => {
     function checkColumnAcrossAllPages(columnIndex: number, expectedValues: string[]) {
       cy.get("[data-testid*='table-page-size-select']").select('Show 500');
       cy.wait(3000)
-      const checkPage = (): Cypress.Chainable<any> => {
+      const checkPage = (): Cypress.Chainable<void> => {
         const noResultSelector = "[class*='flex flex-col items-center']";
-        if (noResultSelector) {
-          return cy.get(noResultSelector)
-            .contains(/No result(s)? found!?/i)
-            .should("be.visible")
-            .then(() => cy.wrap(void 0));
-        }
-        // Table exists → check all rows on this page
-        return cy.get("[data-slot*='table-body']").each($row => {
-          cy.wrap($row)
-            .find("td")
-            .eq(columnIndex)
-            .invoke("text")
-            .then(text => {
-              const cellText = text.trim().toUpperCase();
-              expectedValues.forEach(val => {
-                if (cellText.includes(val.toUpperCase())) {
-                  cy.log(`Found expected value: ${val}`);
+
+        return cy.get("body").then(($body: JQuery<HTMLBodyElement>) => {
+
+          const hasNoResult =
+            $body.find(noResultSelector).length > 0 &&
+            /No result(s)? found!?/i.test($body.text());
+
+          if (hasNoResult) {
+            cy.log("No results found");
+            return;
+          }
+
+          return cy.get("[data-slot*='table-body']")
+            .each(($row: JQuery<HTMLTableRowElement>) => {
+              cy.wrap($row)
+                .find("td")
+                .eq(columnIndex)
+                .invoke("text")
+                .then((text: string) => {
+                  const cellText = text.trim().toUpperCase();
+                  expectedValues.forEach(val => {
+                    if (cellText.includes(val.toUpperCase())) {
+                      cy.log(`Found expected value: ${val}`);
+                    }
+                  });
+                });
+            })
+            .then(() => {
+              return cy.get("[data-testid*='pagination-arrow-next']").then(
+                ($next: JQuery<HTMLButtonElement>) => {
+                  if ($next.is(":disabled")) return;
+                  cy.wrap($next).click();
+                  cy.wait(2000);
+                  return checkPage();
                 }
-              });
+              );
             });
-        }).then(() => {
-          // Check for NEXT button
-          return cy.get("[data-testid*='pagination-arrow-next']").then($next => {
-            if ($next.is(':disabled')) return cy.wrap(void 0); // no more pages
-            cy.wrap($next).click();
-            cy.wait(2000); // wait for table to render
-            return checkPage(); // continue to next page
-          });
+
         });
       };
       return checkPage();

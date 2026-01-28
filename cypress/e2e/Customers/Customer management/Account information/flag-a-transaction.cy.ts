@@ -129,7 +129,7 @@ describe('Flag a transacton', () => {
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('be.disabled') // Flag button should be disbaled
 
-      cy.contains('Escalate to a team').parent().should('be.visible').within(() => {
+      cy.contains('Escalate to a team').parent().scrollIntoView().should('be.visible').within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('contain.text', 'Select team').click()
       }) // Escalation check
 
@@ -137,7 +137,7 @@ describe('Flag a transacton', () => {
         cy.get("[data-testid*='dropdown-option-1']").click(); // Option selection
       })
 
-      cy.contains('Escalate to a team').parent().should('be.visible').within(() => {
+      cy.contains('Escalate to a team').parent().scrollIntoView().should('be.visible').within(() => {
         cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
       }) // After selection check
 
@@ -225,13 +225,13 @@ describe('Flag a transacton', () => {
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('not.be.disabled') // Flag button should be enabled
 
-      cy.contains('Do you want to escalate this?').parent().should('be.visible').within(() => {
+      cy.contains('Do you want to escalate this?').parent().scrollIntoView().should('be.visible').within(() => {
         cy.contains('Yes').click()
       }) // Escalation check
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Flag').and('be.disabled') // Flag button should be disbaled
 
-      cy.contains('Do you want to escalate this?').parent().should('be.visible').within(() => {
+      cy.contains('Do you want to escalate this?').parent().scrollIntoView().should('be.visible').within(() => {
         cy.contains('No').click()
       }) // Escalation check
 

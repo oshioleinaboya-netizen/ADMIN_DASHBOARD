@@ -84,12 +84,15 @@ describe('Customer Actions', () => {
       }) // Open reason dropdown
 
       cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').should('have.length.at.least', 1).within(() => {
-        cy.get("[data-testid*='dropdown-option-0']").click(); // Option selection
+        cy.get("[data-testid*='dropdown-option-0']").invoke("text").then((text: string)=> text.trim()).as("dropdownValue"); 
+        cy.get("[data-testid*='dropdown-option-0']").click() // Option selection
       })
 
-      cy.contains('Why do you want to remove customer from watchlist').parent().should('be.visible').within(() => {
-        cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
-      }) // After selection check
+      cy.get<string>("@dropdownValue").then((value) => {
+        cy.contains('Why do you want to add customer to watchlist').parent().should('be.visible').within(() => {
+          cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty').and('contain.text', value)
+        }) // After selection check
+      })
 
       cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Add').and('be.disabled') // Flag button should be disbaled
 
@@ -97,7 +100,7 @@ describe('Customer Actions', () => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 
-      cy.get("[type*='button']").eq(1).should('contain.text', 'Flag').and('not.be.disabled').click() // Flag button should be enabled now
+      cy.get("[type*='button']").eq(1).should('contain.text', 'Add').and('not.be.disabled').click() // Flag button should be enabled now
     })
     cy.contains('Customer added').should('be.visible'); // Success page check
     cy.contains('Ok').click(); // Close success page
@@ -118,7 +121,7 @@ describe('Customer Actions', () => {
     })
 
     cy.get("[data-slot*='drawer-content']").within(() => {
-      cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Add').and('be.disabled') // Flag button should be disbaled
+      cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Remove').and('be.disabled') // Flag button should be disbaled
 
       cy.get("[class*='text-xl font-semibold mb-4']").contains('Remove Customer from Watchlist').should('be.visible'); // Header check
 
@@ -127,22 +130,25 @@ describe('Customer Actions', () => {
       }) // Open reason dropdown
 
       cy.get("[class*='absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto']").should('not.be.empty').should('have.length.at.least', 1).within(() => {
-        cy.get("[data-testid*='dropdown-option-0']").click(); // Option selection
+        cy.get("[data-testid*='dropdown-option-0']").invoke("text").then((text: string)=> text.trim()).as("dropdownValue")
+        cy.get("[data-testid*='dropdown-option-0']").click() // Option selection
       })
 
-      cy.contains('Why do you want to remove customer from watchlist').parent().should('be.visible').within(() => {
-        cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty')
-      }) // After selection check
+      cy.get<string>("@dropdownValue").then((value) => {
+        cy.contains('Why do you want to remove customer from watchlist').parent().should('be.visible').within(() => {
+          cy.get("[class*='flex flex-wrap gap-2 flex-1']").should('not.be.empty').and('contain.text', value)
+        }) // After selection check
+      })
 
-      cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Add').and('be.disabled') // Flag button should be disbaled
+      cy.get("[type*='button']").eq(1).scrollIntoView().should('contain.text', 'Remove').and('be.disabled') // Flag button should be disbaled
 
       cy.contains('Comment').parent().should('be.visible').within(() => {
         cy.get("[class*='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500']").type('Why you never pay tax since?')
       }) // Comment input check
 
-      cy.get("[type*='button']").eq(1).should('contain.text', 'Flag').and('not.be.disabled').click() // Flag button should be enabled now
+      cy.get("[type*='button']").eq(1).should('contain.text', 'Remove').and('not.be.disabled').click() // Flag button should be enabled now
     })
-    cy.contains('Customer added').should('be.visible'); // Success page check
+    cy.contains('Customer removed').should('be.visible'); // Success page check
     cy.contains('Ok').click(); // Close success page
   })
 })

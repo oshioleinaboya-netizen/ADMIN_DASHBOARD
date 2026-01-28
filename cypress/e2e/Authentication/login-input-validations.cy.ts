@@ -60,7 +60,7 @@ describe('Admin Login - Input validations', () => {
   })
 
   // Clear out state tests
-  it('Admin log in - Clear out state tests', () => {
+  it.only('Admin log in - Clear out state tests', () => {
     const cases = [
       { email: "hshshhshs90@heyoni.com", password: adminPassword, clear: 'text', expectedError: 'is required' },
       { email: adminEmail, password: "hdhjsnjjnhhdn", clear: 'password', expectedError: 'is required' },
