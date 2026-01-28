@@ -2,7 +2,7 @@ image: cypress/browsers:node18.12.0-chrome107
 
 pipelines:
   branches:
-    ci_integration:
+    ci_fixes:
       - step:
           name: Run Cypress E2E
           caches:
@@ -28,7 +28,7 @@ pipelines:
               if [ "$CYPRESS_FAILED" = "true" ]; then
                 echo "❌ Tests failed — sending Telegram notifications..."
                 shopt -s globstar nullglob
-                for file in cypress/screenshots/**/*.png; do
+                for file in $(find cypress/screenshots -type f -name "*.png"); do
                   curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPhoto" \
                     -F chat_id="$TELEGRAM_CHAT_ID" \
                     -F photo=@"$file" \
