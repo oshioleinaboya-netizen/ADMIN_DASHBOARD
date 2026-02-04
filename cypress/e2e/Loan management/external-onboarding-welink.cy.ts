@@ -159,6 +159,7 @@ describe('External Onboardng', () => {
         cy.get("[type*='tel']").type(staffPhone1) // type staff's phone number
 
         cy.contains('Continue').click() // Get web link after this action
+        cy.wait(3000)
 
         cy.get("[class*='truncate text-paragraph']").invoke('text').then(weblink => {
             cy.intercept("GET", "**/face_detection/**", {
@@ -198,13 +199,13 @@ describe('External Onboardng', () => {
         // NIN input
         const ninNumber = '00000' + faker.string.numeric(6);
         cy.contains('Enter your NIN').parent().find("input").type(ninNumber)
-        // cy.contains('Continue').click() // Auto cotinues after NIN input
+        cy.contains('Continue').click() // Auto cotinues after NIN input
         cy.wait(3000)
 
         // BVN input
         const bvnNumber = '000000' + faker.string.numeric(5);
         cy.contains('Enter your BVN').parent().find("input").type(bvnNumber)
-        // cy.contains('Continue').click() // Auto cotinues after BVN input
+        cy.contains('Continue').click() // Auto cotinues after BVN input
         cy.wait(4000)
 
         // Face capture step
