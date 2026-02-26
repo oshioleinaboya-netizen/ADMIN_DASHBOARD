@@ -46,7 +46,7 @@ describe('Generate loan contract && Resend loan contract', () => {
                 cy.wait(3000)
     })
 
-    it('Generate Loan contract', () => {
+    it.only('Generate Loan contract', () => {
 
         //Loan Application and Approval
         loanApplicationAndApproval()
