@@ -64,3 +64,5 @@ Cypress.Commands.add(
     return searchPage();
   }
 );
+
+

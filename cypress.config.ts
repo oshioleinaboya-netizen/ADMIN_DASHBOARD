@@ -10,6 +10,7 @@ module.exports = defineConfig({
   e2e: {
     specPattern: 'cypress/e2e/**/*.cy.{ts,js}',
     supportFile: 'cypress/support/e2e.ts',
+    chromeWebSecurity: false,
     setupNodeEvents(on, config) {
       allureWriter(on, config);
 

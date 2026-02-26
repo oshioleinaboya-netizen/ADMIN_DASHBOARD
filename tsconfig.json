@@ -24,6 +24,6 @@
   },
   "include": [
     "**/*.ts",
-    "cypress.config.js"
+    "cypress.config.ts"
   ]
 }

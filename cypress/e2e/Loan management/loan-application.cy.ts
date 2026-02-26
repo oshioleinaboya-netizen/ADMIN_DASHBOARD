@@ -1,8 +1,5 @@
 import {adminEmail, adminPassword} from "cypress/support/env";
-
-const typeInput = (label: string, value: string) => {
-  cy.contains(label).parent().find("input, textarea").first().clear().type(value);
-};
+import {loanApplicationAndApproval} from "cypress/support/helper"
 
 const selectDropdown = (label: string, optionText: string) => {
   cy.contains(label).parent().find("[class*='flex flex-wrap']").click();
@@ -54,7 +51,13 @@ describe ('Apply for loan', () => {
         cy.contains('Loan Management').click()
         cy.wait(3000)
     })
-    it('Apply for laon', ()=> {
+
+    it.only('Apply for laon | Loan acceptance', ()=> {
+        //Loan Application and Approval
+        loanApplicationAndApproval()
+    })
+
+    it.only('Apply for laon | Loan Rejection', ()=> {
         // Click on loan product
         cy.contains("Civic Loan").click()
         cy.wait(3000)
@@ -90,10 +93,15 @@ describe ('Apply for loan', () => {
 
         // Fill out loan application form
         cy.contains('Loan Type').parent().within(()=> {
-            cy.get("[class*='flex flex-wrap gap-2 flex-1']").click()
+            cy.get("[class*='flex flex-wrap gap-2 flex-1']").click() 
         })
         cy.contains('Civic Loan').click()
-        cy.wait(4000)
+        cy.wait(500)
+
+        cy.contains('CHECKING LOAN ELIGIBILITY').should('exist')
+        cy.wait(5000)
+        cy.contains('LOAN OFFER FOUND').scrollIntoView().should('be.visible')
+
         cy.contains('Customer can get up to').parent().should('be.visible')
         cy.contains('Customer can get up to').parent().within(()=> {
             cy.get("[class*='font-medium lg:text-base text-sm text-black']").invoke('text').then((maxLoanAmount)=>{
@@ -131,7 +139,7 @@ describe ('Apply for loan', () => {
                 // --------
 
                 // Type in ammount lower than minimum amount to test validation
-                getInputLabel('Loan Amount (₦)').clear().type('100')
+                getInputLabel('Loan Amount (₦)').clear().type('50')
 
                 // Loan Tenor ()
                 getInputLabel('Loan Tenor').clear().type('5')
@@ -165,13 +173,17 @@ describe ('Apply for loan', () => {
                 // -------- Loan Tenor Validations --------
                 
                 // Loan Tenor (Above maximum tenor to test validation)
-                getInputLabel('Loan Tenor').clear().type('6')
+                getInputLabel('Loan Tenor').clear().type('13')
 
                 // Loan amount entry
                 getInputLabel('Loan Amount (₦)').clear().type('50000')
                 
                 // Loan Purpose
                 selectDropdown('Loan Purpose', 'Education')
+
+                // Create Loan Application
+                cy.contains('Create Loan').click()
+                cy.wait(3000)
 
                 // Error message assertion
                 cy.get("[alt*='caution icon']").scrollIntoView().should('be.visible')
@@ -187,23 +199,83 @@ describe ('Apply for loan', () => {
                 // Loan Purpose
                 selectDropdown('Loan Purpose', 'Education')
 
+                // Create Loan Application
+                cy.contains('Create Loan').click()
+                cy.wait(3000)
+
                 // Error message assertion
                 cy.get("[alt*='caution icon']").scrollIntoView().should('be.visible')
 
                 // --------
 
-                // Loan Tenor (exaxtly the minimum tenor to test validation)
-                getInputLabel('Loan Tenor').clear().type('1')
+                // Loan Tenor (exactly the minimum tenor to test validation)
+                getInputLabel('Loan Tenor').clear().type('3')
 
                 // Loan amount entry
-                getInputLabel('Loan Amount (₦)').clear().type('50000')
+                getInputLabel('Loan Amount (₦)').clear().type('100')
                 
                 // Loan Purpose
                 selectDropdown('Loan Purpose', 'Education')
 
                 // Create Loan Application
                 cy.contains('Create Loan').click()
-                cy.wait(3000)
+                cy.wait(100)
+                
+                // Error message assertion
+                cy.get('body').find("[alt*='caution icon']").should('not.exist')
+
+                // Success assertion
+                //cy.contains('Successful').should('exist')
             })
+
+        // Laon table check
+        cy.contains("Loans").click()
+        cy.wait(5000)
+        cy.get("[data-slot*='table-body']").within(() => {
+            cy.get("tr").first().should('contain.text', 'REQUESTED').within(() => {
+                cy.get("td").eq(2).should('contain.text', '₦100.00').click()
+                cy.wait(5000)
+            })
+        })
+        // Assert loan status is requested
+        cy.contains('Loan Status').parent().within(() => {
+            cy.contains('Requested').should('exist')
+        })
+
+        // Reject loan application
+        cy.get("[data-testid*='dropdown-button']").eq(1).click()
+        cy.get("[role*='menu']").first().within(()=> {
+            cy.get("[role*='menuitem']").eq(1).contains('Decline loan').click()
+            cy.wait(3000)
+        })
+
+        cy.get("[class*='modal-content-right']").within(() => {
+            // Accept button check
+            cy.contains('button', 'Decline').eq(1).should('contain.text', 'Decline').should('be.visible')//.and('be.disabled')
+
+            //Acceptance comment
+            cy.get("[rows*='4']").type('Nah my guy, give am the loan')
+
+            // Accept button check
+            cy.contains('button', 'Decline').eq(1).should('contain.text', 'Decline').should('be.visible').click()
+            cy.wait(3000)
+        })
+
+        //Loan rejection success page
+        cy.contains('Loan declined successfully').should('be.visible')
+        cy.contains('Ok').click() // Close success page
+        cy.wait(5000)
+
+        // Assert loan status change to Rejected
+        cy.reload() // Refresh the page to get the updated loan status
+        cy.wait(5000)
+
+        // Assert loan status is Rejected
+        cy.contains('Loan Status').parent().within(() => {
+            cy.contains('Rejected').should('exist')
+        })
+
+        // Assert that the actions dropdown no longer exists
+        cy.get('body').find("[data-testid*='dropdown-button']").eq(1).should('not.exist')
     })
 })
