@@ -5,7 +5,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.10.1",
     "allure-commandline": "^2.34.1",
-    "cypress": "^15.8.1",
+    "cypress": "^15.11.0",
     "cypress-mochawesome-reporter": "^4.0.2",
     "cypress-multi-reporters": "^2.0.5",
     "mocha-allure-reporter": "^1.4.0",
@@ -22,6 +22,7 @@
     "dotenv": "^17.2.3",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.10",
+    "prettier": "^3.8.1",
     "read-excel-file": "^6.0.1"
   },
   "scripts": {

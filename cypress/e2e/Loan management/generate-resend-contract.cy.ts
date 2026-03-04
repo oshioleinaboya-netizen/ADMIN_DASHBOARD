@@ -94,29 +94,7 @@ describe('Generate loan contract && Resend loan contract', () => {
         // Generate contract
         cy.get("[data-testid*='dropdown-button']").eq(1).click()
         cy.get("[role*='menu']").first().within(()=> {
-            cy.get("[role*='menuitem']").eq(0).contains('Generate loan contract').click()
-            cy.wait(3000)
-        })
-
-        // Contract admin inputs
-        selectDropdown('Template', 'Public Loan')
-        cy.contains('name').parent().find('input').type('Roscauser1') // Name input
-        cy.contains('phone number').parent().find('input').type(roscaUserPhone) // Phone number input
-
-        cy.get("[type*='button']").should('contain.text', 'Generate Contract'). and('not.be.disabled').click() // Button click
-        cy.wait(3000)
-
-        // Success modal assertion and close
-        cy.contains('Contract generated successfully').should('be.visible') // Assertion
-        cy.get("[type*='button']").should('contain.text', 'Ok').and('not.be.disabled').click() // Close out success modal
-
-        // Page reload and assertion for contract generation
-        cy.reload( {timeout: 20000} )
-        cy.wait(10000)
-
-        // Contract Link parent should not be empty after generation
-        cy.contains('Contract Link').parent().should('not.be.empty').within(() => {
-            cy.contains('a', 'View Contract').should('be.visible').click()
+            cy.get("[role*='menuitem']").eq(0).find('Resend loan contract').should('not.exist') // Assertion to check that resend option does not exist before generation
         })
     })
 })

@@ -57,7 +57,7 @@ describe ('Apply for loan', () => {
         loanApplicationAndApproval()
     })
 
-    it.only('Apply for laon | Loan Rejection', ()=> {
+    it('Apply for laon | Loan Rejection', ()=> {
         // Click on loan product
         cy.contains("Civic Loan").click()
         cy.wait(3000)
