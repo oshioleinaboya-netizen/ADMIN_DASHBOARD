@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword } from "CI_INTEGRATION/allure-results/cypress/support/env";
+import { adminEmail, adminPassword } from "cypress/support/env";
 
 const WAIT_LONG = 30000;
 const WAIT_MED = 8000;

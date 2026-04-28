@@ -1,6 +1,6 @@
-import { adminEmail, adminPassword } from "cypress/support/env"
+import { adminEmail, adminPassword,stagingOtp } from "cypress/support/env"
 describe('Log out flow', () => {
-  const otpCode = '000000'
+  const otpCode = stagingOtp
 
   beforeEach(() => {
     cy.visit("/");

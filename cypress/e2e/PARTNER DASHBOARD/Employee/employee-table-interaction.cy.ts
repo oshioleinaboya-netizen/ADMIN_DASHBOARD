@@ -1,5 +1,6 @@
 import { partnerLink, partnerEmail, partnerPassword } from "cypress/support/env";
 import { faker } from "@faker-js/faker";
+import { checkTableData } from "cypress/support/helper";
 
 describe('Employee table interaction', () => {
     beforeEach(() => {
@@ -39,10 +40,11 @@ describe('Employee table interaction', () => {
     })
 
     it('Pagination navigation check', () => {
-        cy.get("[data-slot*='table-body'] tr").eq(0).should('be.visible').then(($rows) => {
-            cy.get('td').eq(1).invoke('text').then((text) => {
-                cy.wrap(text).as('EmployeeNameFullName') // Store first employee name for later comparison
-            })
-        })
+        checkTableData()
+    })
+
+    it.only('pagenation navigation check - chevron nav.', () => {
+        cy.get("[aria-label*='Page 1']").should('have.attr', 'data-active', 'true')
+        cy.get("[aria-label*='Go to previous page']").should('be.disabled')
     })
 })

@@ -461,6 +461,39 @@ export function loanApplicationAndApproval() {
         })
 }
 
+export function checkTableData() {
+  cy.contains('Employee').click() // Navigate to Employees page
+  cy.wait(2000) // wait for employee table to load
+  cy.get("[data-slot*='table-body'] tr").eq(0).should('be.visible').then(() => {
+      cy.get('td').eq(1).invoke('text').then((text) => {
+          cy.wrap(text).as('EmployeeNumber') // Store first employee name for later comparison
+      })
+  })
+  cy.get("[aria-label*='Page 2']").click()
+  cy.wait(3000) // wait for page 2 to load
+  cy.get("[aria-label*='Page 2']").should('have.attr', 'data-active', 'true') // Navigate back to page 1
+
+  cy.get("[data-slot*='table-body'] tr").eq(0).should('be.visible').then(() => {
+      cy.get('td').eq(1).invoke('text').then((text) => {
+          cy.get('@EmployeeNumber').then((EmployeeNumber) => {
+              expect(text).to.not.equal(EmployeeNumber) // Employee name on page 2 should be different from page 1
+          })
+      })
+  })
+
+  cy.get("[aria-label*='Page 1']").click()
+  cy.wait(3000) // wait for page 1 to load
+  cy.get("[aria-label*='Page 1']").should('have.attr', 'data-active', 'true') // Navigate back to page 1
+
+  cy.get("[data-slot*='table-body'] tr").eq(0).should('be.visible').then(() => {
+    cy.get('td').eq(1).invoke('text').then((text) => {
+        cy.get('@EmployeeNumber').then((EmployeeNumber) => {
+            expect(text).to.equal(EmployeeNumber) // Employee name on page 1 should match original name
+        })
+    })
+  })
+}
+
 
 
 
