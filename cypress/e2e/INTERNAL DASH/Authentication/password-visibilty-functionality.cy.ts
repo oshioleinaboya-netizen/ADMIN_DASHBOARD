@@ -1,4 +1,4 @@
-import { adminPassword } from "CI_INTEGRATION/allure-results/cypress/support/env"
+import { adminPassword } from "cypress/support/env"
 describe('Password visibility toggle', () => {
   beforeEach(() => {
     cy.visit("/");

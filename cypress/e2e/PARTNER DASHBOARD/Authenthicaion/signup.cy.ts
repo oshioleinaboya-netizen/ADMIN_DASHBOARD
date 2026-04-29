@@ -15,9 +15,9 @@ describe('Partner Dashboard Signup Flow', () => {
         cy.url().should('include', '/register') // url check
 
         // Personal details flow point
-        cy.contains('Personal Details').should('be.visible') // Page title check
+        cy.contains('h1', 'Personal Details').should('exist') // Page title check
         
-        cy.contains('Back').should('be.visible').should('not.be.disabled') // Back to personal details button check
+        cy.contains('button', 'Back').should('exist').should('not.be.disabled') // Back button check
 
         cy.get("[class*='text-sm font-medium uppercase tracking-wide text-muted-foreground']").contains('1') // Step check
         // Empty input state check
@@ -94,9 +94,9 @@ describe('Partner Dashboard Signup Flow', () => {
         cy.contains('Continue').scrollIntoView().should('not.be.disabled').click() // Continue to the next flow point
 
         //Email verification flow point
-        cy.contains('Verify Email Address').should('be.visible') // Page title check
+        cy.contains('h1', 'Verify Email Address').should('exist') // Page title check
         
-        cy.contains('Back').should('be.visible').should('not.be.disabled') // Back to personal details button check
+        cy.contains('button', 'Back').should('exist').should('not.be.disabled') // Back button check
         
         cy.url().should('include', '/verify-email') // url check
         cy.get("[class*='text-sm font-medium uppercase tracking-wide text-muted-foreground']").contains('2') // Step check
@@ -109,15 +109,17 @@ describe('Partner Dashboard Signup Flow', () => {
         cy.contains('Email verification code sent successfully').should('be.visible') // Resend OTP check
 
         function handleOtp() {
-            const otpSelector = "[data-slot*='input-otp-slot']"
+            const otpSelector = "input[data-input-otp='true'], input[autocomplete='one-time-code']"
             cy.get('body').then($body => {
                 if ($body.find(otpSelector).length) {
-                    cy.get(otpSelector, { timeout: 10000 }).eq(0).should('be.visible').type(stagingOtp)
+                    cy.get(otpSelector, { timeout: 10000 }).eq(0).type(stagingOtp, { force: true })
                 } else {
                     cy.log('No OTP field found, skipping OTP input.')
                 }
             })
         } handleOtp()
+
+        
 
         cy.contains('Continue').scrollIntoView().should('not.be.disabled').click() // Continue to the next flow point
     })

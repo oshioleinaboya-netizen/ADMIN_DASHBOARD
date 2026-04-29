@@ -1,4 +1,4 @@
-import { adminEmail, adminPassword } from "CI_INTEGRATION/allure-results/cypress/support/env";
+import { adminEmail, adminPassword } from "cypress/support/env";
 import { faker } from '@faker-js/faker';
 
 const selectors = {
