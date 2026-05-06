@@ -16,6 +16,7 @@ describe('Partner Dashboard Signup Flow', () => {
 
         // Personal details flow point
         cy.contains('Personal Details').should('exist') // Page title check
+        cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '1') // Progress bar check
         
         cy.contains('Back').should('exist').should('not.be.disabled') // Back to personal details button check
 
@@ -98,6 +99,7 @@ describe('Partner Dashboard Signup Flow', () => {
         
         //Email verification flow point
         cy.contains('Verify Email Address').should('be.visible') // Page title check
+        cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '2') // Progress bar check
         
         cy.contains('Back').should('be.visible').should('not.be.disabled') // Back to personal details button check
         
@@ -146,6 +148,11 @@ describe('Partner Dashboard Signup Flow', () => {
 
        
         // Company profile page check
+        cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '3') // Progress bar check
+        cy.contains('Company Profile').should('be.visible') // Page title check
+        cy.url().should('include', '/company-profile') // url check
+        cy.contains('Back').should('be.visible').should('not.be.disabled') // Back to email verification button check
+
        // Empty state check
        cy.contains('Continue').click() // Empty state check
        cy.get("[data-slot*='field-error']").should('have.length', 7)
@@ -161,16 +168,94 @@ describe('Partner Dashboard Signup Flow', () => {
        cy.contains('Industry').parent().within(()=> {
             cy.get("[data-slot*='popover-trigger']").should('contain', 'Technology') // Industry input check
        })
-        cy.contains('Tax Number').parent().find('input').type('1234567890')
+        cy.contains('Tax Number').parent().find('input').type('HDH333')
 
         const inputDate = '14/02/2020'
         const [day, month, year] = inputDate.split('/')
-        const formattedDate = `${day}-${month}-${year}`
+        const formattedDate = `${year}-${month}-${day}`
         cy.contains('Year of Incorporation').parent()
-            .find('input').click({force: true}).type(formattedDate, {force: true})
+            .find('input').click({force: true}).type(formattedDate, {force: true}) // Year of Incorporation input check
 
-        // cy.get("[aria-label*='Open date picker']").invoke('showPicker').click()
+        cy.contains('Number of Staffs').parent().find('input').should('have.attr', 'min', '0').type('10')
+
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        
+        cy.get("[data-slot*='field-error']").should('have.length', 1).and('contain', 'Use RC/BN followed by numbers') // CAC/RC Number error check
+
+        // Correcting the CAC/RC Number input
+        cy.contains('CAC/RC Number').parent().find('input').clear().type('RC12345678')
+        cy.get("[data-slot*='field-error']").should('have.length', 0) // Error check for company profile page
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+
+        //Business Name error check
+        cy.contains('already exists').scrollIntoView().should('have.length', 1).should('be.visible')
+        cy.wait(4000)
+        
+        cy.contains('Business Name')
+            .parent()
+            .find('input')
+            .scrollIntoView()
+            .clear()
+            .type(faker.company.name());
+
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
+
+        cy.contains('already exists').scrollIntoView().should('have.length', 1).should('be.visible')
+        cy.wait(4000)
+
+        const suffix = Array.from({ length: 4 }, () =>
+            faker.number.int({ min: 1, max: 8 })
+        ).join('');
+        cy.contains('Tax Number').parent().find('input').scrollIntoView().clear().type('NG-'+suffix) // Tax number uniqueness check
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
+
+        
+        // Contact details page check
+        cy.contains('Contact Details').should('exist') // Page title check
+        cy.url().should('include', '/contact-details') // url check
+        cy.contains('Back').should('exist').should('not.be.disabled') // Back to company profile button check
+        cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '4') // Progress bar check
        
-        cy.contains('Business Name').parent().find('input').type(faker.company.name())
+        // Empty state check
+       cy.contains('Continue').click() // Empty state check
+       cy.get("[data-slot*='field-error']").should('have.length', 3)
+
+       //Matching contacts input check
+       cy.contains('Full Name').parent().find('input').type('Jiam Jiad') // Full name input check
+       cy.contains('Email').parent().find('input').type('jiam@hjs.com') // email input check
+       cy.contains('Phone Number').parent().find('input').type('+2347038299283') // phone number input check
+
+        cy.contains('Add another contact').should('be.visible').click() // Add another contact button check
+
+        cy.get("[type*='text']").eq(3).type('Jiam Jiad') // Full name input check
+       cy.get("[type*='email']").eq(1).type('jiam@hjs.com') // email input check
+       cy.get("[type*='tel']").eq(1).type('+2347038299283') // phone number input check
+       cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
+
+        cy.get("[data-slot*='field-error']").should('have.length', 6) // Duplicate contact error check
+       
+        // Actual flow
+        cy.contains('Remove').should('exist').should('not.be.disabled').click() // Remove contact button check
+       cy.contains('Full Name').parent().find('input').clear().type(faker.person.fullName()) // Full name input check
+       cy.contains('Email').parent().find('input').clear().type(faker.internet.email()) // email input check
+       const suffix2 = Array.from({ length: 8 }, () =>
+            faker.number.int({ min: 1, max: 8 })
+        ).join('');
+       cy.contains('Phone Number').parent().find('input').clear().type('+23470' + suffix2) // phone number input check
+       
+       cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
+
+
+        //Payroll Configuration page check
+        cy.contains('Payroll Configuration').should('exist') // Page title check
+        cy.url().should('include', '/payroll-config') // url check
+        cy.contains('Back').should('exist').should('not.be.disabled') // Back to contact details button check
+        cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '5') // Progress bar check
+
+        
     })
 })
