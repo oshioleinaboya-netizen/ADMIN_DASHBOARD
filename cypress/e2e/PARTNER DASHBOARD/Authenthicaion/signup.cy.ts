@@ -256,6 +256,32 @@ describe('Partner Dashboard Signup Flow', () => {
         cy.contains('Back').should('exist').should('not.be.disabled') // Back to contact details button check
         cy.get("[role*='progressbar']").should('have.attr', 'aria-valuenow', '5') // Progress bar check
 
-        
+        // Empty state check
+       cy.contains('Continue').click() // Empty state check
+       cy.get("[data-slot*='field-error']").should('have.length', 4)
+
+        cy.contains('Payroll Frequency').parent().within(()=> { // Payroll frequency input and option check
+            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click()//.should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
+            cy.contains("[data-slot='command-item']", "Monthly").click() // Payroll frequency option check
+            cy.get("[data-slot*='popover-trigger']").should('contain', 'Monthly') // Payroll frequency input check 
+        })
+
+        cy.contains('Payroll Currency').parent().within(()=> {
+            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
+            cy.contains("[data-slot='command-item']", "NGN").click() // Payroll frequency option check
+            cy.get("[data-slot*='popover-trigger']").should('be.visible').should('contain', 'NGN') // Payroll frequency input check 
+        })
+
+        cy.contains('Payroll Method').parent().within(()=> {
+            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
+            cy.contains("[data-slot='command-item']", "NGN").click() // Payroll frequency option check
+            cy.get("[data-slot*='popover-trigger']").should('contain', 'Bank Transfer') // Payroll frequency input check 
+        })
+
+        cy.contains('Payroll Day').parent().within(()=> {
+            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
+            cy.contains("[data-slot='command-item']", "5th Day").click() // Payroll frequency option check
+            cy.get("[data-slot*='popover-trigger']").should('contain', '5th Day') // Payroll frequency input check 
+        })
     })
 })
