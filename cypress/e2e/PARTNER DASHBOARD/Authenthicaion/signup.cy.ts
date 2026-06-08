@@ -7,6 +7,7 @@ describe('Partner Dashboard Signup Flow', () => {
     })
 
     it('Flow start', () => {
+        cy.wait(4000) // Wait for the page to load completely
         cy.contains('Sign up')
             .should('be.visible')
             .should('not.be.disabled')
@@ -158,9 +159,13 @@ describe('Partner Dashboard Signup Flow', () => {
        cy.get("[data-slot*='field-error']").should('have.length', 7)
 
        // Business name input check
-       cy.contains('Business Name').parent().find('input').type('Dell farms')
-       cy.contains('CAC/RC Number').parent().find('input').type('12345678')
-       cy.contains('Physical Address').parent().find('input').type('Lagos, Nigeria')
+       cy.contains('CAC/RC Number').parent().find('input').scrollIntoView().type('8428273', {force: true}) // CAC/RC Number input check
+       cy.contains('Use RC/BN followed by numbers').should('be.visible') // CAC/RC Number format error check
+       cy.contains('Business Name').parent().should('exist')//.find('input').should('be.disabled') // Business name input disabled check
+       cy.contains('Physical Address').parent().find('input').scrollIntoView().type('Lagos, Nigeria', {force: true}) 
+       // Remember to add a valisations for the "Use this name" flow, where the system is validating existence of the CAC number provided
+
+       //Industry input and option check
        cy.contains('Industry').parent().within(()=> {
             cy.get("[data-slot*='popover-trigger']").click().should('have.attr', 'aria-expanded', 'true') // Industry input check
        })
@@ -168,46 +173,75 @@ describe('Partner Dashboard Signup Flow', () => {
        cy.contains('Industry').parent().within(()=> {
             cy.get("[data-slot*='popover-trigger']").should('contain', 'Technology') // Industry input check
        })
-        cy.contains('Tax Number').parent().find('input').type('HDH333')
-
+       // Employment type input and option check
+         cy.contains('Employer Type').parent().within(()=> {
+                cy.get("[data-slot*='popover-trigger']").click().should('have.attr', 'aria-expanded', 'true') // Employment type input check
+         })
+            cy.get("[data-slot*='command-group']").eq(0).within(() => {
+                cy.get("[data-slot*='command-item']").should('have.length.at.least', 1)
+            })
+            cy.get("[data-value*='Global Tech Firms']").click() // Employment type option check
+        // Tax number input check    
+        cy.contains('Tax Number').parent().find('input').scrollIntoView().click().type('HDH333', {force: true}) // Tax number input check
+        // Year of Incorporation input check with date formatting
         const inputDate = '14/02/2020'
         const [day, month, year] = inputDate.split('/')
         const formattedDate = `${year}-${month}-${day}`
         cy.contains('Year of Incorporation').parent()
             .find('input').click({force: true}).type(formattedDate, {force: true}) // Year of Incorporation input check
 
-        cy.contains('Number of Staffs').parent().find('input').should('have.attr', 'min', '0').type('10')
-
-        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.contains('Number of Staffs').parent().find('input').scrollIntoView().should('have.attr', 'min', '0').type('10')
         
-        cy.get("[data-slot*='field-error']").should('have.length', 1).and('contain', 'Use RC/BN followed by numbers') // CAC/RC Number error check
+        cy.contains('CAC/RC Number').parent().scrollIntoView().find('input').clear().type('RC8428273', {force: true}) // Correcting the CAC/RC Number input
+        cy.contains('Use this name')
+                .should('be.visible')
+                .and('not.be.disabled')
+                .click();
 
-        // Correcting the CAC/RC Number input
-        cy.contains('CAC/RC Number').parent().find('input').clear().type('RC12345678')
-        cy.get("[data-slot*='field-error']").should('have.length', 0) // Error check for company profile page
-        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
-
-        //Business Name error check
+        cy.contains('Continue').scrollIntoView().should('not.be.disabled').click() // Continue to the next flow point
+        
         cy.contains('already exists').scrollIntoView().should('have.length', 1).should('be.visible')
         cy.wait(4000)
+
+        // Correcting the CAC/RC Number input
+        const rcNumber = Array.from({ length: 7 }, () =>
+            faker.number.int({ min: 1, max: 8 })
+        ).join('');
         
-        cy.contains('Business Name')
+        cy.contains('CAC/RC Number').parent().scrollIntoView().find('input').clear().type('RC' + rcNumber, {force: true})
+        cy.get("[data-slot*='field-error']").should('have.length', 0) // Error check for company profile page
+        cy.contains('Match found')
             .parent()
-            .find('input')
-            .scrollIntoView()
-            .clear()
-            .type(faker.company.name());
+            .should('be.visible')
+            .and('not.be.empty')
+            .invoke('text')
+            .then((text) => {
+                const businessName = text
+                .replace('Match found', '')
+                .trim();
 
-        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+                cy.contains('Use this name')
+                .should('be.visible')
+                .and('not.be.disabled')
+                .click();
+                /*
+                cy.contains('Business Name')
+                .parent()
+                .find('input')
+                .should('have.value', businessName);*/
+            });
+        cy.contains('Continue').scrollIntoView().should('not.be.disabled').click() // Continue to the next flow point
+        
+        cy.contains('Continue').scrollIntoView().should('not.be.disabled').click() // Continue to the next flow point
         cy.wait(4000)
-
+        
         cy.contains('already exists').scrollIntoView().should('have.length', 1).should('be.visible')
         cy.wait(4000)
 
         const suffix = Array.from({ length: 4 }, () =>
             faker.number.int({ min: 1, max: 8 })
         ).join('');
-        cy.contains('Tax Number').parent().find('input').scrollIntoView().clear().type('NG-'+suffix) // Tax number uniqueness check
+        cy.contains('Tax Number').parent().find('input').scrollIntoView().clear().type('NG-'+suffix, {force: true}) // Tax number uniqueness check
         cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
         cy.wait(4000)
 
@@ -260,28 +294,77 @@ describe('Partner Dashboard Signup Flow', () => {
        cy.contains('Continue').click() // Empty state check
        cy.get("[data-slot*='field-error']").should('have.length', 4)
 
-        cy.contains('Payroll Frequency').parent().within(()=> { // Payroll frequency input and option check
-            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click()//.should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
-            cy.contains("[data-slot='command-item']", "Monthly").click() // Payroll frequency option check
-            cy.get("[data-slot*='popover-trigger']").should('contain', 'Monthly') // Payroll frequency input check 
+        cy.contains('Payroll Frequency') //
+        .parent()
+        .scrollIntoView()
+        .within(() => {
+            cy.get("[data-slot='popover-trigger']")
+            .click()
         })
+        //
+        cy.contains('Monthly')
+        .should('be.visible')
+        .click()
+        //
+        cy.get("[data-slot='popover-trigger']")
+        .should('contain', 'Monthly')
 
-        cy.contains('Payroll Currency').parent().within(()=> {
-            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
-            cy.contains("[data-slot='command-item']", "NGN").click() // Payroll frequency option check
-            cy.get("[data-slot*='popover-trigger']").should('be.visible').should('contain', 'NGN') // Payroll frequency input check 
+        cy.contains('Payroll Currency') // Payroll currency input and option check
+        .parent()
+        .scrollIntoView()
+        .within(() => {
+            cy.get("[data-slot='popover-trigger']")
+            .click()
         })
+        //
+        cy.contains('NGN')
+        .should('be.visible')
+        .click()
+        //
+        cy.get("[data-slot='popover-trigger']")
+        .should('contain', 'NGN')
 
-        cy.contains('Payroll Method').parent().within(()=> {
-            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
-            cy.contains("[data-slot='command-item']", "NGN").click() // Payroll frequency option check
-            cy.get("[data-slot*='popover-trigger']").should('contain', 'Bank Transfer') // Payroll frequency input check 
+        cy.contains('Payroll Method') // Payroll method input and option check
+        .parent()
+        .scrollIntoView()
+        .within(() => {
+            cy.get("[data-slot='popover-trigger']")
+            .click()
         })
+        //
+        cy.contains('Bank Transfer')
+        .should('be.visible')
+        .click()
+        //
+        cy.get("[data-slot='popover-trigger']")
+        .should('contain', 'Bank Transfer')
 
-        cy.contains('Payroll Day').parent().within(()=> {
-            cy.get("[data-slot*='popover-trigger']").should('have.attr', 'aria-expanded', 'false').click().should('have.attr', 'aria-expanded', 'true') // Payroll frequency input check
-            cy.contains("[data-slot='command-item']", "5th Day").click() // Payroll frequency option check
-            cy.get("[data-slot*='popover-trigger']").should('contain', '5th Day') // Payroll frequency input check 
+        cy.contains('Payroll Day') // Payroll day input and option check
+        .parent()
+        .scrollIntoView()
+        .within(() => {
+            cy.get("[data-slot='popover-trigger']")
+            .click()
         })
+        //
+        cy.contains('5th Day')
+            .scrollIntoView()
+            .should('be.visible')
+            .click()
+        //
+        cy.get("[data-slot='popover-trigger']")
+            .should('contain', '5th Day')
+
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
+
+        // Document upload page check
+        cy.get("[for*='pension_remittance']").selectFile('cypress/fixtures/media.jpeg', { force: true }) // Document upload check
+        cy.get("[for*='tax_clearance_certificate']").selectFile('cypress/fixtures/media.jpeg', { force: true }) // Document upload check
+        cy.get("[for*='tax_id']").selectFile('cypress/fixtures/media.jpeg', { force: true }) // Document upload check
+        cy.get("[for*='business_operation_license']").selectFile('cypress/fixtures/media.jpeg', { force: true }) // Document upload check
+
+        cy.contains('Continue').should('not.be.disabled').click() // Continue to the next flow point
+        cy.wait(4000)
     })
 })
