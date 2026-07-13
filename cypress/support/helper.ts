@@ -876,7 +876,29 @@ export function partnerSignout() {
         cy.url().should('include', '/login') // Check if redirected to login page after logout
 }
 
+export function partnerSignIn() {
+  cy.visit(partnerLink) // Visit the partner signup page
+  cy.wait(4000) // Wait for the page to load completely
+  // Hide and show password check
+            cy.contains('Password').parent().find('input').type(partnerPassword) // password input
+            cy.get("[aria-label*='Show password']").click()
+            // Now it should be text
+            cy.get('input').eq(1)
+            .should('have.attr', 'type', 'text') // Password show check
+            cy.get("[aria-label*='Hide password']").click()
+            cy.get('input').eq(1)
+            .should('have.attr', 'type', 'password') // Password hide check
 
+            // Helper for login input and button click
+            const submitLogin = (email: string, password: string) => {
+              if (email) cy.contains('Email').parent().find('input').clear().type(email)
+              if (password) cy.contains('Password').parent().find('input').clear().type(password)
+              cy.get("[type$='submit']").click()
+            }
 
+            submitLogin("Zakary_Wisoky@gmail.com", "Password@123") // Partner Sign in
+            cy.wait(3000) // Await partner dshboard to load after successful sign in
+            cy.url().should('include', '.africa') // url check after successful login
+}
 
 
