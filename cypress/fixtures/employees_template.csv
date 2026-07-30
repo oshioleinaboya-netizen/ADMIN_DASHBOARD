@@ -1,11 +1,6 @@
 Employee Number,First Name,Last Name,Sex,Date Deployed,Date of Birth,Address,Phone Number
-500,Jordan,Calvey,Female,03/03/2021,24/06/2003,"Rivers, Nigeria",2349133828389
-501,High,Halu,Male,04/03/2021,25/06/2003,"Rivers, Nigeria",2349133838383
-502,High,Haou,Male,05/03/2021,26/06/2003,"Rivers, Nigeria",2349133820943
-503,High,Hapo,Male,06/03/2021,27/06/2003,"Rivers, Nigeria",2349133822222
-504,High,Hapu,Male,07/03/2021,28/06/2003,"Rivers, Nigeria",2349133823333
-505,High,Haku,Male,08/03/2021,29/06/2003,"Rivers, Nigeria",2349133824444
-506,High,Htru,Male,09/03/2021,30/06/2003,"Rivers, Nigeria",2349133828595
-507,High,Haui,Male,10/03/2021,01/07/2003,"Rivers, Nigeria",2349133820003
-508,High,Hayr,Male,11/03/2021,02/07/2003,"Rivers, Nigeria",2349133829993
-509,High,Hawe,Male,12/03/2021,03/07/2003,"Rivers, Nigeria",2349133844489
+17853914926261,Zazu,Rank,M,2024-01-15,1990-05-12,1 Test Upload Street Lagos,07091492626
+17853914926262,Bintu,Rank,F,2024-02-15,1991-05-12,2 Test Upload Street Lagos,07091492627
+17853914926263,Kanti,Rank,M,2024-03-15,1992-05-12,3 Test Upload Street Lagos,07091492628
+17853914926264,Dora,Rank,F,2024-04-15,1993-05-12,4 Test Upload Street Lagos,07091492629
+17853914926265,Glory,Rank,M,2024-05-15,1994-05-12,5 Test Upload Street Lagos,07091492630
