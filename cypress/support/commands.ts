@@ -27,6 +27,7 @@
 
 /// <reference types="cypress" />
 
+
 //Find across pages/
 Cypress.Commands.add(
   "findRowAcrossPages",
@@ -66,3 +67,39 @@ Cypress.Commands.add(
 );
 
 
+export interface GetOtpOptions {
+  timeout?: number;
+  interval?: number;
+  afterTimestamp?: number;
+}
+/**
+ * Polls for the OTP email for up to `timeout` ms, checking every `interval` ms.
+ * Fails the test with a clear message if no OTP arrives in time.
+ */
+Cypress.Commands.add('getOtpFromEmail', (options: GetOtpOptions = {}) => {
+  const { timeout = 30000, interval = 3000, afterTimestamp } = options;
+  const startedAt = afterTimestamp ?? Date.now();
+  const deadline = Date.now() + timeout;
+
+  const poll = (): Cypress.Chainable<string> => {
+    return cy
+      .task<string | null>('fetchOtpFromEmail', { afterTimestamp: startedAt }, { log: false })
+      .then((otp) => {
+        if (otp) {
+          cy.log(`OTP received: ${otp}`);
+          return cy.wrap(otp, { log: false });
+        }
+
+        if (Date.now() > deadline) {
+          throw new Error(
+            `Timed out after ${timeout}ms waiting for OTP email (sent after ${new Date(startedAt).toISOString()})`
+          );
+        }
+
+        cy.wait(interval, { log: false });
+        return poll();
+      });
+  };
+
+  return poll();
+});

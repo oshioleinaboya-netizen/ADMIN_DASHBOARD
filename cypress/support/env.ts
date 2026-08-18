@@ -10,6 +10,6 @@ export const partnerLink = Cypress.env("PARTNER_LINK");
 export const stagingOtp = Cypress.env("STAGING_OTP");
 
 //preprod environment variables
-export const partnerLinkPD = Cypress.env("P_LINK_PD");
-export const partnerEmailPD = Cypress.env("P_EMAIL_PD");
-export const partnerPasswordPD = Cypress.env("P_PASSWORD_PD");
+export const prodLink = Cypress.env("PROD_LINK");
+export const prodEmail = Cypress.env("PROD_EMAIL");
+export const prodPassword = Cypress.env("PROD_PASSWORD");
